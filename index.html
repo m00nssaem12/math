@@ -74,6 +74,14 @@
 .auth-badge-dot{width:7px;height:7px;border-radius:999px;background:#e2e2f2}
 .auth-badge-dot.active{background:var(--p)}
 .activity-chip{display:inline-flex;align-items:center;gap:4px;background:#f4f4fb;border-radius:999px;padding:6px 11px;font-size:12.5px;color:#45466b;white-space:nowrap}
+.cat-row{--cat:#8b8ca8;--cat-bg:#f4f4fb;--cat-fg:#45466b;border:1.5px solid var(--cat);border-left-width:5px;border-radius:10px;background:var(--cat-bg);padding:9px 10px 9px 12px}
+.cat-row .cat-label{color:var(--cat)}
+.cat-row .activity-chip{background:#fff;color:var(--cat-fg);border:1px solid var(--cat)}
+.cat-quiz{--cat:#5b5ce2;--cat-bg:#eeecff;--cat-fg:#4d4ec9}
+.cat-mini{--cat:#e08a1f;--cat-bg:#fff2df;--cat-fg:#b06c14}
+.cat-monster{--cat:#e0507a;--cat-bg:#ffe6ee;--cat-fg:#c23c64}
+.cat-battle{--cat:#2196c9;--cat-bg:#e2f4fc;--cat-fg:#187ea3}
+.cat-manage{--cat:#1fa87a;--cat-bg:#e0f7ee;--cat-fg:#188962}
 .eyebrow{font-size:13px;font-weight:bold;color:var(--p);margin:0}
 .progress{height:10px;background:#ececf6;border-radius:8px;overflow:hidden;margin:12px auto;width:min(330px,80%)}
 .progress i{height:100%;display:block;background:var(--y);transition:.2s}
@@ -220,15 +228,14 @@
   </div>
 </header>
 <div class="header-tools">
-  <button class="game-tab" data-game="shop"><span class="icon">🛍️</span>상점</button>
-  <button class="game-tab" data-game="ranking"><span class="icon">🏆</span>랭킹</button>
-  <button class="game-tab" data-game="review"><span class="icon">📒</span>오답 노트<span class="mini-badge hidden" id="review-badge"></span></button>
   <button class="game-tab hidden" id="submit-tab-btn" data-game="submit"><span class="icon">✏️</span>문제 만들기</button>
 </div>
 <div class="top-nav" id="top-nav">
-  <button class="top-nav-item" data-cat="game">게임</button>
+  <button class="top-nav-item" data-cat="quiz">퀴즈</button>
+  <button class="top-nav-item" data-cat="mini">미니게임</button>
+  <button class="top-nav-item" data-cat="monster">몬스터</button>
   <button class="top-nav-item" data-cat="battle">대결</button>
-  <button class="top-nav-item" data-cat="analysis">분석</button>
+  <button class="top-nav-item" data-cat="manage">관리</button>
 </div>
 <div id="title-toast" class="hidden"></div>
 <div id="titles-overlay" class="hidden" style="position:fixed;inset:0;background:#28284b66;display:flex;align-items:center;justify-content:center;padding:16px;z-index:50">
@@ -287,6 +294,12 @@
 </div>
 <div id="home-view">
 <section class="hero"><div><p>초등 1~6학년 수학 놀이</p><h1>오늘은 어떤<br>탐험을 할까?</h1><p>학년을 고르고 게임을 시작해요!</p></div><div class="mascot" id="hero-mascot">🦊</div></section>
+<section class="panel hidden" id="home-notice-banner" style="text-align:left;border:2px solid var(--p);background:#f5f4ff;margin:14px 0;padding:14px 40px 14px 16px;position:relative;box-shadow:none">
+  <button id="home-notice-dismiss" title="닫기" style="position:absolute;top:10px;right:10px;border:0;background:#eeecff;color:var(--p);border-radius:999px;width:26px;height:26px;cursor:pointer;font-weight:bold">✕</button>
+  <p style="margin:0 0 4px;font-weight:bold;color:var(--p);font-size:13px" id="home-notice-title">📢 공지</p>
+  <p style="margin:0;font-size:14px;color:var(--ink);white-space:pre-wrap" id="home-notice-body"></p>
+  <p style="margin:6px 0 0;font-size:11px;color:#8b8ca8" id="home-notice-date"></p>
+</section>
 <section class="home-summary">
   <button class="summary-card game-tab" data-game="assignment"><span class="label">📌 과제</span><span class="value" id="summary-assign">확인해보세요</span></button>
   <button class="summary-card game-tab" data-game="daily"><span class="label">📅 오늘의 도전</span><span class="value" id="summary-daily">문제 풀고 랭킹 확인!</span></button>
@@ -307,7 +320,7 @@
     </div>
     <div style="display:flex;gap:12px;align-items:flex-start;background:#fbfbff;border:2px solid #e7e7f4;border-radius:14px;padding:12px 14px">
       <span style="font:20px Jua,sans-serif;color:var(--p)">2</span>
-      <div><b>상단 탭에서 활동을 골라요</b><br><span style="font-size:13px;color:#656687">🕹️ <b>게임</b> · ⚔️ <b>대결</b> · 📊 <b>분석</b> 탭을 눌러 원하는 기능으로 들어가요.</span></div>
+      <div><b>상단 탭에서 활동을 골라요</b><br><span style="font-size:13px;color:#656687">🗺️ <b>퀴즈</b> · 🎮 <b>미니게임</b> · 👾 <b>몬스터</b> · ⚔️ <b>대결</b> · 🗂️ <b>관리</b> 탭을 눌러 원하는 기능으로 들어가요.</span></div>
     </div>
     <div style="display:flex;gap:12px;align-items:flex-start;background:#fbfbff;border:2px solid #e7e7f4;border-radius:14px;padding:12px 14px">
       <span style="font:20px Jua,sans-serif;color:var(--p)">3</span>
@@ -317,50 +330,59 @@
   <div style="max-width:600px;margin:0 auto">
     <p style="font:15px Jua,sans-serif;text-align:center;margin:0 0 12px;color:var(--ink)">어떤 활동이 있나요?</p>
     <div style="display:flex;flex-direction:column;gap:10px">
-      <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
-        <span style="font-size:11px;font-weight:bold;color:#8b8ca8;width:44px;flex-shrink:0;margin-top:6px">퀴즈</span>
+      <div class="cat-row cat-quiz" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
+        <span class="cat-label" style="font-size:11px;font-weight:bold;width:44px;flex-shrink:0;margin-top:6px">퀴즈</span>
         <span class="activity-chip">🗺️ 탐험 퀴즈</span><span class="activity-chip">✍️ 서술형 문제</span><span class="activity-chip">⚡ 번개 계산</span><span class="activity-chip">💣 폭탄 해체</span>
       </div>
-      <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
-        <span style="font-size:11px;font-weight:bold;color:#8b8ca8;width:44px;flex-shrink:0;margin-top:6px">미니게임</span>
-        <span class="activity-chip">🃏 카드 짝맞추기</span><span class="activity-chip">🧠 순서 기억</span><span class="activity-chip">🎲 주사위 모험</span><span class="activity-chip">🧩 숫자 미로</span><span class="activity-chip">🥁 리듬 정답 탭</span>
+      <div class="cat-row cat-mini" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
+        <span class="cat-label" style="font-size:11px;font-weight:bold;width:44px;flex-shrink:0;margin-top:6px">미니게임</span>
+        <span class="activity-chip">🃏 카드 짝맞추기</span><span class="activity-chip">🧠 순서 기억</span><span class="activity-chip">🎲 주사위 모험</span><span class="activity-chip">🧩 숫자 미로</span><span class="activity-chip">🥁 리듬 정답 탭</span><span class="activity-chip">🎯 숫자 빙고</span><span class="activity-chip">🖼️ 그림 맞추기</span>
       </div>
-      <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
-        <span style="font-size:11px;font-weight:bold;color:#8b8ca8;width:44px;flex-shrink:0;margin-top:6px">몬스터</span>
+      <div class="cat-row cat-monster" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
+        <span class="cat-label" style="font-size:11px;font-weight:bold;width:44px;flex-shrink:0;margin-top:6px">몬스터</span>
         <span class="activity-chip">🐣 몬스터 목장</span><span class="activity-chip">⚔️ 몬스터 배틀</span><span class="activity-chip">🐲 웨이브 서바이벌</span><span class="activity-chip">🏰 타워 디펜스</span>
       </div>
-      <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
-        <span style="font-size:11px;font-weight:bold;color:#8b8ca8;width:44px;flex-shrink:0;margin-top:6px">대결</span>
+      <div class="cat-row cat-battle" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
+        <span class="cat-label" style="font-size:11px;font-weight:bold;width:44px;flex-shrink:0;margin-top:6px">대결</span>
         <span class="activity-chip">🏃 팀 릴레이</span><span class="activity-chip">🤝 실시간 대결</span><span class="activity-chip">📅 오늘의 도전</span>
       </div>
-      <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
-        <span style="font-size:11px;font-weight:bold;color:#8b8ca8;width:44px;flex-shrink:0;margin-top:6px">관리</span>
-        <span class="activity-chip">📌 과제</span><span class="activity-chip">📊 학습 리포트</span>
+      <div class="cat-row cat-manage" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
+        <span class="cat-label" style="font-size:11px;font-weight:bold;width:44px;flex-shrink:0;margin-top:6px">관리</span>
+        <span class="activity-chip">📌 과제</span><span class="activity-chip">📢 공지사항</span><span class="activity-chip">📊 학습 리포트</span><span class="activity-chip">📅 학습 캘린더</span><span class="activity-chip">📈 주간 성장</span><span class="activity-chip">🎯 목표 설정</span><span class="activity-chip">📒 오답 노트</span><span class="activity-chip">🏅 칭호 도감</span><span class="activity-chip">🛍️ 상점</span><span class="activity-chip">🏆 랭킹</span>
       </div>
     </div>
   </div>
-  <p style="text-align:center;color:#8b8ca8;font-size:12px;margin:18px 0 0">👆 위의 <b style="color:var(--p)">게임 / 대결 / 분석</b> 탭을 눌러서 시작해보세요!</p>
+  <p style="text-align:center;color:#8b8ca8;font-size:12px;margin:18px 0 0">👆 위의 <b style="color:var(--p)">퀴즈 / 미니게임 / 몬스터 / 대결 / 관리</b> 탭을 눌러서 시작해보세요!</p>
 </section>
 <nav id="tabs" class="hidden">
   <div class="mode-tabs mode-tabs-main" id="mode-tabs-panel">
-    <button class="game-tab" data-game="quest" data-cat="game"><span class="icon">🗺️</span>탐험 퀴즈</button>
-    <button class="game-tab" data-game="written" data-cat="game"><span class="icon">✍️</span>서술형 문제</button>
-    <button class="game-tab" data-game="speed" data-cat="game"><span class="icon">⚡</span>번개 계산</button>
-    <button class="game-tab" data-game="match" data-cat="game"><span class="icon">🃏</span>카드 짝맞추기</button>
-    <button class="game-tab" data-game="bomb" data-cat="game"><span class="icon">💣</span>폭탄 해체</button>
-    <button class="game-tab" data-game="memory" data-cat="game"><span class="icon">🧠</span>순서 기억</button>
-    <button class="game-tab" data-game="board" data-cat="game"><span class="icon">🎲</span>주사위 모험</button>
-    <button class="game-tab" data-game="maze" data-cat="game"><span class="icon">🧩</span>숫자 미로</button>
-    <button class="game-tab" data-game="rhythm" data-cat="game"><span class="icon">🥁</span>리듬 정답 탭</button>
-    <button class="game-tab" data-game="mongame" data-cat="game"><span class="icon">🐣</span>몬스터 목장</button>
-    <button class="game-tab" data-game="assignment" data-cat="game"><span class="icon">📌</span>과제</button>
-    <button class="game-tab hidden" data-game="battle" data-cat="battle"><span class="icon">⚔️</span>몬스터 배틀</button>
-    <button class="game-tab hidden" data-game="wave" data-cat="battle"><span class="icon">🐲</span>웨이브 서바이벌</button>
+    <button class="game-tab" data-game="quest" data-cat="quiz"><span class="icon">🗺️</span>탐험 퀴즈</button>
+    <button class="game-tab" data-game="written" data-cat="quiz"><span class="icon">✍️</span>서술형 문제</button>
+    <button class="game-tab" data-game="speed" data-cat="quiz"><span class="icon">⚡</span>번개 계산</button>
+    <button class="game-tab" data-game="bomb" data-cat="quiz"><span class="icon">💣</span>폭탄 해체</button>
+    <button class="game-tab" data-game="match" data-cat="mini"><span class="icon">🃏</span>카드 짝맞추기</button>
+    <button class="game-tab" data-game="memory" data-cat="mini"><span class="icon">🧠</span>순서 기억</button>
+    <button class="game-tab" data-game="board" data-cat="mini"><span class="icon">🎲</span>주사위 모험</button>
+    <button class="game-tab" data-game="maze" data-cat="mini"><span class="icon">🧩</span>숫자 미로</button>
+    <button class="game-tab" data-game="rhythm" data-cat="mini"><span class="icon">🥁</span>리듬 정답 탭</button>
+    <button class="game-tab" data-game="bingo" data-cat="mini"><span class="icon">🎯</span>숫자 빙고</button>
+    <button class="game-tab" data-game="reveal" data-cat="mini"><span class="icon">🖼️</span>그림 맞추기</button>
+    <button class="game-tab" data-game="mongame" data-cat="monster"><span class="icon">🐣</span>몬스터 목장</button>
+    <button class="game-tab hidden" data-game="battle" data-cat="monster"><span class="icon">⚔️</span>몬스터 배틀</button>
+    <button class="game-tab hidden" data-game="wave" data-cat="monster"><span class="icon">🐲</span>웨이브 서바이벌</button>
+    <button class="game-tab hidden" data-game="td" data-cat="monster"><span class="icon">🏰</span>타워 디펜스</button>
     <button class="game-tab hidden" data-game="relay" data-cat="battle"><span class="icon">🏃</span>팀 릴레이</button>
-    <button class="game-tab hidden" data-game="td" data-cat="battle"><span class="icon">🏰</span>타워 디펜스</button>
     <button class="game-tab hidden" data-game="pvp" data-cat="battle"><span class="icon">🤝</span>실시간 대결</button>
     <button class="game-tab hidden" data-game="daily" data-cat="battle"><span class="icon">📅</span>오늘의 도전</button>
-    <button class="game-tab hidden" data-game="report" data-cat="analysis"><span class="icon">📊</span>학습 리포트</button>
+    <button class="game-tab" data-game="assignment" data-cat="manage"><span class="icon">📌</span>과제</button>
+    <button class="game-tab" data-game="report" data-cat="manage"><span class="icon">📊</span>학습 리포트</button>
+    <button class="game-tab" data-game="calendar" data-cat="manage"><span class="icon">📅</span>학습 캘린더</button>
+    <button class="game-tab" data-game="growth" data-cat="manage"><span class="icon">📈</span>주간 성장</button>
+    <button class="game-tab" data-game="goal" data-cat="manage"><span class="icon">🎯</span>목표 설정</button>
+    <button class="game-tab" data-game="review" data-cat="manage"><span class="icon">📒</span>오답 노트<span class="mini-badge hidden" id="review-badge"></span></button>
+    <button class="game-tab" data-game="titledex" data-cat="manage"><span class="icon">🏅</span>칭호 도감</button>
+    <button class="game-tab" data-game="shop" data-cat="manage"><span class="icon">🛍️</span>상점</button>
+    <button class="game-tab" data-game="ranking" data-cat="manage"><span class="icon">🏆</span>랭킹</button>
   </div>
 </nav>
 </div>
@@ -380,6 +402,10 @@
 <section class="panel hidden" id="bomb"><p class="eyebrow">복습 아케이드</p><h2>💣 폭탄 해체 타임어택</h2><p>시간 안에 정답을 골라 폭탄을 해체해요! 틀리거나 시간이 지나면 하트가 줄어요.</p><div class="stat"><span>❤️ <b id="bomb-lives">3</b></span><span>⭐ <b id="bomb-score">0</b></span><span>🏆 <b id="bomb-best">0</b></span></div><div class="progress"><i id="bomb-bar"></i></div><div class="question" id="bomb-question">시작 준비!</div><div class="answers" id="bomb-answers"></div><p class="feedback" id="bomb-feedback"></p><button class="primary" id="bomb-start">게임 시작</button></section>
 
 <section class="panel hidden" id="memory"><p class="eyebrow">복습 아케이드</p><h2>🧠 순서 기억 챌린지</h2><p>카드가 반짝이는 순서를 잘 보고 똑같이 눌러보세요!</p><div class="stat"><span>🔢 <b id="memory-round">0</b>단계</span><span>🏆 <b id="memory-best">0</b></span></div><div class="match-grid" id="memory-grid"></div><p class="feedback" id="memory-feedback">시작 버튼을 눌러요!</p><button class="primary" id="memory-start">게임 시작</button></section>
+
+<section class="panel hidden" id="bingo"><p class="eyebrow">퍼즐 아케이드</p><h2>🎯 숫자 빙고</h2><p>문제를 풀어 정답이 보드에 있으면 칸이 채워져요. 가로·세로·대각선 한 줄을 먼저 완성해봐요!</p><div class="stat"><span>📝 <b id="bingo-tries">0</b>문제</span><span>🏆 <b id="bingo-best">-</b></span></div><div class="match-grid" id="bingo-grid"></div><div class="question hidden" id="bingo-question" style="margin:16px 0 8px"></div><input class="input hidden" id="bingo-input" inputmode="decimal" placeholder="답을 입력하세요" disabled><p class="feedback" id="bingo-feedback">새 게임 버튼을 눌러요!</p><button class="primary" id="bingo-start">새 게임</button></section>
+
+<section class="panel hidden" id="reveal"><p class="eyebrow">힐링 아케이드</p><h2>🖼️ 그림 맞추기</h2><p>문제를 맞히면 그림 조각이 하나씩 열려요. 아홉 조각을 모두 열어 그림을 완성해봐요!</p><div class="stat"><span>🧩 <b id="reveal-left">9</b>조각 남음</span><span>🏆 <b id="reveal-best">0</b></span></div><div class="match-grid" id="reveal-grid" style="grid-template-columns:repeat(3,1fr);max-width:320px"></div><div class="question hidden" id="reveal-question" style="margin:16px 0 8px"></div><div class="answers hidden" id="reveal-answers"></div><p class="feedback" id="reveal-feedback">새 그림 버튼을 눌러요!</p><button class="primary" id="reveal-start">새 그림</button></section>
 
 <section class="panel hidden" id="board"><p class="eyebrow">운 + 전략</p><h2>🎲 주사위 모험 보드게임</h2><p>주사위를 굴려 골인 지점까지 이동해요. ❓ 문제 칸에서는 계산으로 별을 벌어요!</p><div class="stat"><span>🎯 <b id="board-turns">0</b>턴</span><span>⭐ <b id="board-stars">0</b></span></div><div class="board-track" id="board-track"></div><div class="question hidden" id="board-question" style="margin:16px 0 8px"></div><div class="answers hidden" id="board-answers"></div><p class="feedback" id="board-feedback">새 게임 버튼을 눌러요!</p><div id="board-dice">🎲</div><button class="primary" id="board-roll" disabled>주사위 굴리기</button> <button class="primary" id="board-start" style="background:#8b7bff">새 게임</button></section>
 
@@ -595,6 +621,69 @@
   <p class="feedback" id="report-feedback"></p>
 </section>
 
+<section class="panel hidden" id="growth">
+  <p class="eyebrow">나만의 성장 그래프</p>
+  <h2>📈 주간 성장</h2>
+  <p>최근 7일 동안 하루하루 정답률이 어떻게 바뀌었는지 그래프로 확인해요.</p>
+  <p id="growth-summary" style="font-size:14px;color:var(--ink);margin:10px 0 4px"></p>
+  <div id="growth-chart" style="display:flex;justify-content:center;margin:14px 0"></div>
+  <p class="feedback" id="growth-feedback"></p>
+</section>
+
+<section class="panel hidden" id="calendar">
+  <p class="eyebrow">나의 학습 기록</p>
+  <h2>📅 학습 캘린더</h2>
+  <p>날짜별로 문제를 얼마나 풀었는지 한눈에 확인해요.</p>
+  <div class="stat"><span>이번 달 활동일 <b id="calendar-active-days">0</b>일</span><span>이번 달 문제 수 <b id="calendar-month-attempts">0</b></span></div>
+  <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0">
+    <button id="calendar-prev-btn" style="border:2px solid #dddff0;background:#fff;border-radius:10px;padding:6px 12px;font-weight:bold;cursor:pointer">◀</button>
+    <h3 id="calendar-month-label" style="font:20px Jua,sans-serif;margin:0;min-width:110px">-</h3>
+    <button id="calendar-next-btn" style="border:2px solid #dddff0;background:#fff;border-radius:10px;padding:6px 12px;font-weight:bold;cursor:pointer">▶</button>
+  </div>
+  <div id="calendar-weekday-row" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:520px;margin:0 auto 4px;font-size:12px;color:#8b8ca8;text-align:center">
+    <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+  </div>
+  <div id="calendar-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:520px;margin:0 auto"></div>
+  <div id="calendar-day-detail" style="background:#fbfbff;border:2px solid #e7e7f4;border-radius:14px;padding:14px;margin:18px auto 0;max-width:460px;text-align:left"></div>
+  <p class="feedback" id="calendar-feedback"></p>
+</section>
+
+<section class="panel hidden" id="goal">
+  <p class="eyebrow">나만의 학습 계획</p>
+  <h2>🎯 목표 설정</h2>
+  <p>하루/일주일 동안 풀고 싶은 문제 수를 직접 정해보세요. 목표 숫자는 위쪽 🎯 일일 · 📅 주간 진행 막대와 보너스 별 지급 기준에 바로 반영돼요.</p>
+  <div style="max-width:380px;margin:20px auto 0;display:flex;flex-direction:column;gap:18px;text-align:left">
+    <div style="background:#fbfbff;border:2px solid #e7e7f4;border-radius:16px;padding:16px">
+      <label for="goal-daily-input" style="font-size:13px;font-weight:bold;color:var(--p)">🎯 일일 목표 (오늘 풀 문제 수)</label>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+        <input id="goal-daily-input" class="input" type="number" min="1" max="200" step="1" style="width:110px;font-size:20px;padding:9px">
+        <span style="color:#8b8ca8;font-size:13px">문제</span>
+      </div>
+      <p style="font-size:12px;color:#8b8ca8;margin:8px 0 0">오늘 <b id="goal-daily-progress">0/10</b>문제 완료</p>
+    </div>
+    <div style="background:#fbfbff;border:2px solid #e7e7f4;border-radius:16px;padding:16px">
+      <label for="goal-weekly-input" style="font-size:13px;font-weight:bold;color:var(--p)">📅 주간 목표 (이번 주 풀 문제 수)</label>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+        <input id="goal-weekly-input" class="input" type="number" min="1" max="1000" step="1" style="width:110px;font-size:20px;padding:9px">
+        <span style="color:#8b8ca8;font-size:13px">문제</span>
+      </div>
+      <p style="font-size:12px;color:#8b8ca8;margin:8px 0 0">이번 주 <b id="goal-weekly-progress">0/50</b>문제 완료</p>
+    </div>
+    <button class="primary" id="goal-save-btn">목표 저장하기</button>
+    <p class="feedback" id="goal-feedback"></p>
+  </div>
+</section>
+
+<section class="panel hidden" id="titledex">
+  <p class="eyebrow">나의 칭호 모음</p>
+  <h2>🏅 칭호 도감</h2>
+  <p>지금까지 모은 칭호와 아직 못 모은 칭호를 한눈에 확인해요.</p>
+  <div class="stat"><span>모은 칭호 <b id="titledex-progress">0 / 0</b></span></div>
+  <div class="progress" style="width:min(330px,90%)"><i id="titledex-bar-inner" style="width:0%"></i></div>
+  <ul id="titledex-list" style="list-style:none;padding:0;margin:16px auto 0;max-width:460px;display:flex;flex-direction:column;gap:8px;text-align:left"></ul>
+  <p class="feedback" id="titledex-feedback"></p>
+</section>
+
 <section class="panel hidden" id="submit">
   <p class="eyebrow">문제 만들기</p>
   <h2>✏️ 내가 만드는 문제</h2>
@@ -711,6 +800,18 @@
     <ul id="assign-list" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"></ul>
     <p class="feedback" id="assign-feedback"></p>
   </div>
+  <div style="background:#f7f7ff;border-radius:16px;padding:16px;margin:14px 0;text-align:left">
+    <p style="margin:0 0 10px;font-weight:bold;color:var(--p)">📢 학급 공지사항</p>
+    <p style="font-size:12px;color:#8b8ca8;margin:0 0 10px">학급을 골라 공지를 올리면, 그 반 학생의 홈 화면 위쪽에 바로 떠요. 학생이 한 번 닫으면 그 공지는 다시 뜨지 않아요.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+      <select id="notice-class-select" style="border:2px solid #dddff0;border-radius:10px;padding:8px 12px;font:inherit"></select>
+      <input id="notice-title-input" placeholder="공지 제목 (예: 이번 주 준비물)" style="border:2px solid #dddff0;border-radius:10px;padding:8px 12px;font:inherit;flex:1;min-width:180px">
+    </div>
+    <textarea id="notice-body-input" placeholder="공지 내용을 입력해주세요" style="width:100%;min-height:70px;border:2px solid #dddff0;border-radius:10px;padding:9px 12px;font:inherit;resize:vertical;margin-bottom:10px"></textarea>
+    <button class="primary" id="notice-create-btn">공지 올리기</button>
+    <ul id="notice-list" style="list-style:none;padding:0;margin:12px 0 0;display:flex;flex-direction:column;gap:8px"></ul>
+    <p class="feedback" id="notice-feedback"></p>
+  </div>
   <div class="stat" id="teacher-summary"><span>👦 학생 <b id="teacher-count">0</b>명</span><span>✅ 평균 정답률 <b id="teacher-rate">0</b>%</span></div>
   <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:14px 0">
     <select id="teacher-class-filter" style="border:2px solid #dddff0;border-radius:10px;padding:8px 12px;font:inherit"><option value="">전체 학급</option></select>
@@ -804,6 +905,8 @@ const GAME_RANK_DEFS = [
   { id: 'bombScore', label: '💣 폭탄 해체 · 최고 점수', field: 'bombScore', higherIsBetter: true, format: v => `${v}점` },
   { id: 'memoryRound', label: '🧠 순서 기억 · 최고 라운드', field: 'memoryRound', higherIsBetter: true, format: v => `${v}라운드` },
   { id: 'mazeMoves', label: '🧩 숫자 미로 · 최소 이동', field: 'mazeMoves', higherIsBetter: false, format: v => `${v}걸음` },
+  { id: 'bingoTries', label: '🎯 숫자 빙고 · 최소 문제 수', field: 'bingoTries', higherIsBetter: false, format: v => `${v}문제` },
+  { id: 'revealBest', label: '🖼️ 그림 맞추기 · 완성 개수', field: 'revealBest', higherIsBetter: true, format: v => `${v}개` },
 ];
 function currentRankDef() { return GAME_RANK_DEFS.find(d => d.id === rankGame) || GAME_RANK_DEFS[0]; }
 $('ranking-game-filter').innerHTML = GAME_RANK_DEFS.map(d => `<option value="${d.id}">${d.label}</option>`).join('');
@@ -826,6 +929,14 @@ let semester = 2;
 let quest = { n: 0, stars: 0, playing: false }, speed = { run: false, score: 0, streak: 0, answer: 0, timer: null }, battle = { run: false, hero: 100, monster: 100, answer: 0 };
 let bomb = { run: false, lives: 3, score: 0, answer: 0, text: '', sub: '', svg: null, timer: null, limit: 6000, best: +(localStorage.mathQuestBombBest || 0) };
 let memory = { playing: false, round: 0, seq: [], input: 0, showing: false, best: +(localStorage.mathQuestMemoryBest || 0) };
+let bingo = { run: false, board: [], marked: [], queue: [], idx: 0, tries: 0, answer: 0, text: '', sub: '', svg: null, best: localStorage.mathQuestBingoBest ? +localStorage.mathQuestBingoBest : null };
+const REVEAL_THEMES = [
+  { name: '동물 친구들', emojis: ['🐶', '🐱', '🦊', '🐻', '🐼', '🐨', '🦁', '🐯', '🐰'] },
+  { name: '바다 탐험', emojis: ['🐠', '🐡', '🐙', '🦀', '🐬', '🐳', '🦈', '🐢', '⭐'] },
+  { name: '우주 여행', emojis: ['🚀', '🌙', '⭐', '🪐', '☄️', '👽', '🛸', '🌟', '🌌'] },
+  { name: '달콤한 디저트', emojis: ['🍰', '🍩', '🍪', '🧁', '🍫', '🍬', '🍭', '🍦', '🍓'] },
+];
+let reveal = { playing: false, theme: null, order: [], next: 0, left: 9, answer: 0, text: '', sub: '', svg: null, best: +(localStorage.mathQuestRevealBest || 0) };
 let wave = { run: false, hero: 100, monster: 100, monsterMax: 100, round: 1, answer: 0, text: '', sub: '', svg: null, best: +(localStorage.mathQuestWaveBest || 0) };
 let board = { run: false, pos: 0, turns: 0, stars: 0, tiles: [], awaiting: false, _answer: 0, _text: '', _sub: '', _svg: null };
 let maze = { run: false, pos: { x: 0, y: 0 }, grid: [], gates: new Set(), cleared: new Set(), lives: 3, moves: 0, awaiting: false, _answer: 0, _text: '', _sub: '', _svg: null, _target: null, best: +(localStorage.mathQuestMazeBest || 0) };
@@ -1356,6 +1467,61 @@ $('titles-btn').onclick = () => { renderTitlesOverlay(); $('titles-overlay').cla
 $('titles-overlay-close').onclick = () => $('titles-overlay').classList.add('hidden');
 $('titles-overlay').onclick = e => { if (e.target.id === 'titles-overlay') $('titles-overlay').classList.add('hidden'); };
 
+// ---- 🏅 칭호 도감(관리 탭 전용 패널): 모은/못 모은 칭호를 진행률과 함께 한눈에 보여준다. ----
+function renderTitleDex() {
+  if (!user || profile?.role === 'teacher') {
+    $('titledex-feedback').textContent = '로그인한 학생만 이용할 수 있어요.';
+    $('titledex-list').innerHTML = ''; $('titledex-progress').textContent = '0 / 0'; $('titledex-bar-inner').style.width = '0%';
+    return;
+  }
+  $('titledex-feedback').textContent = '';
+  const total = TITLES.length, earnedCount = TITLES.filter(t => myTitles.includes(t.id)).length;
+  $('titledex-progress').textContent = `${earnedCount} / ${total}`;
+  $('titledex-bar-inner').style.width = `${total ? Math.round(earnedCount / total * 100) : 0}%`;
+  $('titledex-list').innerHTML = TITLES.map(t => {
+    const earned = myTitles.includes(t.id);
+    return `<li style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:${earned ? '#eeecff' : '#f7f7fb'};opacity:${earned ? 1 : .6}">` +
+      `<span style="font-size:26px">${t.emoji}</span>` +
+      `<span style="flex:1;text-align:left"><b>${t.name}</b><br><small style="color:#8b8ca8">${t.desc}</small></span>` +
+      `${earned ? '<span style="color:#2bba7b;font-weight:bold;white-space:nowrap">✓ 획득</span>' : '<span style="color:#c5c6dc;font-weight:bold;white-space:nowrap">미획득</span>'}</li>`;
+  }).join('');
+}
+
+// ---- 📈 주간 성장 그래프: 최근 7일간 dailyLog(날짜별 attempts/correct)를 요일 라벨과 함께 정답률 추이로 그려준다. ----
+function loadGrowth() {
+  if (!user || profile?.role === 'teacher') {
+    $('growth-feedback').textContent = '로그인한 학생만 이용할 수 있어요.';
+    $('growth-chart').innerHTML = ''; $('growth-summary').textContent = '';
+    return;
+  }
+  $('growth-feedback').textContent = '';
+  const weekdayNames = ['일', '월', '화', '수', '목', '금', '토'];
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 86400000);
+    const key = d.toISOString().slice(0, 10);
+    const rec = dailyLog[key] || { attempts: 0, correct: 0 };
+    const rate = rec.attempts ? Math.round(rec.correct / rec.attempts * 100) : 0;
+    days.push({ key, label: weekdayNames[d.getDay()], rate, attempts: rec.attempts || 0 });
+  }
+  const totalAttempts = days.reduce((s, d) => s + d.attempts, 0);
+  if (!totalAttempts) {
+    $('growth-chart').innerHTML = '';
+    $('growth-summary').innerHTML = '최근 7일간 푼 문제가 아직 없어요. 문제를 풀면 그래프가 채워져요!';
+    return;
+  }
+  $('growth-chart').innerHTML = lineGraphSVG(days.map(d => d.label), days.map(d => d.rate));
+  const activeDays = days.filter(d => d.attempts > 0);
+  let trendMsg = '';
+  if (activeDays.length >= 2) {
+    const diff = activeDays[activeDays.length - 1].rate - activeDays[0].rate;
+    trendMsg = diff > 0 ? ` · 📈 ${activeDays[0].label}요일보다 정답률이 <b style="color:#2bba7b">${diff}%p</b> 올랐어요!`
+      : diff < 0 ? ` · ${activeDays[0].label}요일보다 정답률이 <b style="color:#ef6675">${Math.abs(diff)}%p</b> 낮아졌어요. 조금 더 힘내봐요!`
+      : ' · 정답률이 꾸준히 유지되고 있어요.';
+  }
+  $('growth-summary').innerHTML = `이번 주 문제 <b>${totalAttempts}</b>개 풀이${trendMsg}`;
+}
+
 function todayStr() { return new Date().toISOString().slice(0, 10); }
 
 // ---- 일일 별 획득 한도 ----
@@ -1392,6 +1558,8 @@ updateDailyCapDisplay();
 
 // ---- 출석 스트릭 ----
 // 매일 문제를 1개 이상 풀면 연속 접속 일수가 늘어난다. 하루에 한 번만 갱신되도록 attendance.date로 방어.
+// 📅 학습 캘린더: uid -> {date: {attempts, correct}} 형태로 Firestore progress 문서의 dailyLog를 그대로 들고 있는다.
+let dailyLog = {};
 let attendance = { date: '', streak: 0 };
 try { const saved = JSON.parse(localStorage.mathQuestAttendance || 'null'); if (saved?.date) attendance = saved; } catch (e) {}
 function saveAttendanceLocal() { localStorage.mathQuestAttendance = JSON.stringify(attendance); }
@@ -1417,7 +1585,7 @@ updateAttendanceDisplay();
 
 // ---- 일일 미션 ----
 // 오늘 문제를 MISSION_TARGET개 풀면 보너스 별을 한 번 지급한다.
-const MISSION_TARGET = 10, MISSION_REWARD = 5;
+let MISSION_TARGET = 10; const MISSION_REWARD = 5;
 let mission = { date: '', count: 0, claimed: false };
 try { const saved = JSON.parse(localStorage.mathQuestMission || 'null'); if (saved?.date) mission = saved; } catch (e) {}
 function saveMissionLocal() { localStorage.mathQuestMission = JSON.stringify(mission); }
@@ -1447,7 +1615,7 @@ updateMissionDisplay();
 
 // ---- 주간 도전과제 ----
 // 이번 주(월요일 시작) 문제 WEEKLY_TARGET개를 풀면 큰 보너스를 한 번 지급한다.
-const WEEKLY_TARGET = 50, WEEKLY_REWARD = 20;
+let WEEKLY_TARGET = 50; const WEEKLY_REWARD = 20;
 function weekKey() { const d = new Date(); const day = (d.getDay() + 6) % 7; const monday = new Date(d); monday.setDate(d.getDate() - day); return monday.toISOString().slice(0, 10); }
 let weekly = { week: '', count: 0, claimed: false };
 try { const saved = JSON.parse(localStorage.mathQuestWeekly || 'null'); if (saved?.week) weekly = saved; } catch (e) {}
@@ -1478,6 +1646,37 @@ function bumpWeekly() {
   }
 }
 updateWeeklyDisplay();
+
+// ---- 목표 설정(일일/주간 목표 문제 수를 사용자가 직접 정하기) ----
+// 저장된 값으로 위쪽 🎯 일일 · 📅 주간 진행 막대의 기준(MISSION_TARGET, WEEKLY_TARGET)을 바꾼다.
+try {
+  const savedGoal = JSON.parse(localStorage.mathQuestGoal || 'null');
+  if (savedGoal?.daily) { MISSION_TARGET = savedGoal.daily; WEEKLY_TARGET = savedGoal.weekly || WEEKLY_TARGET; }
+} catch (e) {}
+function applyGoalSettings(daily, weekly) {
+  MISSION_TARGET = Math.min(200, Math.max(1, Math.round(daily) || 10));
+  WEEKLY_TARGET = Math.min(1000, Math.max(1, Math.round(weekly) || 50));
+  try { localStorage.mathQuestGoal = JSON.stringify({ daily: MISSION_TARGET, weekly: WEEKLY_TARGET }); } catch (e) {}
+  updateMissionDisplay(); updateWeeklyDisplay();
+}
+function renderGoalPanel() {
+  ensureMissionToday(); ensureWeeklyCurrent();
+  $('goal-daily-input').value = MISSION_TARGET;
+  $('goal-weekly-input').value = WEEKLY_TARGET;
+  $('goal-daily-progress').textContent = `${Math.min(mission.count, MISSION_TARGET)}/${MISSION_TARGET}`;
+  $('goal-weekly-progress').textContent = `${Math.min(weekly.count, WEEKLY_TARGET)}/${WEEKLY_TARGET}`;
+  $('goal-feedback').textContent = '';
+}
+$('goal-save-btn').onclick = () => {
+  const daily = +$('goal-daily-input').value, weekly = +$('goal-weekly-input').value;
+  if (!daily || daily < 1 || !weekly || weekly < 1) { $('goal-feedback').textContent = '1 이상의 숫자를 입력해주세요.'; return; }
+  applyGoalSettings(daily, weekly);
+  renderGoalPanel();
+  $('goal-feedback').textContent = '✅ 목표가 저장됐어요!';
+  if (db && user && profile?.role !== 'teacher') {
+    setDoc(doc(db, 'progress', user.uid), { goalSettings: { daily: MISSION_TARGET, weekly: WEEKLY_TARGET }, updatedAt: serverTimestamp() }, { merge: true }).catch(e => console.warn('목표 저장 실패', e));
+  }
+};
 
 // ---- 오답 노트 ----
 // 틀린 문제(텍스트+정답)를 모아뒀다가 "오답 노트" 탭에서 다시 풀 수 있게 한다. 다시 맞히면 노트에서 사라진다.
@@ -1668,13 +1867,23 @@ async function recordAnswer(topic, ok, problem, sub) {
       TITLES.forEach(t => {
         if (!titles[t.id] && t.check({ correct: newCorrect, attempts: newAttempts, bestStreak, topicStats: stats })) { titles[t.id] = serverTimestamp(); newlyEarned.push(t); }
       });
-      tx.set(ref, { name: profile.name, classCode: profile.classCode, attempts: newAttempts, correct: newCorrect, topicStats: stats, subtopicStats: subStats, recentResults, streak, bestStreak, titles, updatedAt: serverTimestamp() }, { merge: true });
+      // 📅 학습 캘린더용 날짜별 기록: 날짜(YYYY-MM-DD)마다 시도/정답 수를 누적한다.
+      // 문서 크기를 제한하기 위해 최근 120일치만 남기고 오래된 날짜는 지운다.
+      const dailyLogUpd = { ...(old.dailyLog || {}) };
+      const todayKey = todayStr();
+      const prevDay = dailyLogUpd[todayKey] || { attempts: 0, correct: 0 };
+      dailyLogUpd[todayKey] = { attempts: prevDay.attempts + 1, correct: prevDay.correct + (ok ? 1 : 0) };
+      const dailyLogCutoff = new Date(Date.now() - 120 * 86400000).toISOString().slice(0, 10);
+      Object.keys(dailyLogUpd).forEach(k => { if (k < dailyLogCutoff) delete dailyLogUpd[k]; });
+      tx.set(ref, { name: profile.name, classCode: profile.classCode, attempts: newAttempts, correct: newCorrect, topicStats: stats, subtopicStats: subStats, recentResults, streak, bestStreak, titles, dailyLog: dailyLogUpd, updatedAt: serverTimestamp() }, { merge: true });
       return { titleIds: Object.keys(titles), newlyEarned };
     });
     earnedIds = result.titleIds;
     myTitles = earnedIds;
     updateTitleBadge();
     if (result.newlyEarned.length) showTitleToast(result.newlyEarned);
+    const todayKey = todayStr(), prevDay = dailyLog[todayKey] || { attempts: 0, correct: 0 };
+    dailyLog = { ...dailyLog, [todayKey]: { attempts: prevDay.attempts + 1, correct: prevDay.correct + (ok ? 1 : 0) } };
   } catch (e) { console.warn('기록 저장 실패', e); }
   try {
     const today = todayStr(), wk = weekKey();
@@ -1698,12 +1907,12 @@ async function loadProfile(u) {
   $('who').textContent = `${profile.name}님${roleLabel}`;
   $('login-btn').textContent = '로그아웃'; $('signup-menu-wrap').classList.add('hidden'); $('signup-menu').classList.add('hidden');
   if (profile.role === 'teacher') { // 교사 계정은 게임 대신 학급 결과 대시보드를 본다
-    myTitles = []; updateTitleBadge();
+    myTitles = []; updateTitleBadge(); dailyLog = {};
     $('home-view').classList.add('hidden'); $('back-bar').classList.add('hidden');
     document.querySelectorAll('.panel').forEach(x => x.classList.add('hidden'));
     $('teacher-dash').classList.remove('hidden');
     $('teacher-grade-label').textContent = profile.grade || '미설정';
-    loadMyClassCodes().then(() => { loadTeacherData(); loadQuestionBank(); populateAssignClassSelect(); populateAssignTopicSelect(); loadMyAssignmentsTeacher(); });
+    loadMyClassCodes().then(() => { loadTeacherData(); loadQuestionBank(); populateAssignClassSelect(); populateAssignTopicSelect(); loadMyAssignmentsTeacher(); populateNoticeClassSelect(); loadMyNoticesTeacher(); });
     return;
   }
   // 학생 계정: 가입한 학급의 학년(또는 선생님이 개별 조정한 학년)으로 문제 학년을 고정하고, 학년 직접 선택은 숨긴다.
@@ -1733,11 +1942,13 @@ async function loadProfile(u) {
   updateTitleBadge();
   if (pdata?.attendance?.date && (!attendance.date || pdata.attendance.date > attendance.date)) { attendance = pdata.attendance; saveAttendanceLocal(); }
   updateAttendanceDisplay();
+  dailyLog = pdata?.dailyLog || {};
   // 다른 기기에서 이미 오늘 별을 받았다면 그 값을 가져와서 기기를 바꿔도 한도가 이어지게 한다.
   if (pdata?.dailyEarn?.date === todayStr() && pdata.dailyEarn.earned > dailyEarn.earned) { dailyEarn = pdata.dailyEarn; saveDailyEarnLocal(); }
   updateDailyCapDisplay();
   if (pdata?.weekly?.week === weekKey() && pdata.weekly.count > weekly.count) { weekly = pdata.weekly; saveWeeklyLocal(); }
   updateWeeklyDisplay();
+  if (pdata?.goalSettings?.daily) applyGoalSettings(pdata.goalSettings.daily, pdata.goalSettings.weekly);
   if (pdata?.wrongBank?.length) {
     const map = new Map(wrongBank.map(w => [w.text, w]));
     pdata.wrongBank.forEach(w => { if (!map.has(w.text)) map.set(w.text, w); });
@@ -1760,6 +1971,7 @@ async function loadProfile(u) {
   if (pdata?.matchHistory?.length) { matchHistory = pdata.matchHistory.slice(0, HISTORY_MAX); saveHistoryLocal(); }
   applyAvatar();
   loadRanking();
+  loadHomeNotice();
 }
 
 // ---- 선생님 대시보드 ----
@@ -1798,7 +2010,7 @@ async function toggleClassCodeSemester(code, curSem) {
 }
 async function deleteClassCode(code) {
   if (!confirm(`'${code}' 학급 코드를 삭제할까요? 이미 이 코드로 가입한 학생 계정에는 영향이 없어요.`)) return;
-  try { await deleteDoc(doc(db, 'classCodes', code)); await loadMyClassCodes(); await loadTeacherData(); populateAssignClassSelect(); }
+  try { await deleteDoc(doc(db, 'classCodes', code)); await loadMyClassCodes(); await loadTeacherData(); populateAssignClassSelect(); populateNoticeClassSelect(); }
   catch (e) { alert('삭제 실패: ' + e.message); }
 }
 $('class-code-create-btn').onclick = async () => {
@@ -1815,6 +2027,7 @@ $('class-code-create-btn').onclick = async () => {
     await loadMyClassCodes();
     await loadTeacherData();
     populateAssignClassSelect();
+    populateNoticeClassSelect();
   } catch (e) { alert('학급 코드 생성 실패: ' + e.message); }
 };
 
@@ -1876,6 +2089,76 @@ async function deleteAssignment(a) {
   try { await deleteDoc(doc(db, 'assignments', a.id)); await loadMyAssignmentsTeacher(); }
   catch (e) { $('assign-feedback').textContent = '삭제 실패: ' + e.message; }
 }
+
+// ---- 학급 공지사항(선생님이 학급을 골라 올리면 그 반 학생 홈 화면 위쪽에 뜨는 배너) ----
+let myNoticesTeacher = [];
+function populateNoticeClassSelect() {
+  const sel = $('notice-class-select');
+  sel.innerHTML = myClassCodes.length
+    ? myClassCodes.map(c => `<option value="${c}">${c}</option>`).join('')
+    : '<option value="">먼저 학급 코드를 만들어주세요</option>';
+}
+$('notice-create-btn').onclick = async () => {
+  const classCode = $('notice-class-select').value;
+  const title = $('notice-title-input').value.trim();
+  const body = $('notice-body-input').value.trim();
+  if (!db || !user) { $('notice-feedback').textContent = '로그인 후 이용해주세요.'; return; }
+  if (!classCode) { $('notice-feedback').textContent = '먼저 학급 코드를 만들고 골라주세요.'; return; }
+  if (!body) { $('notice-feedback').textContent = '공지 내용을 입력해주세요.'; return; }
+  $('notice-create-btn').disabled = true;
+  try {
+    await addDoc(collection(db, 'notices'), {
+      classCode, ownerId: user.uid, title, body, createdAt: serverTimestamp(), active: true,
+    });
+    $('notice-title-input').value = ''; $('notice-body-input').value = '';
+    $('notice-feedback').textContent = '공지를 올렸어요! 🎉';
+    await loadMyNoticesTeacher();
+  } catch (e) { $('notice-feedback').textContent = '공지 올리기 실패: ' + e.message; }
+  $('notice-create-btn').disabled = false;
+};
+async function loadMyNoticesTeacher() {
+  if (!db || !user) return;
+  try {
+    const snap = await getDocs(query(collection(db, 'notices'), where('ownerId', '==', user.uid)));
+    myNoticesTeacher = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => (b.createdAt?.toMillis?.() || 0) - (a.createdAt?.toMillis?.() || 0));
+    $('notice-list').innerHTML = myNoticesTeacher.length
+      ? myNoticesTeacher.map((n, i) => `<li style="background:#fbfbff;border:2px solid #e1e1f0;border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+          <span><b>${escHtml(n.title || '(제목 없음)')}</b> <small style="color:#8b8ca8">· ${n.classCode} · ${escHtml((n.body || '').slice(0, 40))}${(n.body || '').length > 40 ? '…' : ''}</small></span>
+          <button class="pvp-mini-btn notice-delete-btn" data-i="${i}" style="background:#ef6675;color:#fff">삭제</button>
+        </li>`).join('')
+      : '<li style="color:#8b8ca8;list-style:none">아직 올린 공지가 없어요.</li>';
+    document.querySelectorAll('.notice-delete-btn').forEach(b => b.onclick = () => deleteNotice(myNoticesTeacher[+b.dataset.i]));
+  } catch (e) { $('notice-feedback').textContent = '공지 목록을 불러오지 못했어요: ' + e.message; }
+}
+async function deleteNotice(n) {
+  if (!confirm(`'${n.title || '이 공지'}'를 삭제할까요? 학생 화면에서 바로 사라져요.`)) return;
+  try { await deleteDoc(doc(db, 'notices', n.id)); await loadMyNoticesTeacher(); }
+  catch (e) { $('notice-feedback').textContent = '삭제 실패: ' + e.message; }
+}
+
+// 학생 홈 화면: 자기 학급으로 온 가장 최근 공지 하나를 배너로 보여준다. 한 번 닫으면(✕) 그 공지 id를 기기에 저장해 다시 뜨지 않게 한다.
+async function loadHomeNotice() {
+  const banner = $('home-notice-banner');
+  if (!db || !user || profile?.role === 'teacher' || !profile?.classCode) { banner.classList.add('hidden'); return; }
+  try {
+    const snap = await getDocs(query(collection(db, 'notices'), where('classCode', '==', profile.classCode), where('active', '==', true)));
+    const notices = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => (b.createdAt?.toMillis?.() || 0) - (a.createdAt?.toMillis?.() || 0));
+    const latest = notices[0];
+    if (!latest || localStorage.mathQuestDismissedNoticeId === latest.id) { banner.classList.add('hidden'); return; }
+    $('home-notice-title').textContent = `📢 ${latest.title || '공지'}`;
+    $('home-notice-body').textContent = latest.body || '';
+    $('home-notice-date').textContent = latest.createdAt?.toDate ? latest.createdAt.toDate().toLocaleDateString('ko-KR') : '';
+    banner.dataset.noticeId = latest.id;
+    banner.classList.remove('hidden');
+  } catch (e) { banner.classList.add('hidden'); }
+}
+$('home-notice-dismiss').onclick = () => {
+  const banner = $('home-notice-banner');
+  localStorage.mathQuestDismissedNoticeId = banner.dataset.noticeId || '';
+  banner.classList.add('hidden');
+};
 
 async function loadTeacherData() {
   $('teacher-feedback').textContent = '불러오는 중...';
@@ -1999,7 +2282,7 @@ $('student-detail-close').onclick = () => $('student-detail-overlay').classList.
 $('student-detail-overlay').onclick = e => { if (e.target.id === 'student-detail-overlay') $('student-detail-overlay').classList.add('hidden'); };
 $('teacher-class-filter').onchange = renderTeacherTable;
 $('teacher-search').oninput = renderTeacherTable;
-$('teacher-refresh').onclick = () => loadMyClassCodes().then(() => { loadTeacherData(); loadQuestionBank(); populateAssignClassSelect(); populateAssignTopicSelect(); loadMyAssignmentsTeacher(); });
+$('teacher-refresh').onclick = () => loadMyClassCodes().then(() => { loadTeacherData(); loadQuestionBank(); populateAssignClassSelect(); populateAssignTopicSelect(); loadMyAssignmentsTeacher(); populateNoticeClassSelect(); loadMyNoticesTeacher(); });
 
 // ---- 학생이 낸 문제 승인(문제은행) ----
 let questionRows = [], questionFilterStatus = 'pending';
@@ -2195,6 +2478,7 @@ $('login-btn').onclick = async () => {
     $('grades').classList.remove('hidden'); $('tabs').classList.remove('hidden'); $('teacher-dash').classList.add('hidden'); $('student-detail-overlay').classList.add('hidden');
     $('submit-tab-btn').classList.add('hidden'); communityBank = [];
     myTitles = []; updateTitleBadge(); $('titles-overlay').classList.add('hidden');
+    dailyLog = {};
     myFriends = []; renderFriendsUI();
     leavePvp();
     leaveCoop();
@@ -2568,8 +2852,8 @@ function stripGraphSVG(labels, percents) {
   return `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" style="width:min(${w}px,100%)" font-family="'Gowun Dodum',sans-serif">${out}</svg>`;
 }
 
-const GAME_LABELS = { quest: '🗺️ 탐험 퀴즈', written: '✍️ 서술형 문제', speed: '⚡ 번개 계산', match: '🃏 카드 짝맞추기', bomb: '💣 폭탄 해체', memory: '🧠 순서 기억', board: '🎲 주사위 모험', maze: '🧩 숫자 미로', rhythm: '🥁 리듬 정답 탭', mongame: '🐣 몬스터 목장', battle: '⚔️ 몬스터 배틀', wave: '🐲 웨이브 서바이벌', relay: '🏃 팀 릴레이', td: '🏰 타워 디펜스', pvp: '🤝 실시간 대결', review: '📒 오답 노트', submit: '✏️ 문제 만들기', shop: '🛍️ 상점', ranking: '🏆 랭킹', daily: '📅 오늘의 도전', assignment: '📌 과제', report: '📊 학습 리포트' };
-// ---- 상단 카테고리 내비(게임/대결/분석): mode-tabs-panel 안의 버튼을 data-cat 값으로 걸러서 보여준다.
+const GAME_LABELS = { quest: '🗺️ 탐험 퀴즈', written: '✍️ 서술형 문제', speed: '⚡ 번개 계산', match: '🃏 카드 짝맞추기', bomb: '💣 폭탄 해체', memory: '🧠 순서 기억', bingo: '🎯 숫자 빙고', reveal: '🖼️ 그림 맞추기', board: '🎲 주사위 모험', maze: '🧩 숫자 미로', rhythm: '🥁 리듬 정답 탭', mongame: '🐣 몬스터 목장', battle: '⚔️ 몬스터 배틀', wave: '🐲 웨이브 서바이벌', relay: '🏃 팀 릴레이', td: '🏰 타워 디펜스', pvp: '🤝 실시간 대결', review: '📒 오답 노트', submit: '✏️ 문제 만들기', shop: '🛍️ 상점', ranking: '🏆 랭킹', daily: '📅 오늘의 도전', assignment: '📌 과제', report: '📊 학습 리포트', calendar: '📅 학습 캘린더', goal: '🎯 목표 설정', growth: '📈 주간 성장', titledex: '🏅 칭호 도감' };
+// ---- 상단 카테고리 내비(퀴즈/미니게임/몬스터/대결/관리): mode-tabs-panel 안의 버튼을 data-cat 값으로 걸러서 보여준다.
 // 홈 요약카드 등 다른 경로로 특정 게임에 들어가도(예: 과제 카드 클릭) 다시 홈으로 돌아왔을 때
 // 해당 게임이 속한 카테고리가 자동으로 선택되어 있도록 showGame()에서 switchCategory()를 같이 호출한다.
 function switchCategory(cat) {
@@ -2578,7 +2862,7 @@ function switchCategory(cat) {
 }
 // 메뉴바가 이제 모든 화면에서 항상 보이므로, 게임 화면 중에 카테고리를 누르면 먼저 홈으로 돌아간 뒤
 // (진행 중인 게임이 있으면 goHome이 알아서 막고 안내한다) 해당 카테고리를 펼쳐 보여준다.
-// 첫 화면에는 사용법 안내(intro-guide)를 보여주고, 상단 탭(게임/대결/분석)을 누르면
+// 첫 화면에는 사용법 안내(intro-guide)를 보여주고, 상단 탭(퀴즈/미니게임/몬스터/대결/관리)을 누르면
 // 안내를 감추고 해당 카테고리의 기능 탭을 펼쳐 보여준다.
 function showTabsPanel(cat) {
   $('intro-guide').classList.add('hidden');
@@ -2612,10 +2896,14 @@ function showGame(name) {
   if (name === 'daily') loadDailyChallenge();
   if (name === 'assignment') loadAssignments();
   if (name === 'report') loadReport();
+  if (name === 'calendar') loadCalendar();
+  if (name === 'goal') renderGoalPanel();
+  if (name === 'growth') loadGrowth();
+  if (name === 'titledex') renderTitleDex();
 }
 // 게임 화면에서 나가는 도중이면(진행 중인 타이머/대전 등) 홈으로 돌아가지 않고 안내만 한다.
 function goHome() {
-  if (speed.run || battle.run || written.playing || pvp.duelId || coop.coopId || bomb.run || memory.playing || wave.run || board.run || maze.run || rhythm.run || monster.playing || relay.run || td.run) { showToast('진행 중인 게임을 먼저 끝내주세요!'); return; }
+  if (speed.run || battle.run || written.playing || pvp.duelId || coop.coopId || bomb.run || memory.playing || bingo.run || reveal.playing || wave.run || board.run || maze.run || rhythm.run || monster.playing || relay.run || td.run) { showToast('진행 중인 게임을 먼저 끝내주세요!'); return; }
   document.querySelectorAll('.panel').forEach(x => x.classList.add('hidden'));
   $('back-bar').classList.add('hidden');
   if (profile?.role !== 'teacher') $('home-view').classList.remove('hidden');
@@ -2839,6 +3127,130 @@ $('memory-start').onclick = () => {
   if (memory.playing) return;
   memory = { playing: true, round: 0, seq: [], input: 0, showing: false, best: memory.best };
   $('memory-best').textContent = memory.best; buildMemoryGrid(); $('memory-start').textContent = '게임 중'; nextMemoryRound();
+};
+
+// ---- 숫자 빙고 (퍼즐 아케이드) ----
+// 4x4 보드에 채울 숫자 16개를 미리 뽑은 문제 묶음(pool)의 정답들 중에서 고른다. 그러면 문제를
+// 그 pool 순서대로 섞어서 내는 동안 보드에 있는 16개 숫자가 언젠가는 전부 나오는 게 보장돼서,
+// 끝까지 풀면 반드시 빙고가 완성된다(운이 좋으면 더 빨리 완성).
+const BINGO_LINES = [
+  [0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15],
+  [0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15],
+  [0, 5, 10, 15], [3, 6, 9, 12],
+];
+function buildBingoBoard() {
+  const pool = [];
+  for (let i = 0; i < 40; i++) pool.push(makeProblem());
+  const seen = new Set(), boardVals = [];
+  for (const p of pool) {
+    if (seen.has(p.answer)) continue;
+    seen.add(p.answer); boardVals.push(p.answer);
+    if (boardVals.length === 16) break;
+  }
+  while (boardVals.length < 16) boardVals.push(pool[rand(0, pool.length - 1)].answer); // 서로 다른 정답이 16개가 안 모이면(문제 종류가 적은 학년 등) 남은 칸은 임의로 채운다.
+  bingo.board = shuffle(boardVals);
+  bingo.marked = new Array(16).fill(false);
+  bingo.queue = shuffle(pool);
+  bingo.idx = 0; bingo.tries = 0;
+}
+function renderBingoBoard() {
+  $('bingo-grid').innerHTML = bingo.board.map((v, i) => `<button class="card${bingo.marked[i] ? ' done' : ''}" disabled>${v}</button>`).join('');
+}
+function bingoHasLine() { return BINGO_LINES.some(line => line.every(i => bingo.marked[i])); }
+function bingoNext() {
+  if (bingo.idx >= bingo.queue.length) { bingoEnd(false); return; }
+  const p = bingo.queue[bingo.idx];
+  bingo.answer = p.answer; bingo.text = p.text; bingo.sub = p.sub; bingo.svg = p.svg;
+  renderQuestion($('bingo-question'), p);
+  $('bingo-input').value = ''; $('bingo-input').disabled = false; $('bingo-input').focus();
+}
+function submitBingo() {
+  if (!bingo.run) return;
+  const raw = $('bingo-input').value.trim();
+  if (raw === '') return;
+  const ok = Math.round((+raw) * 100) === Math.round(bingo.answer * 100), topic = `grade${grade}`;
+  bingo.tries++; $('bingo-tries').textContent = bingo.tries;
+  recordAnswer(topic, ok, { text: bingo.text, answer: bingo.answer, svg: bingo.svg }, bingo.sub);
+  bingo.input = true; $('bingo-input').disabled = true;
+  if (ok) {
+    const cellIdx = bingo.board.findIndex((v, i) => v === bingo.answer && !bingo.marked[i]);
+    if (cellIdx !== -1) { bingo.marked[cellIdx] = true; renderBingoBoard(); $('bingo-feedback').textContent = '정답! 보드에서 칸을 찾았어요 ✨'; }
+    else $('bingo-feedback').textContent = '정답이지만 보드에는 없는 숫자예요.';
+  } else $('bingo-feedback').textContent = `아쉬워요! 정답은 ${bingo.answer}이에요.`;
+  bingo.idx++;
+  setTimeout(() => {
+    if (bingoHasLine()) bingoEnd(true);
+    else bingoNext();
+  }, 650);
+}
+function bingoEnd(won) {
+  bingo.run = false; $('bingo-question').innerHTML = ''; $('bingo-input').classList.add('hidden'); $('bingo-input').disabled = true;
+  if (won) {
+    if (bingo.best == null || bingo.tries < bingo.best) { bingo.best = bingo.tries; localStorage.mathQuestBingoBest = bingo.best; $('bingo-best').textContent = bingo.best; syncGameBest('bingoTries', bingo.best, false); }
+    $('bingo-feedback').textContent = `🎉 빙고! ${bingo.tries}문제 만에 완성했어요.`;
+  } else {
+    $('bingo-feedback').textContent = '아쉬워요, 이번엔 빙고를 못 만들었어요. 다시 도전해봐요!';
+  }
+  $('bingo-start').textContent = '다시 하기';
+}
+$('bingo-start').onclick = () => {
+  if (bingo.run) return;
+  bingo.run = true; bingo.tries = 0;
+  $('bingo-tries').textContent = 0; $('bingo-feedback').textContent = '보드에 있는 숫자가 나오면 칸이 채워져요!';
+  $('bingo-input').classList.remove('hidden'); $('bingo-input').disabled = false;
+  $('bingo-start').textContent = '게임 중';
+  buildBingoBoard(); renderBingoBoard(); bingoNext();
+};
+$('bingo-input').onkeydown = e => { if (e.key === 'Enter') submitBingo(); };
+
+// ---- 그림 맞추기 (힐링 아케이드) ----
+// 문제를 맞히면 조각이 하나씩 열리는, 시간 압박이나 하트 소모 없는 느긋한 게임. 틀려도 그냥 다음
+// 문제로 넘어갈 뿐이라 부담 없이 계속 도전할 수 있다.
+function buildRevealGrid() {
+  reveal.theme = REVEAL_THEMES[rand(0, REVEAL_THEMES.length - 1)];
+  reveal.order = shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+  reveal.next = 0; reveal.left = 9;
+  $('reveal-grid').innerHTML = reveal.theme.emojis.map((_, i) => `<button class="card" data-i="${i}" disabled>❓</button>`).join('');
+  $('reveal-left').textContent = reveal.left;
+}
+function revealNext() {
+  const p = makeProblem(), topic = `grade${grade}`;
+  reveal.answer = p.answer; reveal.text = p.text; reveal.sub = p.sub; reveal.svg = p.svg;
+  renderQuestion($('reveal-question'), p);
+  $('reveal-answers').innerHTML = opts(p.answer).map(v => `<button>${v}</button>`).join('');
+  document.querySelectorAll('#reveal-answers button').forEach(b => b.onclick = () => revealAnswer(+b.textContent));
+}
+function revealAnswer(v) {
+  if (!reveal.playing) return;
+  document.querySelectorAll('#reveal-answers button').forEach(b => b.disabled = true);
+  const ok = v === reveal.answer, topic = `grade${grade}`;
+  recordAnswer(topic, ok, { text: reveal.text, answer: reveal.answer, svg: reveal.svg }, reveal.sub);
+  if (ok) {
+    const cellIdx = reveal.order[reveal.next]; reveal.next++; reveal.left--;
+    const cell = document.querySelector(`#reveal-grid .card[data-i="${cellIdx}"]`);
+    if (cell) { cell.textContent = reveal.theme.emojis[cellIdx]; cell.classList.add('done'); }
+    $('reveal-left').textContent = reveal.left;
+    $('reveal-feedback').textContent = '정답! 조각이 열렸어요 ✨';
+  } else {
+    $('reveal-feedback').textContent = `아쉬워요! 정답은 ${reveal.answer}이에요.`;
+  }
+  setTimeout(() => {
+    if (reveal.left <= 0) revealEnd();
+    else revealNext();
+  }, 600);
+}
+function revealEnd() {
+  reveal.playing = false; $('reveal-question').innerHTML = ''; $('reveal-answers').innerHTML = '';
+  reveal.best++; localStorage.mathQuestRevealBest = reveal.best; $('reveal-best').textContent = reveal.best; syncGameBest('revealBest', reveal.best);
+  $('reveal-feedback').textContent = `🎉 "${reveal.theme.name}" 완성!`;
+  $('reveal-start').textContent = '새 그림';
+}
+$('reveal-start').onclick = () => {
+  if (reveal.playing) return;
+  reveal.playing = true;
+  $('reveal-question').classList.remove('hidden'); $('reveal-answers').classList.remove('hidden');
+  $('reveal-feedback').textContent = '문제를 맞혀서 그림을 완성해요!'; $('reveal-start').textContent = '게임 중';
+  buildRevealGrid(); revealNext();
 };
 
 // ---- 주사위 모험 보드게임 (운 + 전략) ----
@@ -3714,6 +4126,62 @@ function renderHeatmap(subStats) {
     return `<div class="heatmap-cell" style="background:${heatColor(e.rate)};color:#fff" title="${titleAttr}"><span class="heatmap-topic">${escHtml(e.topic)}</span><span class="heatmap-pct">${pct}%</span></div>`;
   }).join('');
 }
+// ---- 학습 캘린더: 날짜별 활동 기록 보기 ----
+let calendarViewDate = new Date();
+async function loadCalendar() {
+  if (!db || !user || profile?.role === 'teacher') {
+    $('calendar-feedback').textContent = '로그인한 학생만 이용할 수 있어요.';
+    $('calendar-grid').innerHTML = ''; $('calendar-day-detail').innerHTML = '';
+    $('calendar-active-days').textContent = '0'; $('calendar-month-attempts').textContent = '0';
+    return;
+  }
+  $('calendar-feedback').textContent = '';
+  calendarViewDate = new Date();
+  try {
+    const snap = await getDoc(doc(db, 'progress', user.uid));
+    dailyLog = (snap.exists() && snap.data().dailyLog) || dailyLog || {};
+  } catch (e) { /* 최신 조회 실패해도 로컬에 있는 dailyLog로 우선 보여준다 */ }
+  renderCalendarMonth();
+}
+function renderCalendarMonth() {
+  const y = calendarViewDate.getFullYear(), m = calendarViewDate.getMonth();
+  $('calendar-month-label').textContent = `${y}년 ${m + 1}월`;
+  const startWeekday = new Date(y, m, 1).getDay();
+  const daysInMonth = new Date(y, m + 1, 0).getDate();
+  const todayKey = todayStr();
+  let cells = [];
+  for (let i = 0; i < startWeekday; i++) cells.push('<div></div>');
+  let activeDays = 0, monthAttempts = 0;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const log = dailyLog[key];
+    const has = !!log?.attempts;
+    if (has) { activeDays++; monthAttempts += log.attempts; }
+    const isToday = key === todayKey;
+    cells.push(`<button class="calendar-day-cell" data-date="${key}" style="border:2px solid ${isToday ? 'var(--p)' : (has ? '#c7c8f5' : '#e7e7f4')};background:${has ? '#eeecff' : '#fff'};border-radius:10px;padding:8px 2px;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:44px">` +
+      `<span style="font-size:13px;font-weight:${isToday ? 'bold' : 'normal'};color:${isToday ? 'var(--p)' : 'var(--ink)'}">${d}</span>` +
+      (has ? `<span style="font-size:10px;color:var(--p)">✏️${log.attempts}</span>` : '') +
+      `</button>`);
+  }
+  $('calendar-grid').innerHTML = cells.join('');
+  $('calendar-active-days').textContent = activeDays;
+  $('calendar-month-attempts').textContent = monthAttempts;
+  document.querySelectorAll('#calendar-grid .calendar-day-cell').forEach(b => b.onclick = () => showCalendarDayDetail(b.dataset.date));
+  const now = new Date();
+  const isCurrentMonth = y === now.getFullYear() && m === now.getMonth();
+  showCalendarDayDetail(isCurrentMonth ? todayKey : '');
+}
+function showCalendarDayDetail(key) {
+  const box = $('calendar-day-detail');
+  if (!key) { box.innerHTML = '<p style="margin:0;color:#8b8ca8">날짜를 눌러 그날의 기록을 확인해보세요.</p>'; return; }
+  const log = dailyLog[key];
+  if (!log?.attempts) { box.innerHTML = `<p style="margin:0;color:#8b8ca8"><b>${key}</b>에는 활동 기록이 없어요.</p>`; return; }
+  const rate = Math.round(log.correct / log.attempts * 100);
+  box.innerHTML = `<p style="margin:0 0 6px;font-weight:bold;color:var(--p)">${key}</p><p style="margin:0">푼 문제 <b>${log.attempts}</b>개 · 정답 <b>${log.correct}</b>개 · 정답률 <b>${rate}%</b></p>`;
+}
+$('calendar-prev-btn').onclick = () => { calendarViewDate = new Date(calendarViewDate.getFullYear(), calendarViewDate.getMonth() - 1, 1); renderCalendarMonth(); };
+$('calendar-next-btn').onclick = () => { calendarViewDate = new Date(calendarViewDate.getFullYear(), calendarViewDate.getMonth() + 1, 1); renderCalendarMonth(); };
+
 function renderReport(subStats, totalAttempts, totalCorrect) {
   $('report-overall-rate').textContent = totalAttempts ? Math.round(totalCorrect / totalAttempts * 100) : 0;
   renderHeatmap(subStats);
@@ -4393,5 +4861,7 @@ newMatch(); paintBattle();
 $('monster-feed-need').textContent = MONSTER_FEED_NEED;
 $('maze-best').textContent = maze.best || '-';
 $('rhythm-best').textContent = rhythm.best;
+$('bingo-best').textContent = bingo.best == null ? '-' : bingo.best;
+$('reveal-best').textContent = reveal.best;
 renderMonsterGallery(); paintMonsterStage();
 </script></body></html>

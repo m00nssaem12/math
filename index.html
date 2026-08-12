@@ -705,6 +705,10 @@ import{initializeApp}from'https://www.gstatic.com/firebasejs/12.17.1/firebase-ap
 import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut}from'https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js';
 import{getFirestore,doc,getDoc,setDoc,deleteDoc,runTransaction,serverTimestamp,collection,getDocs,query,where,onSnapshot,addDoc,updateDoc}from'https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js';
 
+// $ 는 아래 코드 여러 곳(예: 랭킹 필터 옵션 채우기)에서 이 시점부터 바로 쓰이므로,
+// 반드시 그 사용 지점들보다 앞에서 선언해야 한다("초기화 전 접근" ReferenceError 방지).
+const $ = x => document.getElementById(x), shuffle = a => [...a].sort(() => Math.random() - .5), rand = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+
 // 여기에 Firebase 웹 앱 설정을 넣으면 로그인/기록 저장이 켜집니다. 비워두면 이 기기에만 저장됩니다.
 const firebaseConfig = {
   apiKey: "AIzaSyBFjxAqb6_wLvrLid8rkUA89R6IfXGTABE",
@@ -738,7 +742,6 @@ function updateRankingScopeVisibility() {
 }
 if (firebaseConfig) { const app = initializeApp(firebaseConfig); auth = getAuth(app); db = getFirestore(app); }
 
-const $ = x => document.getElementById(x), shuffle = a => [...a].sort(() => Math.random() - .5), rand = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
 function escHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 let grade = 5, total = +(localStorage.mathQuestStars || 0);
 // 오답 노트 데이터는 renderHomeSummary() 등 여러 초기화 함수에서 일찍 참조되므로,

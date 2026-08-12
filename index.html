@@ -49,6 +49,31 @@
 #back-bar-title{font:16px Jua,sans-serif;color:var(--ink)}
 .panel{background:#fff;border-radius:23px;padding:27px;box-shadow:0 12px 30px #34336d18;text-align:center}
 .hidden{display:none!important}
+.auth-modal-overlay{position:fixed;inset:0;background:#28284b6e;display:flex;align-items:center;justify-content:center;padding:16px;z-index:60;animation:authFade .15s ease}
+.auth-modal-card{background:#fff;border-radius:22px;padding:28px 26px 24px;max-width:380px;width:100%;box-shadow:0 20px 46px #28284b3d;position:relative;animation:authPop .18s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes authFade{from{opacity:0}to{opacity:1}}
+@keyframes authPop{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.auth-modal-close{position:absolute;top:14px;right:14px;border:0;background:#eeecff;color:var(--p);border-radius:999px;width:30px;height:30px;font-weight:bold;cursor:pointer;line-height:1}
+.auth-modal-close:hover{background:#e0deff}
+.auth-modal-icon{font-size:40px;text-align:center;line-height:1;margin-bottom:6px}
+.auth-modal-title{margin:0 0 4px;font:22px Jua,sans-serif;text-align:center;color:var(--ink)}
+.auth-modal-sub{margin:0 0 20px;text-align:center;font-size:13px;color:#8b8ca8;line-height:1.5}
+.auth-field{margin-bottom:12px}
+.auth-field label{display:block;font-size:12px;font-weight:bold;color:#6d6ea3;margin:0 0 5px 2px}
+.auth-field input{width:100%;font:15px 'Gowun Dodum',sans-serif;border:2px solid #dddff0;border-radius:12px;padding:11px 13px;color:var(--ink);transition:border-color .15s,background .15s;background:#fbfbff}
+.auth-field input:focus{outline:none;border-color:var(--p);background:#fff}
+.auth-step-error{color:#e0245e;font-size:12.5px;margin:-4px 0 12px 2px;display:flex;align-items:center;gap:4px}
+.auth-modal-actions{display:flex;gap:8px;margin-top:6px}
+.auth-btn-primary{flex:1;border:0;border-radius:999px;padding:12px 14px;background:var(--p);color:#fff;font:15px 'Gowun Dodum',sans-serif;font-weight:bold;cursor:pointer;transition:filter .15s,transform .1s}
+.auth-btn-primary:hover{filter:brightness(1.08)}
+.auth-btn-primary:disabled{opacity:.55;cursor:default}
+.auth-btn-secondary{border:2px solid #dddff0;border-radius:999px;padding:12px 16px;background:#fff;color:#6d6ea3;font:14px 'Gowun Dodum',sans-serif;font-weight:bold;cursor:pointer}
+.auth-btn-secondary:hover{background:#f5f5fb}
+.auth-hint{font-size:11.5px;color:#adaecb;margin:5px 2px 0}
+.auth-badge-row{display:flex;justify-content:center;gap:6px;margin-bottom:18px}
+.auth-badge-dot{width:7px;height:7px;border-radius:999px;background:#e2e2f2}
+.auth-badge-dot.active{background:var(--p)}
+.activity-chip{display:inline-flex;align-items:center;gap:4px;background:#f4f4fb;border-radius:999px;padding:6px 11px;font-size:12.5px;color:#45466b;white-space:nowrap}
 .eyebrow{font-size:13px;font-weight:bold;color:var(--p);margin:0}
 .progress{height:10px;background:#ececf6;border-radius:8px;overflow:hidden;margin:12px auto;width:min(330px,80%)}
 .progress i{height:100%;display:block;background:var(--y);transition:.2s}
@@ -215,6 +240,51 @@
     <ul id="titles-overlay-list" style="list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:8px"></ul>
   </div>
 </div>
+<div id="auth-modal" class="hidden auth-modal-overlay">
+  <div class="auth-modal-card">
+    <button id="auth-modal-close" class="auth-modal-close">✕</button>
+    <div class="auth-modal-icon" id="auth-modal-icon">🧑‍🎓</div>
+    <h3 class="auth-modal-title" id="auth-modal-title">학생 가입</h3>
+    <p class="auth-modal-sub" id="auth-modal-sub">선생님께 받은 학급 코드를 입력해주세요</p>
+    <div class="auth-badge-row"><span class="auth-badge-dot active" id="auth-dot-1"></span><span class="auth-badge-dot" id="auth-dot-2"></span></div>
+
+    <form id="auth-step1-form">
+      <div class="auth-field">
+        <label id="auth-code-label" for="auth-code-input">학급 코드</label>
+        <input id="auth-code-input" autocomplete="off" placeholder="예: sunny5-2">
+      </div>
+      <p class="auth-step-error hidden" id="auth-step1-error"></p>
+      <div class="auth-modal-actions">
+        <button type="submit" class="auth-btn-primary" id="auth-step1-next">다음</button>
+      </div>
+    </form>
+
+    <form id="auth-step2-form" class="hidden">
+      <div class="auth-field">
+        <label id="auth-name-label" for="auth-name-input">이름</label>
+        <input id="auth-name-input" autocomplete="off" placeholder="이름을 입력해주세요">
+      </div>
+      <div class="auth-field hidden" id="auth-grade-field">
+        <label for="auth-grade-input">담당 학년</label>
+        <input id="auth-grade-input" inputmode="numeric" autocomplete="off" placeholder="1~6 사이 숫자">
+        <p class="auth-hint">이 학년의 문제가 학생들에게 기본으로 출제돼요.</p>
+      </div>
+      <div class="auth-field">
+        <label for="auth-id-input">아이디</label>
+        <input id="auth-id-input" autocomplete="off" placeholder="영문 · 숫자">
+      </div>
+      <div class="auth-field">
+        <label for="auth-pw-input">비밀번호</label>
+        <input id="auth-pw-input" type="password" autocomplete="new-password" placeholder="6자 이상">
+      </div>
+      <p class="auth-step-error hidden" id="auth-step2-error"></p>
+      <div class="auth-modal-actions">
+        <button type="button" class="auth-btn-secondary" id="auth-step2-back">이전</button>
+        <button type="submit" class="auth-btn-primary" id="auth-step2-submit">가입하기</button>
+      </div>
+    </form>
+  </div>
+</div>
 <div id="home-view">
 <section class="hero"><div><p>초등 1~6학년 수학 놀이</p><h1>오늘은 어떤<br>탐험을 할까?</h1><p>학년을 고르고 게임을 시작해요!</p></div><div class="mascot" id="hero-mascot">🦊</div></section>
 <section class="home-summary">
@@ -245,26 +315,28 @@
     </div>
   </div>
   <div style="max-width:600px;margin:0 auto">
-    <p style="font:15px Jua,sans-serif;text-align:center;margin:0 0 10px;color:var(--ink)">어떤 활동이 있나요?</p>
-    <div style="display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));font-size:13px;color:#45466b">
-      <div>🗺️ <b>탐험 퀴즈</b> — 객관식 문제를 풀어요</div>
-      <div>✍️ <b>서술형 문제</b> — 답을 직접 입력해요</div>
-      <div>⚡ <b>번개 계산</b> — 60초 안에 빠르게 계산해요</div>
-      <div>🃏 <b>카드 짝맞추기</b> — 짝을 찾는 기억력 게임</div>
-      <div>💣 <b>폭탄 해체</b> — 시간 안에 정답을 골라요</div>
-      <div>🧠 <b>순서 기억</b> — 반짝인 순서를 기억해서 눌러요</div>
-      <div>🎲 <b>주사위 모험</b> — 주사위로 이동하는 보드게임</div>
-      <div>🧩 <b>숫자 미로</b> — 문제를 풀어 잠긴 문을 열고 미로를 탈출해요</div>
-      <div>🥁 <b>리듬 정답 탭</b> — 정답 칸이 반짝일 때 타이밍 맞춰 탭해요</div>
-      <div>🐣 <b>몬스터 목장</b> — 문제를 풀어 먹이를 주고 몬스터를 모으고 키워요</div>
-      <div>🏃 <b>팀 릴레이</b> — 파트너와 번갈아 풀며 상대 팀과 릴레이 대결해요</div>
-      <div>🏰 <b>타워 디펜스</b> — 문제를 맞혀 포탑을 쏘고 몰려오는 몬스터로부터 기지를 지켜요</div>
-      <div>📌 <b>과제</b> — 선생님이 낸 과제를 확인해요</div>
-      <div>⚔️ <b>몬스터 배틀</b> — 문제를 풀며 몬스터와 대결</div>
-      <div>🐲 <b>웨이브 서바이벌</b> — 몬스터 웨이브를 계속 물리쳐요</div>
-      <div>🤝 <b>실시간 대결</b> — 친구와 실시간으로 겨뤄요</div>
-      <div>📅 <b>오늘의 도전</b> — 매일 새 문제로 순위 경쟁</div>
-      <div>📊 <b>학습 리포트</b> — 내 학습 현황을 분석해서 보여줘요</div>
+    <p style="font:15px Jua,sans-serif;text-align:center;margin:0 0 12px;color:var(--ink)">어떤 활동이 있나요?</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
+        <span style="font-size:11px;font-weight:bold;color:#8b8ca8;width:44px;flex-shrink:0;margin-top:6px">퀴즈</span>
+        <span class="activity-chip">🗺️ 탐험 퀴즈</span><span class="activity-chip">✍️ 서술형 문제</span><span class="activity-chip">⚡ 번개 계산</span><span class="activity-chip">💣 폭탄 해체</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
+        <span style="font-size:11px;font-weight:bold;color:#8b8ca8;width:44px;flex-shrink:0;margin-top:6px">미니게임</span>
+        <span class="activity-chip">🃏 카드 짝맞추기</span><span class="activity-chip">🧠 순서 기억</span><span class="activity-chip">🎲 주사위 모험</span><span class="activity-chip">🧩 숫자 미로</span><span class="activity-chip">🥁 리듬 정답 탭</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
+        <span style="font-size:11px;font-weight:bold;color:#8b8ca8;width:44px;flex-shrink:0;margin-top:6px">몬스터</span>
+        <span class="activity-chip">🐣 몬스터 목장</span><span class="activity-chip">⚔️ 몬스터 배틀</span><span class="activity-chip">🐲 웨이브 서바이벌</span><span class="activity-chip">🏰 타워 디펜스</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
+        <span style="font-size:11px;font-weight:bold;color:#8b8ca8;width:44px;flex-shrink:0;margin-top:6px">대결</span>
+        <span class="activity-chip">🏃 팀 릴레이</span><span class="activity-chip">🤝 실시간 대결</span><span class="activity-chip">📅 오늘의 도전</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
+        <span style="font-size:11px;font-weight:bold;color:#8b8ca8;width:44px;flex-shrink:0;margin-top:6px">관리</span>
+        <span class="activity-chip">📌 과제</span><span class="activity-chip">📊 학습 리포트</span>
+      </div>
     </div>
   </div>
   <p style="text-align:center;color:#8b8ca8;font-size:12px;margin:18px 0 0">👆 위의 <b style="color:var(--p)">게임 / 대결 / 분석</b> 탭을 눌러서 시작해보세요!</p>
@@ -2002,49 +2074,118 @@ $('teacher-csv').onclick = () => {
 };
 $('signup-menu-btn').onclick = e => { e.stopPropagation(); $('signup-menu').classList.toggle('hidden'); };
 document.addEventListener('click', e => { if (!$('signup-menu-wrap').contains(e.target)) $('signup-menu').classList.add('hidden'); });
-$('signup-btn').onclick = async () => {
-  $('signup-menu').classList.add('hidden');
-  if (!firebaseConfig) { alert('먼저 firebaseConfig를 채워야 로그인 기능을 쓸 수 있어요.'); return; }
-  const rawCode = prompt('학급 코드를 입력하세요 (선생님께 받은 코드)');
-  if (!rawCode) return;
-  const classCode = rawCode.trim().toLowerCase();
-  let classSnap;
-  try { classSnap = await getDoc(doc(db, 'classCodes', classCode)); }
-  catch (e) { alert('학급 코드를 확인하는 중 문제가 생겼어요: ' + e.message); return; }
-  if (!classSnap.exists()) { alert('선생님께 받은 학급 코드가 맞는지 다시 확인해주세요.'); return; }
-  const classGrade = classSnap.data().grade || 5; // 학급 코드에 학년 정보가 없으면(예전 코드) 5학년으로 기본 설정
-  const name = prompt('학생 이름'), id = prompt('로그인 아이디 (영문·숫자)'), pw = prompt('비밀번호 (6자 이상)');
-  if (!name || !id || !pw) return;
-  try {
-    const cred = await createUserWithEmailAndPassword(auth, `${id.toLowerCase()}@student.mathquest.local`, pw);
-    // grade: 가입한 학급(선생님)의 학년으로 고정. gradeOverride: 선생님이 관리자 화면에서 개별 조정할 때만 채워짐.
-    await setDoc(doc(db, 'users', cred.user.uid), { name, classCode, role: 'student', grade: classGrade, gradeOverride: null, createdAt: serverTimestamp() });
-    await loadProfile(cred.user);
-  } catch (e) { alert(e.message); }
-};
-$('teacher-signup-btn').onclick = async () => {
-  $('signup-menu').classList.add('hidden');
-  if (!firebaseConfig) { alert('먼저 firebaseConfig를 채워야 로그인 기능을 쓸 수 있어요.'); return; }
-  const rawInvite = prompt('교사 가입 코드를 입력하세요 (관리자에게 받은 코드)');
-  if (!rawInvite) return;
-  const inviteCode = rawInvite.trim().toLowerCase();
-  let inviteSnap;
-  try { inviteSnap = await getDoc(doc(db, 'teacherCodes', inviteCode)); }
-  catch (e) { alert('교사 코드를 확인하는 중 문제가 생겼어요: ' + e.message); return; }
-  if (!inviteSnap.exists()) { alert('교사 가입 코드가 올바르지 않아요.'); return; }
+// ---- 가입 모달 (학생/교사 공용) ----
+let authRole = 'student'; // 'student' | 'teacher'
+let authVerified = null; // 1단계 코드 확인 결과: { classCode, classGrade } 또는 { inviteCode }
 
-  const name = prompt('교사 이름');
-  if (!name) return;
-  const gradeStr = prompt('담당 학년을 입력하세요 (1~6). 이 학년의 문제만 학생들에게 출제돼요.');
-  const teacherGrade = parseInt(gradeStr, 10);
-  if (!teacherGrade || teacherGrade < 1 || teacherGrade > 6) { alert('학년은 1~6 사이 숫자로 입력해주세요.'); return; }
-  const id = prompt('로그인 아이디 (영문·숫자)'), pw = prompt('비밀번호 (6자 이상)');
-  if (!id || !pw) return;
+function resetAuthForm() {
+  $('auth-step1-error').classList.add('hidden'); $('auth-step1-error').textContent = '';
+  $('auth-step2-error').classList.add('hidden'); $('auth-step2-error').textContent = '';
+  $('auth-code-input').value = ''; $('auth-name-input').value = '';
+  $('auth-grade-input').value = ''; $('auth-id-input').value = ''; $('auth-pw-input').value = '';
+  $('auth-step1-form').classList.remove('hidden'); $('auth-step2-form').classList.add('hidden');
+  $('auth-dot-1').classList.add('active'); $('auth-dot-2').classList.remove('active');
+}
+function openAuthModal(role) {
+  $('signup-menu').classList.add('hidden');
+  if (!firebaseConfig) { alert('먼저 firebaseConfig를 채워야 로그인 기능을 쓸 수 있어요.'); return; }
+  authRole = role; authVerified = null;
+  resetAuthForm();
+  if (role === 'student') {
+    $('auth-modal-icon').textContent = '🧑‍🎓';
+    $('auth-modal-title').textContent = '학생 가입';
+    $('auth-modal-sub').textContent = '선생님께 받은 학급 코드를 입력해주세요';
+    $('auth-code-label').textContent = '학급 코드';
+    $('auth-code-input').placeholder = '예: sunny5-2';
+    $('auth-grade-field').classList.add('hidden');
+  } else {
+    $('auth-modal-icon').textContent = '🧑‍🏫';
+    $('auth-modal-title').textContent = '교사 가입';
+    $('auth-modal-sub').textContent = '관리자에게 받은 교사 가입 코드를 입력해주세요';
+    $('auth-code-label').textContent = '교사 가입 코드';
+    $('auth-code-input').placeholder = '예: teacher2026';
+    $('auth-grade-field').classList.remove('hidden');
+  }
+  $('auth-modal').classList.remove('hidden');
+  setTimeout(() => $('auth-code-input').focus(), 50);
+}
+function closeAuthModal() { $('auth-modal').classList.add('hidden'); }
+$('auth-modal-close').onclick = closeAuthModal;
+$('auth-modal').addEventListener('click', e => { if (e.target.id === 'auth-modal') closeAuthModal(); });
+$('signup-btn').onclick = () => openAuthModal('student');
+$('teacher-signup-btn').onclick = () => openAuthModal('teacher');
+
+function setAuthError(el, msg) {
+  if (!msg) { $(el).classList.add('hidden'); $(el).textContent = ''; return; }
+  $(el).textContent = '⚠️ ' + msg; $(el).classList.remove('hidden');
+}
+
+$('auth-step1-form').onsubmit = async e => {
+  e.preventDefault();
+  setAuthError('auth-step1-error', '');
+  const raw = $('auth-code-input').value.trim().toLowerCase();
+  if (!raw) { setAuthError('auth-step1-error', authRole === 'student' ? '학급 코드를 입력해주세요.' : '교사 가입 코드를 입력해주세요.'); return; }
+  const btn = $('auth-step1-next');
+  btn.disabled = true; btn.textContent = '확인 중...';
+  try {
+    if (authRole === 'student') {
+      const classSnap = await getDoc(doc(db, 'classCodes', raw));
+      if (!classSnap.exists()) { setAuthError('auth-step1-error', '선생님께 받은 학급 코드가 맞는지 다시 확인해주세요.'); return; }
+      authVerified = { classCode: raw, classGrade: classSnap.data().grade || 5 }; // 학급 코드에 학년 정보가 없으면(예전 코드) 5학년으로 기본 설정
+    } else {
+      const inviteSnap = await getDoc(doc(db, 'teacherCodes', raw));
+      if (!inviteSnap.exists()) { setAuthError('auth-step1-error', '교사 가입 코드가 올바르지 않아요.'); return; }
+      authVerified = { inviteCode: raw };
+    }
+    $('auth-step1-form').classList.add('hidden'); $('auth-step2-form').classList.remove('hidden');
+    $('auth-dot-1').classList.remove('active'); $('auth-dot-2').classList.add('active');
+    $('auth-modal-sub').textContent = '코드 확인 완료! 정보를 입력해주세요';
+    setTimeout(() => $('auth-name-input').focus(), 50);
+  } catch (err) {
+    setAuthError('auth-step1-error', '코드를 확인하는 중 문제가 생겼어요: ' + err.message);
+  } finally {
+    btn.disabled = false; btn.textContent = '다음';
+  }
+};
+
+$('auth-step2-back').onclick = () => {
+  $('auth-step2-form').classList.add('hidden'); $('auth-step1-form').classList.remove('hidden');
+  $('auth-dot-2').classList.remove('active'); $('auth-dot-1').classList.add('active');
+  setAuthError('auth-step2-error', '');
+  $('auth-modal-sub').textContent = authRole === 'student' ? '선생님께 받은 학급 코드를 입력해주세요' : '관리자에게 받은 교사 가입 코드를 입력해주세요';
+};
+
+$('auth-step2-form').onsubmit = async e => {
+  e.preventDefault();
+  setAuthError('auth-step2-error', '');
+  const name = $('auth-name-input').value.trim();
+  const id = $('auth-id-input').value.trim();
+  const pw = $('auth-pw-input').value;
+  if (!name) { setAuthError('auth-step2-error', '이름을 입력해주세요.'); return; }
+  let teacherGrade = null;
+  if (authRole === 'teacher') {
+    teacherGrade = parseInt($('auth-grade-input').value, 10);
+    if (!teacherGrade || teacherGrade < 1 || teacherGrade > 6) { setAuthError('auth-step2-error', '담당 학년은 1~6 사이 숫자로 입력해주세요.'); return; }
+  }
+  if (!id) { setAuthError('auth-step2-error', '아이디를 입력해주세요.'); return; }
+  if (!pw || pw.length < 6) { setAuthError('auth-step2-error', '비밀번호는 6자 이상이어야 해요.'); return; }
+  const btn = $('auth-step2-submit');
+  btn.disabled = true; btn.textContent = '가입하는 중...';
   try {
     const cred = await createUserWithEmailAndPassword(auth, `${id.toLowerCase()}@student.mathquest.local`, pw);
-    await setDoc(doc(db, 'users', cred.user.uid), { name, role: 'teacher', grade: teacherGrade, inviteCode, createdAt: serverTimestamp() });
+    if (authRole === 'student') {
+      // grade: 가입한 학급(선생님)의 학년으로 고정. gradeOverride: 선생님이 관리자 화면에서 개별 조정할 때만 채워짐.
+      await setDoc(doc(db, 'users', cred.user.uid), { name, classCode: authVerified.classCode, role: 'student', grade: authVerified.classGrade, gradeOverride: null, createdAt: serverTimestamp() });
+    } else {
+      await setDoc(doc(db, 'users', cred.user.uid), { name, role: 'teacher', grade: teacherGrade, inviteCode: authVerified.inviteCode, createdAt: serverTimestamp() });
+    }
+    closeAuthModal();
     await loadProfile(cred.user);
-  } catch (e) { alert(e.message); }
+  } catch (err) {
+    setAuthError('auth-step2-error', err.message);
+  } finally {
+    btn.disabled = false; btn.textContent = '가입하기';
+  }
 };
 $('login-btn').onclick = async () => {
   if (!firebaseConfig) { alert('먼저 firebaseConfig를 채워야 로그인 기능을 쓸 수 있어요.'); return; }

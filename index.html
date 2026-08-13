@@ -6,7 +6,7 @@
 :root{--ink:#28284b;--p:#5b5ce2;--y:#ffd95a;--mint:#ddf8ec}*{box-sizing:border-box}body{margin:0;background:#fafaff;color:var(--ink);font-family:'Gowun Dodum',sans-serif}
 .app{max-width:930px;margin:auto;padding:22px 16px 45px}
 .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
-.logo{font:28px Jua,sans-serif}
+.logo{font:28px Jua,sans-serif;display:flex;align-items:center;gap:8px}
 .account{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px}
 .account button{border:0;border-radius:999px;padding:8px 13px;background:#eeecff;color:var(--p);font:inherit;font-weight:bold;cursor:pointer}
 .stars{background:#fff3c6;border-radius:20px;padding:8px 12px;font-weight:bold}
@@ -187,10 +187,86 @@
 .board-tile.here{box-shadow:0 0 0 3px var(--p)}
 #board-dice{font-size:44px;margin:8px 0}
 @media(max-width:550px){.hero{flex-wrap:wrap;gap:8px}.hero h1{font-size:22px}.mascot{font-size:38px}.answers{grid-template-columns:1fr}.match-grid{grid-template-columns:repeat(3,1fr)}.card{height:70px}.fighter{font-size:60px}}
-</style></head><body><main class="app">
+.landing{max-width:720px;margin:0 auto;padding:40px 20px 60px;text-align:center}
+.landing-hero{margin:10px 0 8px}
+.landing-mascot{font-size:56px;line-height:1}
+.landing-mascot img,.logo img{display:block}
+.landing-hero h1{font:36px Jua,sans-serif;margin:10px 0 6px;color:var(--ink)}
+.landing-tag{margin:0;color:#6d6ea3;font-size:15px}
+.landing-intro{margin:22px auto 0;max-width:520px;color:#54547a;font-size:14px;line-height:1.7}
+.landing-features{display:grid;grid-template-columns:1fr;gap:12px;margin:30px 0}
+@media(min-width:600px){.landing-features{grid-template-columns:repeat(2,1fr)}}
+.landing-feature-card{background:#fff;border:2px solid #eeecf7;border-radius:18px;padding:18px 16px;text-align:left;box-shadow:0 8px 20px #34336d0d}
+.landing-feature-card .icon{font-size:26px;line-height:1;margin-bottom:8px}
+.landing-feature-card h3{margin:0 0 6px;font:16px Jua,sans-serif;color:var(--ink)}
+.landing-feature-card p{margin:0;font-size:13px;color:#7c7ca0;line-height:1.6}
+#landing-cta-wrap{margin:32px 0 6px}
+.landing-cta-btn{border:0;border-radius:999px;padding:16px 44px;background:linear-gradient(120deg,#5c5de0,#987ee9);color:#fff;font:18px Jua,sans-serif;cursor:pointer;box-shadow:0 10px 26px #5b5ce240;transition:transform .1s,filter .15s}
+.landing-cta-btn:hover{filter:brightness(1.06)}
+.landing-cta-btn:active{transform:scale(.97)}
+#landing-role-wrap{margin:30px 0 6px;animation:authFade .25s ease}
+#landing-role-wrap>p{font:16px Jua,sans-serif;color:var(--ink);margin:0 0 16px}
+.landing-role-buttons{display:flex;flex-direction:column;gap:10px;max-width:320px;margin:0 auto}
+@media(min-width:480px){.landing-role-buttons{flex-direction:row;max-width:none}}
+.landing-role-btn{flex:1;border:2px solid #dddff0;background:#fff;border-radius:14px;padding:16px 14px;font:15px 'Gowun Dodum',sans-serif;font-weight:bold;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s,transform .1s}
+.landing-role-btn .emoji{font-size:24px;display:block;margin-bottom:6px}
+.landing-role-btn:hover{border-color:#c7c8f5;background:#f8f8ff;transform:translateY(-2px)}
+.landing-role-btn.primary{background:var(--p);border-color:var(--p);color:#fff}
+.landing-role-hint{margin:18px 0 0;font-size:12px;color:#9394b3}
+.landing-back-btn{margin-top:18px;border:0;background:none;color:#9394b3;font:13px 'Gowun Dodum',sans-serif;text-decoration:underline;cursor:pointer}
+.pwa-env-row{border:2px solid #e7e7f4;border-radius:14px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;text-align:left}
+.pwa-env-row .icon{font-size:20px;line-height:1.2}
+.pwa-env-row b{display:block;margin-bottom:2px;font-size:14px}
+.pwa-env-row span{font-size:12.5px;color:#6d6ea3;line-height:1.5}
+.pwa-env-row.pwa-env-row-active{border-color:var(--p);background:#f7f6ff}
+.pwa-env-row.warn{border-color:#f7b7bd;background:#fff3f4}
+.pwa-env-row.warn b{color:#e0245e}
+.pwa-env-row.warn span{color:#c23c53}
+</style>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="shortcut icon" href="icon-192.png">
+<meta name="theme-color" content="#5b5ce2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="반달수학">
+<link rel="apple-touch-icon" href="icon-192.png">
+</head><body>
+<div id="landing-view" class="landing">
+  <div class="landing-hero">
+    <div class="landing-mascot"><img src="icon-512.png" alt="반달수학 로고" width="72" height="72" style="margin:0 auto;border-radius:18px"></div>
+    <h1>반달수학</h1>
+    <p class="landing-tag">초등 1~6학년 수학, 놀이처럼 매일 조금씩</p>
+  </div>
+  <p class="landing-intro">문제를 풀수록 별이 쌓이고 몬스터가 자라나요. 친구와 실시간으로 겨루는 대결부터, 매일 똑같이 나오는 오늘의 도전, 선생님이 관리하는 학급까지 — 반달수학 하나로 다 돼요.</p>
+  <div class="landing-features">
+    <div class="landing-feature-card"><div class="icon">🎮</div><h3>맞춤 난이도 퀴즈</h3><p>학년별 문제은행에서 정답률에 맞춰 난이도가 자동으로 오르내려요.</p></div>
+    <div class="landing-feature-card"><div class="icon">⚔️</div><h3>실시간 대결</h3><p>친구와 실시간으로 문제를 겨루는 몬스터 배틀, 랭킹과 연승 보너스를 즐겨요.</p></div>
+    <div class="landing-feature-card"><div class="icon">🐣</div><h3>몬스터 도감</h3><p>정답을 맞힐 때마다 몬스터가 자라요. 나만의 도감을 완성해보세요.</p></div>
+    <div class="landing-feature-card"><div class="icon">📅</div><h3>오늘의 도전 · 주간 미션</h3><p>매일 같은 문제로 친구들과 함께 풀고, 꾸준히 쌓아가는 보상을 받아요.</p></div>
+    <div class="landing-feature-card"><div class="icon">🧑‍🏫</div><h3>교사용 학급 관리</h3><p>학급 코드로 학생을 초대하고, 학기·단원별 출제 범위와 학습 리포트를 확인해요.</p></div>
+    <div class="landing-feature-card"><div class="icon">✏️</div><h3>학생 문제 만들기</h3><p>학생이 직접 문제를 내고 선생님 승인을 거쳐 친구들과 공유해요.</p></div>
+  </div>
+  <div id="landing-cta-wrap">
+    <button class="landing-cta-btn" id="landing-start-btn">시작하기</button>
+  </div>
+  <div id="landing-role-wrap" class="hidden">
+    <p>어떻게 시작할까요?</p>
+    <div class="landing-role-buttons">
+      <button class="landing-role-btn" id="landing-guest-btn"><span class="emoji">🙋</span>게스트로 시작</button>
+      <button class="landing-role-btn primary" id="landing-student-btn"><span class="emoji">🧑‍🎓</span>학생 로그인</button>
+      <button class="landing-role-btn" id="landing-teacher-btn"><span class="emoji">🧑‍🏫</span>교사 로그인</button>
+    </div>
+    <p class="landing-role-hint">계정이 없다면 게스트로 먼저 둘러보거나, 시작한 뒤 오른쪽 위 '가입' 메뉴에서 새로 만들 수 있어요.</p>
+    <button type="button" class="landing-back-btn" id="landing-back-btn">← 소개 다시 보기</button>
+  </div>
+  <footer style="text-align:center;margin-top:30px;font-size:12px;color:#b3b4cc"><img src="icon-192.png" alt="" width="16" height="16" style="border-radius:4px;vertical-align:-3px;margin-right:5px">© <span id="landing-footer-year"></span> 반달수학 · All rights reserved · made by m00n</footer>
+</div>
+<main class="app hidden" id="app-main">
 <header class="top">
   <div>
-    <div class="logo">🌗 반달수학</div>
+    <div class="logo"><img src="icon-192.png" alt="반달수학 로고" width="28" height="28" style="border-radius:7px">반달수학</div>
     <div class="status-bar" style="margin:10px 0 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:12px;color:#8b8ca8">
       <div style="display:flex;align-items:center;gap:6px;white-space:nowrap">
         <span id="level-badge" style="background:#e0e7ff;color:#3730a3;border-radius:999px;padding:4px 10px;font-weight:bold;white-space:nowrap;font-size:13px"></span>
@@ -228,6 +304,7 @@
   </div>
 </header>
 <div class="header-tools">
+  <button id="pwa-install-btn"><span class="icon">📲</span>앱 설치</button>
   <button class="game-tab hidden" id="submit-tab-btn" data-game="submit"><span class="icon">✏️</span>문제 만들기</button>
 </div>
 <div class="top-nav" id="top-nav">
@@ -238,6 +315,23 @@
   <button class="top-nav-item" data-cat="manage">관리</button>
 </div>
 <div id="title-toast" class="hidden"></div>
+<div class="auth-modal-overlay hidden" id="pwa-install-overlay">
+  <div class="auth-modal-card" style="max-width:440px">
+    <button class="auth-modal-close" id="pwa-install-close">✕</button>
+    <div class="auth-modal-icon">📲</div>
+    <h3 class="auth-modal-title">앱 설치 환경 안내</h3>
+    <p class="auth-modal-sub">반달수학의 모든 기능을 가장 안정적으로 사용하려면 아래 브라우저에서의 설치를 권장합니다.</p>
+    <div id="pwa-install-body" style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px">
+      <div class="pwa-env-row" id="pwa-row-pc"><span class="icon">🖥️</span><div><b>PC 및 안드로이드 기기</b><span>구글 크롬(Chrome) 또는 네이버 웨일(Whale) 브라우저</span></div></div>
+      <div class="pwa-env-row" id="pwa-row-ios"><span class="icon">📱</span><div><b>iOS (아이폰, 아이패드)</b><span>사파리(Safari) 브라우저</span></div></div>
+      <div class="pwa-env-row warn" id="pwa-row-warn"><span class="icon">⚠️</span><div><b>MS 엣지(Edge) 브라우저</b><span>일부 기능이 원활하지 않을 수 있어 설치를 권장하지 않습니다.</span></div></div>
+    </div>
+    <div class="auth-modal-actions">
+      <button class="auth-btn-secondary" id="pwa-install-cancel">취소</button>
+      <button class="auth-btn-primary" id="pwa-install-go">계속 진행</button>
+    </div>
+  </div>
+</div>
 <div id="titles-overlay" class="hidden" style="position:fixed;inset:0;background:#28284b66;display:flex;align-items:center;justify-content:center;padding:16px;z-index:50">
   <div style="background:#fff;border-radius:20px;padding:24px;max-width:480px;width:100%;max-height:80vh;overflow-y:auto;box-shadow:0 18px 40px #28284b33">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
@@ -292,8 +386,63 @@
     </form>
   </div>
 </div>
+<div id="topic-scope-modal" class="hidden auth-modal-overlay">
+  <div class="auth-modal-card">
+    <button id="topic-scope-close" class="auth-modal-close">✕</button>
+    <div class="auth-modal-icon">📚</div>
+    <h3 class="auth-modal-title">출제 범위 설정</h3>
+    <p class="auth-modal-sub" id="topic-scope-sub">체크 해제한 단원은 문제로 나오지 않아요. 진도에 맞게 조정해보세요.</p>
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <button type="button" id="topic-scope-all-btn" class="pvp-mini-btn">전체 선택</button>
+      <button type="button" id="topic-scope-none-btn" class="pvp-mini-btn">전체 해제</button>
+    </div>
+    <div id="topic-scope-checks" style="display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto;text-align:left;padding:4px 2px"></div>
+    <div id="topic-scope-copy-section" class="hidden" style="text-align:left;margin:12px 0 0;padding:10px 12px;background:#f7f7ff;border-radius:12px">
+      <p style="font-size:12px;font-weight:bold;color:var(--p);margin:0 0 6px">📋 이 출제 범위를 다른 학급에도 그대로 적용</p>
+      <p style="font-size:11px;color:#8b8ca8;margin:0 0 8px">같은 학년 학급만 선택할 수 있어요. 반마다 똑같이 설정하는 수고를 줄여줘요.</p>
+      <div id="topic-scope-copy-checks" style="display:flex;flex-direction:column;gap:6px;max-height:120px;overflow-y:auto"></div>
+    </div>
+    <p class="auth-step-error hidden" id="topic-scope-error"></p>
+    <div class="auth-modal-actions">
+      <button type="button" class="auth-btn-primary" id="topic-scope-save-btn">저장</button>
+    </div>
+  </div>
+</div>
+<div id="login-modal" class="hidden auth-modal-overlay">
+  <div class="auth-modal-card">
+    <button id="login-modal-close" class="auth-modal-close">✕</button>
+    <div class="auth-modal-icon">🔐</div>
+    <h3 class="auth-modal-title">로그인</h3>
+    <p class="auth-modal-sub">아이디와 비밀번호를 입력해주세요</p>
+    <form id="login-modal-form">
+      <div class="auth-field">
+        <label for="login-id-input">아이디</label>
+        <input id="login-id-input" autocomplete="username" placeholder="아이디">
+      </div>
+      <div class="auth-field">
+        <label for="login-pw-input">비밀번호</label>
+        <input id="login-pw-input" type="password" autocomplete="current-password" placeholder="비밀번호">
+      </div>
+      <p class="auth-step-error hidden" id="login-modal-error"></p>
+      <div class="auth-modal-actions">
+        <button type="submit" class="auth-btn-primary" id="login-modal-submit">로그인</button>
+      </div>
+    </form>
+    <p style="margin:16px 0 0;font-size:12px;color:#9394b3;text-align:center">계정이 없나요?
+      <button type="button" id="login-modal-student-signup" style="border:0;background:none;color:var(--p);font-weight:bold;cursor:pointer;text-decoration:underline;padding:0">학생 가입</button> ·
+      <button type="button" id="login-modal-teacher-signup" style="border:0;background:none;color:var(--p);font-weight:bold;cursor:pointer;text-decoration:underline;padding:0">교사 가입</button>
+    </p>
+  </div>
+</div>
 <div id="home-view">
 <section class="hero"><div><p>초등 1~6학년 수학 놀이</p><h1>오늘은 어떤<br>탐험을 할까?</h1><p>학년을 고르고 게임을 시작해요!</p></div><div class="mascot" id="hero-mascot">🦊</div></section>
+<section class="panel hidden" id="streak-warning-banner" style="text-align:left;border:2px solid #ef6675;background:#fff0f1;margin:14px 0;padding:14px 16px;display:flex;align-items:center;gap:12px;box-shadow:none">
+  <span style="font-size:26px;line-height:1">⏰</span>
+  <div>
+    <p style="margin:0;font-weight:bold;color:#c23c52;font-size:14px" id="streak-warning-text"></p>
+    <p style="margin:3px 0 0;font-size:12px;color:#8b8ca8">지금 문제를 하나만 풀어도 기록이 이어져요!</p>
+  </div>
+</section>
 <section class="panel hidden" id="home-notice-banner" style="text-align:left;border:2px solid var(--p);background:#f5f4ff;margin:14px 0;padding:14px 40px 14px 16px;position:relative;box-shadow:none">
   <button id="home-notice-dismiss" title="닫기" style="position:absolute;top:10px;right:10px;border:0;background:#eeecff;color:var(--p);border-radius:999px;width:26px;height:26px;cursor:pointer;font-weight:bold">✕</button>
   <p style="margin:0 0 4px;font-weight:bold;color:var(--p);font-size:13px" id="home-notice-title">📢 공지</p>
@@ -307,6 +456,13 @@
   <button class="summary-card game-tab" data-game="review"><span class="label">📒 오답 노트</span><span class="value" id="summary-review">0문제</span></button>
   <button class="summary-card game-tab" data-game="shop"><span class="label">⭐ 누적 별</span><span class="value" id="summary-stars">0</span></button>
   <div class="summary-card" style="cursor:default"><span class="label">🔥 연속 출석</span><span class="value" id="summary-streak">0일</span></div>
+</section>
+<section class="panel hidden" id="streak-calendar-widget" style="text-align:left;margin:14px 0;padding:16px;background:#fff7f0;border:2px solid #ffddc0;border-radius:16px;box-shadow:none">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+    <p style="margin:0;font-weight:bold;color:#c2410c;font-size:14px">🔥 출석 스트릭 캘린더</p>
+    <span style="font-size:12px;color:#a9744a" id="streak-calendar-best">최고 기록 0일</span>
+  </div>
+  <div id="streak-calendar-strip" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:2px"></div>
 </section>
 <nav class="grades" id="grades"><button data-grade="1">1학년</button><button data-grade="2">2학년</button><button data-grade="3">3학년</button><button data-grade="4">4학년</button><button class="active" data-grade="5">5학년</button><button data-grade="6">6학년</button></nav>
 <section class="panel" id="intro-guide" style="text-align:left;margin:18px 0">
@@ -509,7 +665,9 @@
     <div style="margin:12px 0">
       <button class="primary" id="pvp-random-btn">🎲 랜덤 상대 찾기</button>
       <button class="primary hidden" id="pvp-cancel-btn">찾는 중... (취소)</button>
+      <button class="primary" id="pvp-bot-btn" style="background:#8b7bff;margin-left:6px">🤖 봇과 연습 대결</button>
     </div>
+    <p style="margin:-4px 0 12px;font-size:12px;opacity:.75">상대를 찾는 동안 심심하다면, 같은 학년 실력의 봇과 바로 연습해보세요! (점수·전적에는 반영되지 않아요)</p>
     <div class="pvp-card" style="display:block">
       <p style="margin:0 0 8px;font-weight:bold">👫 친구에게 도전장 보내기</p>
       <ul id="pvp-friend-list"></ul>
@@ -644,6 +802,9 @@
     <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
   </div>
   <div id="calendar-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:520px;margin:0 auto"></div>
+  <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:12px auto 0;max-width:520px;font-size:11px;color:#8b8ca8">
+    <span>🟢 정답률 80%+</span><span>🟣 정답률 50~79%</span><span>🔴 정답률 50% 미만</span><span>· 진할수록 문제 수 많음</span>
+  </div>
   <div id="calendar-day-detail" style="background:#fbfbff;border:2px solid #e7e7f4;border-radius:14px;padding:14px;margin:18px auto 0;max-width:460px;text-align:left"></div>
   <p class="feedback" id="calendar-feedback"></p>
 </section>
@@ -770,17 +931,22 @@
 <section class="panel hidden" id="teacher-dash">
   <p class="eyebrow">선생님 전용</p>
   <h2>📊 학급 결과 대시보드</h2>
+  <button type="button" id="question-pending-alert" class="hidden" style="display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:2px solid #ffd1d1;background:#fff0f0;color:#c0392b;border-radius:14px;padding:10px 14px;margin:10px 0 14px;font:inherit;font-weight:bold;cursor:pointer">
+    <span style="font-size:18px">🔔</span>승인 대기 중인 문제가 <span id="question-pending-alert-count">0</span>개 있어요 — 눌러서 확인하기 →
+  </button>
   <div style="background:#f7f7ff;border-radius:16px;padding:16px;margin:14px 0;text-align:left">
     <p style="margin:0 0 10px;font-weight:bold;color:var(--p)">🔑 내 학급 코드</p>
-    <p style="font-size:12px;color:#8b8ca8;margin:0 0 10px">이 코드로 가입하는 학생은 가입 시 선생님이 입력한 학년(<b id="teacher-grade-label">-</b>학년)의 문제만 풀게 돼요. 학생별 조정은 아래 표에서 할 수 있어요. 학기를 '1학기'로 두면 1학기 내용만, '2학기'로 두면 1~2학기 전체 내용에서 문제가 나와요.</p>
+    <p style="font-size:12px;color:#8b8ca8;margin:0 0 10px">이 코드로 가입하는 학생은 가입 시 선생님이 입력한 학년(<b id="teacher-grade-label">-</b>학년)의 문제만 풀게 돼요. 학생별 조정은 아래 표에서 할 수 있어요. 학기를 '1학기'로 두면 1학기 내용만, '2학기'로 두면 1~2학기 전체 내용에서 문제가 나와요. 반마다 진도가 다르면 '📚 출제 범위'로 단원까지 좁힐 수 있어요.</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
       <input id="class-code-input" placeholder="새 학급 코드 (예: 5a-2026)" style="border:2px solid #dddff0;border-radius:10px;padding:8px 12px;font:inherit;flex:1;min-width:160px">
       <select id="class-code-semester-select" style="border:2px solid #dddff0;border-radius:10px;padding:8px 12px;font:inherit">
         <option value="1">1학기만</option>
         <option value="2" selected>2학기(1~2학기 전체)</option>
       </select>
+      <button type="button" id="class-code-topic-btn" style="border:2px solid #dddff0;background:#fff;color:var(--p);border-radius:10px;padding:8px 12px;font:inherit;cursor:pointer">📚 출제 범위</button>
       <button class="primary" id="class-code-create-btn">학급 코드 만들기</button>
     </div>
+    <p style="font-size:12px;color:#8b8ca8;margin:-4px 0 10px" id="class-code-topic-summary">출제 범위: 전체 단원</p>
     <ul id="class-code-list" style="list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px"></ul>
     <p class="feedback" id="class-code-feedback"></p>
   </div>
@@ -823,6 +989,8 @@
     <p style="margin:0 0 4px;font-weight:bold;color:var(--p)">📊 반 전체 통계</p>
     <p style="font-size:12px;color:#8b8ca8;margin:0 0 12px">위 학급 필터·검색에 맞춰 반 전체 성취도를 한눈에 볼 수 있어요.</p>
     <div class="stat" id="class-dash-summary" style="margin:0 0 16px;flex-wrap:wrap"></div>
+    <p style="margin:0 0 6px;font-weight:bold;color:var(--ink);font-size:14px">📈 반 전체 주간 성장 추이</p>
+    <div id="class-dash-growth" style="margin:0 0 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap"></div>
     <p style="margin:0 0 6px;font-weight:bold;color:var(--ink);font-size:14px">📈 학생별 정답률 분포</p>
     <div id="class-dash-dist" style="margin:0 0 20px"></div>
     <p style="margin:0 0 8px;font-weight:bold;color:var(--ink);font-size:14px">🔥 유형별 정답률 (반 전체 합산)</p>
@@ -830,9 +998,12 @@
     <div id="class-dash-heatmap" class="heatmap-grid"></div>
     <div id="class-dash-weak"></div>
   </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin:0 0 6px">
+    <label style="display:flex;align-items:center;gap:5px;font-size:12.5px;color:#6d6ea3;cursor:pointer"><input type="checkbox" id="teacher-sort-declining">📉 최근 하락·부진 학생 먼저 보기</label>
+  </div>
   <div style="overflow-x:auto">
     <table style="width:100%;border-collapse:collapse;font-size:14px">
-      <thead><tr style="text-align:left;border-bottom:2px solid #dddff0"><th style="padding:8px">학급</th><th style="padding:8px">이름</th><th style="padding:8px">레벨</th><th style="padding:8px">문제 학년</th><th style="padding:8px">시도</th><th style="padding:8px">정답</th><th style="padding:8px">정답률</th><th style="padding:8px">최근 업데이트</th></tr></thead>
+      <thead><tr style="text-align:left;border-bottom:2px solid #dddff0"><th style="padding:8px">학급</th><th style="padding:8px">이름</th><th style="padding:8px">레벨</th><th style="padding:8px">문제 학년</th><th style="padding:8px">시도</th><th style="padding:8px">정답</th><th style="padding:8px">정답률</th><th style="padding:8px">최근 7일 추이</th><th style="padding:8px">최근 업데이트</th></tr></thead>
       <tbody id="teacher-tbody"></tbody>
     </table>
   </div>
@@ -860,10 +1031,15 @@
   <div style="background:#fff;border-radius:20px;padding:24px;max-width:480px;width:100%;max-height:80vh;overflow-y:auto;box-shadow:0 18px 40px #28284b33">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
       <h3 id="student-detail-title" style="margin:0;font:22px Jua,sans-serif">학생 상세</h3>
-      <button id="student-detail-close" style="border:0;background:#eeecff;color:var(--p);border-radius:999px;width:32px;height:32px;font-weight:bold;cursor:pointer">✕</button>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+        <button id="student-detail-print" title="리포트 PDF/인쇄" style="border:0;background:#eeecff;color:var(--p);border-radius:999px;width:32px;height:32px;font-weight:bold;cursor:pointer">🖨️</button>
+        <button id="student-detail-close" style="border:0;background:#eeecff;color:var(--p);border-radius:999px;width:32px;height:32px;font-weight:bold;cursor:pointer">✕</button>
+      </div>
     </div>
     <div class="stat" id="student-detail-summary" style="justify-content:flex-start;gap:20px;margin:14px 0"></div>
     <p id="student-detail-weak" style="color:#ef6675;font-size:13px;font-weight:bold;margin:0 0 12px"></p>
+    <p style="margin:0 0 6px;font-weight:bold;color:var(--ink);font-size:13px">📈 최근 7일 정답률 추이</p>
+    <div id="student-detail-growth" style="margin:0 0 16px"></div>
     <table style="width:100%;border-collapse:collapse;font-size:14px">
       <thead><tr style="text-align:left;border-bottom:2px solid #dddff0"><th style="padding:6px">영역</th><th style="padding:6px">시도</th><th style="padding:6px">정답</th><th style="padding:6px">정답률</th></tr></thead>
       <tbody id="student-detail-tbody"></tbody>
@@ -871,12 +1047,12 @@
   </div>
 </div>
 
-<footer style="text-align:center;margin-top:30px;font-size:12px;color:#b3b4cc">© <span id="footer-year"></span> 반달수학 · made by m00n</footer>
+<footer style="text-align:center;margin-top:30px;font-size:12px;color:#b3b4cc"><img src="icon-192.png" alt="" width="16" height="16" style="border-radius:4px;vertical-align:-3px;margin-right:5px">© <span id="footer-year"></span> 반달수학 · All rights reserved · made by m00n</footer>
 </main>
 <script type="module">
 import{initializeApp}from'https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js';
-import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut}from'https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js';
-import{getFirestore,doc,getDoc,setDoc,deleteDoc,runTransaction,serverTimestamp,collection,getDocs,query,where,onSnapshot,addDoc,updateDoc}from'https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js';
+import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js';
+import{getFirestore,doc,getDoc,setDoc,deleteDoc,runTransaction,serverTimestamp,collection,getDocs,query,where,onSnapshot,addDoc,updateDoc,writeBatch}from'https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js';
 
 // $ 는 아래 코드 여러 곳(예: 랭킹 필터 옵션 채우기)에서 이 시점부터 바로 쓰이므로,
 // 반드시 그 사용 지점들보다 앞에서 선언해야 한다("초기화 전 접근" ReferenceError 방지).
@@ -917,6 +1093,18 @@ function updateRankingScopeVisibility() {
 }
 if (firebaseConfig) { const app = initializeApp(firebaseConfig); auth = getAuth(app); db = getFirestore(app); }
 
+// ---- 세션 유지 ----
+// Firebase Auth는 로그인 세션을 브라우저에 저장해두지만, 이 앱은 그동안 시작할 때 그 세션을 확인하는
+// 코드가 없어서 새로고침할 때마다 무조건 게스트(랜딩 화면)로 돌아갔다. onAuthStateChanged로 저장된
+// 세션이 있는지 확인해서, 있으면 자동으로 로그인 상태를 복구하고 랜딩 화면 없이 바로 앱으로 들어간다.
+if (auth) {
+  onAuthStateChanged(auth, u => {
+    if (u && !user) {
+      loadProfile(u).then(() => enterApp()).catch(e => console.warn('세션 복구 실패', e));
+    }
+  });
+}
+
 function escHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 let grade = 5, total = +(localStorage.mathQuestStars || 0);
 // 오답 노트 데이터는 renderHomeSummary() 등 여러 초기화 함수에서 일찍 참조되므로,
@@ -926,6 +1114,10 @@ try { const savedWrongBank = JSON.parse(localStorage.mathQuestWrongBank || 'null
 // 학기 설정: 1이면 "1학기 내용만", 2면 "1~2학기 전체"(기본값). 로그인한 학급 코드에 학기가 설정돼 있으면
 // loadProfile()에서 그 값으로 덮어쓴다. 비로그인/설정 없는 학급은 항상 전체(2)로 동작해 기존 사용자에게 영향이 없다.
 let semester = 2;
+// 출제 범위(단원) 설정: 학급 코드 문서의 topics 배열에 담긴 topic 이름만 출제된다.
+// 배열이 비어있거나(=[]) 없으면 "전체 단원"(제한 없음)으로 동작해 기존 사용자에게 영향이 없다.
+// 학기 설정과 마찬가지로 loadProfile()에서 학급 코드 문서를 조회해 채운다.
+let enabledTopics = null;
 let quest = { n: 0, stars: 0, playing: false }, speed = { run: false, score: 0, streak: 0, answer: 0, timer: null }, battle = { run: false, hero: 100, monster: 100, answer: 0 };
 let bomb = { run: false, lives: 3, score: 0, answer: 0, text: '', sub: '', svg: null, timer: null, limit: 6000, best: +(localStorage.mathQuestBombBest || 0) };
 let memory = { playing: false, round: 0, seq: [], input: 0, showing: false, best: +(localStorage.mathQuestMemoryBest || 0) };
@@ -1399,6 +1591,7 @@ async function pullGacha() {
 }
 $('gacha-pull-btn').onclick = pullGacha;
 $('footer-year').textContent = new Date().getFullYear();
+$('landing-footer-year').textContent = new Date().getFullYear();
 
 // ---- 칭호(뱃지) 시스템 ----
 // 세 종류의 조건을 조합: 누적 정답 수(단계별 대표 칭호), 연속 정답(콤보), 학년별 마스터.
@@ -1528,7 +1721,7 @@ function todayStr() { return new Date().toISOString().slice(0, 10); }
 // 문제를 계속 반복 풀어서 별을 무한정 모으는 것을 막기 위한 하루 상한선.
 // 정답 별·미션 보너스·주간 보너스·콤보 보너스·대결 승리 보너스 등 별이 지급되는 모든 경로는
 // 반드시 awardStars()를 거치게 해서, 한도(DAILY_STAR_CAP)에 도달하면 그 이후로는 별이 지급되지 않는다.
-const DAILY_STAR_CAP = 50;
+const DAILY_STAR_CAP = 30;
 let dailyEarn = { date: '', earned: 0 };
 try { const saved = JSON.parse(localStorage.mathQuestDailyEarn || 'null'); if (saved?.date) dailyEarn = saved; } catch (e) {}
 function saveDailyEarnLocal() { localStorage.mathQuestDailyEarn = JSON.stringify(dailyEarn); }
@@ -1566,7 +1759,19 @@ function saveAttendanceLocal() { localStorage.mathQuestAttendance = JSON.stringi
 function updateAttendanceDisplay() {
   $('streak-badge').textContent = attendance.streak > 0 ? `🔥 연속 ${attendance.streak}일` : '';
   $('streak-badge').classList.toggle('hidden', attendance.streak <= 0);
+  updateStreakWarningBanner();
   if (typeof renderHomeSummary === 'function') renderHomeSummary();
+}
+// 🔥 스트릭 위기 경고: 어제까지 이어온 연속 기록이 있는데 오늘 아직 문제를 안 풀었으면 홈에 경고 배너를 띄운다.
+// (attendance.date가 어제보다 더 오래됐다면 이미 끊긴 것이므로 "위기"가 아니라 경고를 띄우지 않는다.)
+function updateStreakWarningBanner() {
+  const el = $('streak-warning-banner');
+  if (!el) return;
+  const today = todayStr();
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  const atRisk = (attendance.streak || 0) > 0 && attendance.date !== today && attendance.date === yesterday;
+  el.classList.toggle('hidden', !atRisk);
+  if (atRisk) $('streak-warning-text').textContent = `오늘 안 풀면 연속 ${attendance.streak}일 기록이 끊겨요!`;
 }
 function bumpAttendance() {
   const today = todayStr();
@@ -1582,6 +1787,41 @@ function bumpAttendance() {
   }
 }
 updateAttendanceDisplay();
+
+// 🔥 출석 스트릭 캘린더 위젯: 홈 화면에 최근 14일을 작은 원 스트립으로 보여줘서 연속 출석 패턴을
+// 몬스터 도감·칭호처럼 한눈에 보이는 시각적 요소로 만든다. dailyLog(날짜별 시도 기록)가 있는
+// 로그인한 학생에게만 노출한다(게스트는 날짜별 기록이 없어서 정확한 표시가 불가능하므로 숨김).
+function longestAttendanceStreak(log) {
+  const dates = Object.keys(log || {}).filter(k => (log[k]?.attempts || 0) > 0).sort();
+  if (!dates.length) return 0;
+  let longest = 1, cur = 1;
+  for (let i = 1; i < dates.length; i++) {
+    const diffDays = Math.round((new Date(dates[i]) - new Date(dates[i - 1])) / 86400000);
+    cur = diffDays === 1 ? cur + 1 : 1;
+    longest = Math.max(longest, cur);
+  }
+  return longest;
+}
+function renderStreakCalendarWidget() {
+  const el = $('streak-calendar-widget');
+  if (!el) return;
+  if (!user || profile?.role === 'teacher') { el.classList.add('hidden'); return; }
+  el.classList.remove('hidden');
+  const todayKey = todayStr();
+  const days = [];
+  for (let i = 13; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 86400000);
+    const key = d.toISOString().slice(0, 10);
+    days.push({ key, label: d.getDate(), attended: (dailyLog[key]?.attempts || 0) > 0, isToday: key === todayKey });
+  }
+  $('streak-calendar-strip').innerHTML = days.map(d => `
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:30px;flex-shrink:0" title="${d.key}${d.attended ? ' · 출석 완료' : ''}">
+      <div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;${d.attended ? 'background:linear-gradient(135deg,#ff9d5c,#ff6a3d);box-shadow:0 2px 6px #ff6a3d55' : 'background:#fff;border:2px dashed #ffd6b8'}${d.isToday ? ';outline:2px solid #c2410c;outline-offset:2px' : ''}">${d.attended ? '🔥' : ''}</div>
+      <span style="font-size:10px;color:${d.isToday ? '#c2410c' : '#b3925c'};font-weight:${d.isToday ? 'bold' : 'normal'}">${d.label}</span>
+    </div>`).join('');
+  const best = Math.max(attendance.streak || 0, longestAttendanceStreak(dailyLog));
+  $('streak-calendar-best').textContent = `최고 기록 ${best}일`;
+}
 
 // ---- 일일 미션 ----
 // 오늘 문제를 MISSION_TARGET개 풀면 보너스 별을 한 번 지급한다.
@@ -1700,6 +1940,7 @@ function renderHomeSummary() {
   if (sEl) sEl.textContent = total;
   const streakEl = $('summary-streak');
   if (streakEl) streakEl.textContent = attendance.streak > 0 ? `${attendance.streak}일` : '오늘 시작해봐요';
+  renderStreakCalendarWidget();
   const rankEl = $('summary-rank');
   if (!rankEl) return;
   if (!user) { rankEl.textContent = '로그인하면 볼 수 있어요'; return; }
@@ -1926,12 +2167,14 @@ async function loadProfile(u) {
   }
   // 학기 설정은 학급 코드 문서에서 매번 새로 읽어온다. 학생 프로필에 박아두지 않고 여기서 조회해야
   // 선생님이 나중에 학급 코드의 학기를 바꿨을 때, 이미 가입한 학생들도 다음 로그인부터 바로 반영된다.
-  semester = 2;
+  semester = 2; enabledTopics = null;
   if (profile.classCode) {
     try {
       const classSnap = await getDoc(doc(db, 'classCodes', profile.classCode));
       semester = (classSnap.exists() && classSnap.data().semester) || 2;
-    } catch (e) { semester = 2; }
+      const t = classSnap.exists() ? classSnap.data().topics : null;
+      enabledTopics = (t && t.length) ? t : null;
+    } catch (e) { semester = 2; enabledTopics = null; }
   }
   loadCommunityBank(grade);
   const progress = await getDoc(doc(db, 'progress', u.uid));
@@ -1980,6 +2223,7 @@ let myClassCodes = []; // 이 교사가 만든 학급 코드 목록 (문서 ID�
 const gradeLabel = topic => /^grade(\d)$/.test(topic) ? `${topic.slice(5)}학년` : topic;
 
 // 내가 만든 학급 코드 목록을 불러와서 화면에 표시한다.
+let myClassCodesFull = []; // docsSorted를 그대로 보관(출제 범위 버튼에서 topics 배열을 다시 꺼내 쓰기 위함)
 async function loadMyClassCodes() {
   if (!db || !user) return;
   $('class-code-feedback').textContent = '학급 코드 불러오는 중...';
@@ -1987,15 +2231,23 @@ async function loadMyClassCodes() {
     const snap = await getDocs(query(collection(db, 'classCodes'), where('ownerId', '==', user.uid)));
     const docsSorted = snap.docs.sort((a, b) => a.id.localeCompare(b.id));
     myClassCodes = docsSorted.map(d => d.id);
+    myClassCodesFull = docsSorted.map(d => ({ id: d.id, ...d.data() }));
     $('class-code-list').innerHTML = docsSorted.length
-      ? docsSorted.map(d => {
-          const g = d.data().grade;
-          const sem = d.data().semester || 2;
-          return `<li style="background:#eeecff;color:var(--p);border-radius:999px;padding:6px 12px;font-weight:bold;display:flex;align-items:center;gap:6px">${d.id}${g ? ` <small style="opacity:.75">(${g}학년·${sem === 1 ? '1학기만' : '2학기 전체'})</small>` : ''}<button data-code="${d.id}" data-sem="${sem}" class="class-code-sem-toggle-btn" title="학기 전환" style="border:0;background:none;color:var(--p);cursor:pointer">🔁</button><button data-code="${d.id}" class="class-code-delete-btn" title="삭제" style="border:0;background:none;color:var(--p);cursor:pointer;font-weight:bold">✕</button></li>`;
+      ? myClassCodesFull.map((d, i) => {
+          const g = d.grade;
+          const sem = d.semester || 2;
+          const topics = d.topics || [];
+          const totalTopics = topicsForGrade(g).length;
+          const topicLabel = topics.length ? `·${topics.length}/${totalTopics}단원` : '';
+          return `<li style="background:#eeecff;color:var(--p);border-radius:999px;padding:6px 12px;font-weight:bold;display:flex;align-items:center;gap:6px">${d.id}${g ? ` <small style="opacity:.75">(${g}학년·${sem === 1 ? '1학기만' : '2학기 전체'}${topicLabel})</small>` : ''}<button data-i="${i}" class="class-code-topic-edit-btn" title="출제 범위" style="border:0;background:none;color:var(--p);cursor:pointer">📚</button><button data-code="${d.id}" data-sem="${sem}" class="class-code-sem-toggle-btn" title="학기 전환" style="border:0;background:none;color:var(--p);cursor:pointer">🔁</button><button data-code="${d.id}" class="class-code-delete-btn" title="삭제" style="border:0;background:none;color:var(--p);cursor:pointer;font-weight:bold">✕</button></li>`;
         }).join('')
       : '<li style="color:#8b8ca8">아직 만든 학급 코드가 없어요. 위에서 하나 만들어보세요.</li>';
     document.querySelectorAll('.class-code-delete-btn').forEach(b => b.onclick = () => deleteClassCode(b.dataset.code));
     document.querySelectorAll('.class-code-sem-toggle-btn').forEach(b => b.onclick = () => toggleClassCodeSemester(b.dataset.code, +b.dataset.sem));
+    document.querySelectorAll('.class-code-topic-edit-btn').forEach(b => b.onclick = () => {
+      const d = myClassCodesFull[+b.dataset.i];
+      openTopicScopeModal(d.id, d.grade, d.topics || []);
+    });
     $('class-code-feedback').textContent = '';
   } catch (e) { $('class-code-feedback').textContent = '학급 코드를 불러오지 못했어요: ' + e.message; }
 }
@@ -2013,22 +2265,83 @@ async function deleteClassCode(code) {
   try { await deleteDoc(doc(db, 'classCodes', code)); await loadMyClassCodes(); await loadTeacherData(); populateAssignClassSelect(); populateNoticeClassSelect(); }
   catch (e) { alert('삭제 실패: ' + e.message); }
 }
+let pendingNewClassTopics = []; // 학급 코드를 새로 만들 때 함께 저장할 출제 범위(빈 배열=전체 단원)
+$('class-code-topic-btn').onclick = () => {
+  if (!profile?.grade) { alert('내 계정에 담당 학년 정보가 없어요. 교사 계정을 다시 가입하거나 관리자에게 문의해주세요.'); return; }
+  openTopicScopeModal(null, profile.grade, pendingNewClassTopics);
+};
 $('class-code-create-btn').onclick = async () => {
   const raw = $('class-code-input').value.trim().toLowerCase();
   if (!raw) return;
   if (!db || !user) { alert('로그인 후 이용해주세요.'); return; }
-  if (!profile?.grade) { alert('내 계정에 담당 학년 정보가 없어요. 교사 계정을 다시 가입하거나 관리자에게 문의해주세요.'); return; }
+  if (!profile?.grade) { alert('내 계정에 담당 학년 정보가 없어요. 교사 가입 코드를 다시 확인하거나 관리자에게 문의해주세요.'); return; }
   try {
     const existing = await getDoc(doc(db, 'classCodes', raw));
     if (existing.exists()) { alert('이미 존재하는 학급 코드예요. 다른 코드를 써주세요.'); return; }
     const sem = +$('class-code-semester-select').value === 1 ? 1 : 2;
-    await setDoc(doc(db, 'classCodes', raw), { ownerId: user.uid, grade: profile.grade, semester: sem, createdAt: serverTimestamp() });
+    await setDoc(doc(db, 'classCodes', raw), { ownerId: user.uid, grade: profile.grade, semester: sem, topics: pendingNewClassTopics, createdAt: serverTimestamp() });
     $('class-code-input').value = '';
+    pendingNewClassTopics = [];
+    $('class-code-topic-summary').textContent = '출제 범위: 전체 단원';
     await loadMyClassCodes();
     await loadTeacherData();
     populateAssignClassSelect();
     populateNoticeClassSelect();
   } catch (e) { alert('학급 코드 생성 실패: ' + e.message); }
+};
+
+// ---- 출제 범위(단원) 설정 모달: classCode가 null이면 "새 학급 만들기"용 임시 선택, 문자열이면 기존 학급을 바로 저장 ----
+let topicScopeEditingCode = null, topicScopeGrade = null;
+function openTopicScopeModal(classCode, g, currentTopics) {
+  topicScopeEditingCode = classCode; topicScopeGrade = g;
+  const all = topicsForGrade(g);
+  $('topic-scope-sub').textContent = classCode
+    ? `'${classCode}' 학급의 출제 범위를 정해요. 체크 해제한 단원은 문제로 나오지 않아요.`
+    : '새 학급을 만들 때 적용할 출제 범위예요. 나중에 학급 목록의 📚 버튼으로 다시 바꿀 수 있어요.';
+  const checked = currentTopics && currentTopics.length ? new Set(currentTopics) : new Set(all);
+  $('topic-scope-checks').innerHTML = all.map(t => `<label style="display:flex;align-items:center;gap:8px;font-size:14px"><input type="checkbox" class="topic-scope-check" value="${t}" ${checked.has(t) ? 'checked' : ''}> ${t}</label>`).join('');
+  // 템플릿 복사: 기존 학급을 편집하는 경우에만, 같은 학년의 다른 학급 목록을 보여준다(단원 목록이 학년마다 달라서
+  // 학년이 다르면 그대로 복사할 수 없다). 새 학급 만들기(classCode=null)일 때는 아직 복사 대상이 없으므로 숨긴다.
+  const others = classCode ? myClassCodesFull.filter(d => d.id !== classCode && d.grade === g) : [];
+  if (others.length) {
+    $('topic-scope-copy-checks').innerHTML = others.map(d => `<label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" class="topic-scope-copy-check" value="${d.id}"> ${d.id}</label>`).join('');
+    $('topic-scope-copy-section').classList.remove('hidden');
+  } else {
+    $('topic-scope-copy-checks').innerHTML = '';
+    $('topic-scope-copy-section').classList.add('hidden');
+  }
+  $('topic-scope-error').classList.add('hidden');
+  $('topic-scope-modal').classList.remove('hidden');
+}
+$('topic-scope-close').onclick = () => $('topic-scope-modal').classList.add('hidden');
+$('topic-scope-all-btn').onclick = () => document.querySelectorAll('.topic-scope-check').forEach(c => c.checked = true);
+$('topic-scope-none-btn').onclick = () => document.querySelectorAll('.topic-scope-check').forEach(c => c.checked = false);
+$('topic-scope-save-btn').onclick = async () => {
+  const all = topicsForGrade(topicScopeGrade);
+  const selected = [...document.querySelectorAll('.topic-scope-check:checked')].map(c => c.value);
+  if (!selected.length) { $('topic-scope-error').textContent = '최소 1개 단원은 선택해야 해요.'; $('topic-scope-error').classList.remove('hidden'); return; }
+  const topics = selected.length === all.length ? [] : selected; // 전체 선택이면 빈 배열(=제한 없음)로 저장
+  if (topicScopeEditingCode) {
+    // 템플릿 복사로 선택된 다른 학급들(같은 학년)에도 동일한 출제 범위를 한 번에 적용한다.
+    const copyTargets = [...document.querySelectorAll('.topic-scope-copy-check:checked')].map(c => c.value);
+    $('topic-scope-save-btn').disabled = true;
+    try {
+      const batch = writeBatch(db);
+      batch.set(doc(db, 'classCodes', topicScopeEditingCode), { topics }, { merge: true });
+      copyTargets.forEach(code => batch.set(doc(db, 'classCodes', code), { topics }, { merge: true }));
+      await batch.commit();
+      $('topic-scope-modal').classList.add('hidden');
+      await loadMyClassCodes();
+      $('class-code-feedback').textContent = copyTargets.length
+        ? `'${topicScopeEditingCode}' 외 ${copyTargets.length}개 학급에 출제 범위를 똑같이 적용했어요. 이미 가입한 학생도 다음 로그인부터 바로 적용돼요.`
+        : `'${topicScopeEditingCode}' 학급의 출제 범위를 저장했어요. 이미 가입한 학생도 다음 로그인부터 바로 적용돼요.`;
+    } catch (e) { $('topic-scope-error').textContent = '저장 실패: ' + e.message; $('topic-scope-error').classList.remove('hidden'); }
+    $('topic-scope-save-btn').disabled = false;
+  } else {
+    pendingNewClassTopics = topics;
+    $('topic-scope-modal').classList.add('hidden');
+    $('class-code-topic-summary').textContent = topics.length ? `출제 범위: ${topics.length}/${all.length}개 단원 선택됨` : '출제 범위: 전체 단원';
+  }
 };
 
 // ---- 과제 내주기(교사) ----
@@ -2173,7 +2486,7 @@ async function loadTeacherData() {
         return {
           uid: d.id, name: u.name || v.name || '(이름 없음)', classCode: u.classCode || v.classCode || '-',
           grade: u.grade || null, gradeOverride: u.gradeOverride || null,
-          attempts: v.attempts || 0, correct: v.correct || 0, topicStats: v.topicStats || {}, subtopicStats: v.subtopicStats || {}, updatedAt: v.updatedAt?.toDate ? v.updatedAt.toDate() : null,
+          attempts: v.attempts || 0, correct: v.correct || 0, topicStats: v.topicStats || {}, subtopicStats: v.subtopicStats || {}, dailyLog: v.dailyLog || {}, updatedAt: v.updatedAt?.toDate ? v.updatedAt.toDate() : null,
         };
       });
     teacherRows.sort((a, b) => a.classCode === b.classCode ? a.name.localeCompare(b.name, 'ko') : a.classCode.localeCompare(b.classCode));
@@ -2193,19 +2506,70 @@ function gradeOverrideOptions(r) {
   const eff = r.gradeOverride || r.grade || 5;
   return [1, 2, 3, 4, 5, 6].map(g => `<option value="${g}" ${g === eff ? 'selected' : ''}>${g}학년${r.grade && g === r.grade && !r.gradeOverride ? ' (학급 기본)' : ''}</option>`).join('');
 }
+// 🧑‍🏫 학생별 성장 추이: dailyLog(날짜별 attempts/correct)를 최근 numDays일치로 뽑아온다. 캘린더 히트맵과 같은 방식으로 데이터를 읽는다.
+function recentDailySeries(dailyLog, numDays) {
+  const days = [];
+  for (let i = numDays - 1; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 86400000);
+    const key = d.toISOString().slice(0, 10);
+    const rec = (dailyLog || {})[key] || { attempts: 0, correct: 0 };
+    days.push({ key, label: `${d.getMonth() + 1}/${d.getDate()}`, attempts: rec.attempts || 0, correct: rec.correct || 0 });
+  }
+  return days;
+}
+// 최근 7일을 앞/뒤 절반으로 나눠 정답률 변화를 비교해서 상승/하락/보합/무활동을 판정한다.
+// 부진 학생을 빠르게 찾을 수 있도록 반 대시보드와 학생 표에서 함께 쓰인다.
+function studentTrend(dailyLog) {
+  const days = recentDailySeries(dailyLog, 7);
+  const totalAttempts = days.reduce((s, d) => s + d.attempts, 0);
+  if (!totalAttempts) return { status: 'none', days, label: '기록 없음' };
+  const early = days.slice(0, 4).reduce((s, d) => ({ attempts: s.attempts + d.attempts, correct: s.correct + d.correct }), { attempts: 0, correct: 0 });
+  const recent = days.slice(4).reduce((s, d) => ({ attempts: s.attempts + d.attempts, correct: s.correct + d.correct }), { attempts: 0, correct: 0 });
+  if (!recent.attempts) return { status: 'inactive', days, label: '최근 3일 활동 없음' };
+  const recentRate = recent.correct / recent.attempts;
+  if (!early.attempts) return { status: 'flat', days, label: `최근 정답률 ${Math.round(recentRate * 100)}%` };
+  const earlyRate = early.correct / early.attempts;
+  const diff = Math.round((recentRate - earlyRate) * 100);
+  if (diff <= -15) return { status: 'down', days, label: `정답률 ${Math.abs(diff)}%p 하락` };
+  if (diff >= 15) return { status: 'up', days, label: `정답률 ${diff}%p 상승` };
+  return { status: 'flat', days, label: `정답률 유지 (${Math.round(recentRate * 100)}%)` };
+}
+// 학생 표에 넣을 작은 막대 스파크라인: 캘린더 히트맵과 같은 초록(고정답률)/보라(보통)/빨강(저정답률) 배색을 재사용해 일관된 색 언어를 유지한다.
+function miniSparkSVG(days) {
+  const w = 100, h = 30, gap = 3, barW = (w - gap * (days.length - 1)) / days.length;
+  const maxAttempts = Math.max(1, ...days.map(d => d.attempts));
+  const bars = days.map((d, i) => {
+    const x = i * (barW + gap);
+    const hgt = d.attempts ? Math.max(3, (d.attempts / maxAttempts) * (h - 5)) : 2;
+    const y = h - hgt;
+    const rate = d.attempts ? d.correct / d.attempts : null;
+    const color = rate == null ? '#e7e7f4' : rate >= 0.8 ? '#1fa87a' : rate >= 0.5 ? '#5b5ce2' : '#ef6675';
+    return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${hgt.toFixed(1)}" rx="1.5" fill="${color}"/>`;
+  }).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">${bars}</svg>`;
+}
+const TREND_BADGE = { up: { icon: '📈', color: '#1fa87a' }, down: { icon: '📉', color: '#ef6675' }, flat: { icon: '➡️', color: '#8b8ca8' }, inactive: { icon: '💤', color: '#e08a1f' }, none: { icon: '', color: '#c5c6dc' } };
 function renderTeacherTable() {
-  const rows = filteredTeacherRows();
+  let rows = filteredTeacherRows();
+  rows = rows.map(r => ({ ...r, trend: studentTrend(r.dailyLog) }));
+  if ($('teacher-sort-declining').checked) {
+    const order = { down: 0, inactive: 1, flat: 2, none: 3, up: 4 };
+    rows.sort((a, b) => (order[a.trend.status] - order[b.trend.status]) || a.name.localeCompare(b.name, 'ko'));
+  }
   $('teacher-tbody').innerHTML = rows.map((r, i) => {
     const rate = r.attempts ? Math.round(r.correct / r.attempts * 100) : 0;
     const upd = r.updatedAt ? r.updatedAt.toLocaleString('ko-KR') : '-';
-    return `<tr style="border-bottom:1px solid #ececf6"><td style="padding:8px">${r.classCode}</td><td style="padding:8px"><button data-i="${i}" class="student-name-btn" style="border:0;background:none;color:var(--p);font:inherit;font-weight:bold;cursor:pointer;text-decoration:underline">${r.name}</button></td><td style="padding:8px">Lv.${calcLevel(r.correct).level}</td><td style="padding:8px"><select data-i="${i}" class="student-grade-select" style="border:2px solid #dddff0;border-radius:8px;padding:4px 6px;font:inherit">${gradeOverrideOptions(r)}</select></td><td style="padding:8px">${r.attempts}</td><td style="padding:8px">${r.correct}</td><td style="padding:8px">${rate}%</td><td style="padding:8px">${upd}</td></tr>`;
-  }).join('') || '<tr><td colspan="8" style="padding:14px;text-align:center;color:#888">해당하는 결과가 없어요.</td></tr>';
+    const badge = TREND_BADGE[r.trend.status];
+    const rowBg = (r.trend.status === 'down' || r.trend.status === 'inactive') ? 'background:#fff6f7' : '';
+    return `<tr style="border-bottom:1px solid #ececf6;${rowBg}"><td style="padding:8px">${r.classCode}</td><td style="padding:8px"><button data-i="${i}" class="student-name-btn" style="border:0;background:none;color:var(--p);font:inherit;font-weight:bold;cursor:pointer;text-decoration:underline">${r.name}</button></td><td style="padding:8px">Lv.${calcLevel(r.correct).level}</td><td style="padding:8px"><select data-i="${i}" class="student-grade-select" style="border:2px solid #dddff0;border-radius:8px;padding:4px 6px;font:inherit">${gradeOverrideOptions(r)}</select></td><td style="padding:8px">${r.attempts}</td><td style="padding:8px">${r.correct}</td><td style="padding:8px">${rate}%</td><td style="padding:8px" title="${escHtml(r.trend.label)}"><div style="display:flex;align-items:center;gap:5px">${miniSparkSVG(r.trend.days)}${badge.icon ? `<span style="font-size:12px">${badge.icon}</span>` : ''}</div></td><td style="padding:8px">${upd}</td></tr>`;
+  }).join('') || '<tr><td colspan="9" style="padding:14px;text-align:center;color:#888">해당하는 결과가 없어요.</td></tr>';
   const sumAttempts = rows.reduce((s, r) => s + r.attempts, 0), sumCorrect = rows.reduce((s, r) => s + r.correct, 0);
   $('teacher-count').textContent = rows.length; $('teacher-rate').textContent = sumAttempts ? Math.round(sumCorrect / sumAttempts * 100) : 0;
   document.querySelectorAll('.student-name-btn').forEach(b => b.onclick = () => openStudentDetail(rows[+b.dataset.i]));
   document.querySelectorAll('.student-grade-select').forEach(sel => sel.onchange = () => setStudentGradeOverride(rows[+sel.dataset.i], +sel.value));
   renderClassDashboard(rows);
 }
+$('teacher-sort-declining').onchange = renderTeacherTable;
 // 반 전체 통계 대시보드: 위쪽 학급 필터·검색에 걸린 학생들을 대상으로 참여율/정답률 분포/유형별 취약점을 요약해서 보여준다.
 // 개별 학생 표(renderTeacherTable)와 같은 rows를 그대로 재사용하므로 필터가 바뀌면 자동으로 같이 갱신된다.
 function renderClassDashboard(rows) {
@@ -2213,7 +2577,33 @@ function renderClassDashboard(rows) {
   const totalAttempts = rows.reduce((s, r) => s + r.attempts, 0), totalCorrect = rows.reduce((s, r) => s + r.correct, 0);
   const avgRate = totalAttempts ? Math.round(totalCorrect / totalAttempts * 100) : 0;
   const needHelp = active.filter(r => r.attempts >= 5 && r.correct / r.attempts < REPORT_WEAK_RATE).length;
-  $('class-dash-summary').innerHTML = `<span>👦 전체 <b>${rows.length}</b>명</span><span>🙋 참여 <b>${active.length}</b>명</span><span>✅ 반 평균 정답률 <b>${avgRate}</b>%</span><span>🆘 도움 필요 <b style="color:${needHelp ? '#ef6675' : 'inherit'}">${needHelp}</b>명</span>`;
+  const declining = rows.filter(r => r.trend && (r.trend.status === 'down' || r.trend.status === 'inactive')).length;
+  $('class-dash-summary').innerHTML = `<span>👦 전체 <b>${rows.length}</b>명</span><span>🙋 참여 <b>${active.length}</b>명</span><span>✅ 반 평균 정답률 <b>${avgRate}</b>%</span><span>🆘 도움 필요 <b style="color:${needHelp ? '#ef6675' : 'inherit'}">${needHelp}</b>명</span><span>📉 최근 하락·부진 <b style="color:${declining ? '#ef6675' : 'inherit'}">${declining}</b>명</span>`;
+
+  // 📈 반 전체 주간 성장 추이: 학생들의 dailyLog를 요일별로 합산해서 반 평균 정답률 추이를 그려준다.
+  const weekdayNames = ['일', '월', '화', '수', '목', '금', '토'];
+  const classDays = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 86400000);
+    const key = d.toISOString().slice(0, 10);
+    let attempts = 0, correct = 0;
+    rows.forEach(r => { const rec = (r.dailyLog || {})[key]; if (rec) { attempts += rec.attempts || 0; correct += rec.correct || 0; } });
+    classDays.push({ label: weekdayNames[d.getDay()], rate: attempts ? Math.round(correct / attempts * 100) : 0, attempts });
+  }
+  const classWeekAttempts = classDays.reduce((s, d) => s + d.attempts, 0);
+  if (!classWeekAttempts) {
+    $('class-dash-growth').innerHTML = '<p style="margin:0;color:#8b8ca8;font-size:13px">이번 주에 아직 활동 기록이 없어요.</p>';
+  } else {
+    const activeDays = classDays.filter(d => d.attempts > 0);
+    let trendMsg = '';
+    if (activeDays.length >= 2) {
+      const diff = activeDays[activeDays.length - 1].rate - activeDays[0].rate;
+      trendMsg = diff > 0 ? `📈 ${activeDays[0].label}요일 대비 반 평균 정답률이 <b style="color:#2bba7b">${diff}%p</b> 올랐어요.`
+        : diff < 0 ? `📉 ${activeDays[0].label}요일 대비 반 평균 정답률이 <b style="color:#ef6675">${Math.abs(diff)}%p</b> 내려갔어요.`
+        : '반 평균 정답률이 꾸준히 유지되고 있어요.';
+    }
+    $('class-dash-growth').innerHTML = `<div>${lineGraphSVG(classDays.map(d => d.label), classDays.map(d => d.rate))}</div><p style="margin:0;font-size:13px;color:var(--ink)">이번 주 반 전체 문제 <b>${classWeekAttempts}</b>개 풀이<br>${trendMsg}</p>`;
+  }
 
   // 정답률 구간별 학생 분포
   const buckets = [
@@ -2263,6 +2653,7 @@ async function setStudentGradeOverride(r, newGrade) {
   } catch (e) { $('teacher-feedback').textContent = '학년 조정 실패: ' + e.message; renderTeacherTable(); }
 }
 function openStudentDetail(r) {
+  currentStudentDetail = r;
   const rate = r.attempts ? Math.round(r.correct / r.attempts * 100) : 0;
   const eff = r.gradeOverride || r.grade;
   $('student-detail-title').textContent = `${r.name} (${r.classCode}) · Lv.${calcLevel(r.correct).level}${eff ? ` · ${eff}학년 문제` : ''}`;
@@ -2271,6 +2662,12 @@ function openStudentDetail(r) {
   $('student-detail-weak').innerHTML = weakSub.length
     ? `🔍 취약 유형: ${weakSub.map(([topic, s]) => `<b>${escHtml(topic)}</b>(${Math.round(s.correct / s.attempts * 100)}%)`).join(', ')}`
     : '';
+  const trend = r.trend || studentTrend(r.dailyLog);
+  const trendAttempts = trend.days.reduce((s, d) => s + d.attempts, 0);
+  const badge = TREND_BADGE[trend.status];
+  $('student-detail-growth').innerHTML = trendAttempts
+    ? `${lineGraphSVG(trend.days.map(d => d.label), trend.days.map(d => d.attempts ? Math.round(d.correct / d.attempts * 100) : 0))}<p style="margin:6px 0 0;font-size:12.5px;color:${badge.color}">${badge.icon} ${escHtml(trend.label)}</p>`
+    : '<p style="margin:0;color:#8b8ca8;font-size:13px">최근 7일간 활동 기록이 없어요.</p>';
   const topics = Object.entries(r.topicStats).sort(([a], [b]) => a.localeCompare(b));
   $('student-detail-tbody').innerHTML = topics.map(([topic, s]) => {
     const tRate = s.attempts ? Math.round(s.correct / s.attempts * 100) : 0;
@@ -2280,6 +2677,54 @@ function openStudentDetail(r) {
 }
 $('student-detail-close').onclick = () => $('student-detail-overlay').classList.add('hidden');
 $('student-detail-overlay').onclick = e => { if (e.target.id === 'student-detail-overlay') $('student-detail-overlay').classList.add('hidden'); };
+// ---- 학생 개별 리포트를 별도 창에서 인쇄용 페이지로 열어준다(브라우저 인쇄 대화상자에서 'PDF로 저장' 선택 가능) ----
+let currentStudentDetail = null;
+function printStudentReport(r) {
+  const rate = r.attempts ? Math.round(r.correct / r.attempts * 100) : 0;
+  const eff = r.gradeOverride || r.grade;
+  const weakSub = Object.entries(r.subtopicStats || {}).filter(([, s]) => s.attempts >= 3 && s.correct / s.attempts < 0.6).sort(([, a], [, b]) => a.correct / a.attempts - b.correct / b.attempts).slice(0, 3);
+  const trend = r.trend || studentTrend(r.dailyLog);
+  const trendAttempts = trend.days.reduce((s, d) => s + d.attempts, 0);
+  const badge = TREND_BADGE[trend.status];
+  const growthHtml = trendAttempts
+    ? `${lineGraphSVG(trend.days.map(d => d.label), trend.days.map(d => d.attempts ? Math.round(d.correct / d.attempts * 100) : 0))}<p style="margin:6px 0 0;font-size:12.5px;color:${badge.color}">${badge.icon} ${escHtml(trend.label)}</p>`
+    : '<p style="margin:0;color:#8b8ca8;font-size:13px">최근 7일간 활동 기록이 없어요.</p>';
+  const topics = Object.entries(r.topicStats || {}).sort(([a], [b]) => a.localeCompare(b));
+  const rows = topics.map(([topic, s]) => {
+    const tRate = s.attempts ? Math.round(s.correct / s.attempts * 100) : 0;
+    return `<tr><td>${gradeLabel(topic)}</td><td>${s.attempts}</td><td>${s.correct}</td><td>${tRate}%</td></tr>`;
+  }).join('') || '<tr><td colspan="4" style="text-align:center;color:#888">아직 푼 문제가 없어요.</td></tr>';
+  const today = new Date().toLocaleDateString('ko-KR');
+  const win = window.open('', '_blank', 'width=720,height=900');
+  if (!win) { alert('팝업이 차단됐어요. 브라우저의 팝업 차단을 해제한 뒤 다시 눌러주세요.'); return; }
+  win.document.write(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${escHtml(r.name)} 학습 리포트</title>
+    <style>
+      body{font-family:'Malgun Gothic',sans-serif;color:#28284b;padding:32px;max-width:640px;margin:0 auto}
+      h1{font-size:22px;margin:0 0 4px}
+      .sub{color:#8b8ca8;font-size:13px;margin:0 0 20px}
+      .stat-row{display:flex;gap:24px;margin:0 0 16px;padding:14px 18px;background:#f7f7ff;border-radius:14px}
+      .stat-row div{font-size:13px;color:#6d6ea3}
+      .stat-row b{display:block;font-size:20px;color:#4c3fd6}
+      .weak{color:#ef6675;font-size:13px;font-weight:bold;margin:0 0 16px}
+      table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+      th,td{padding:7px 8px;border-bottom:1px solid #ececf6;text-align:left}
+      th{background:#f7f7ff}
+      footer{margin-top:28px;color:#b3b4cf;font-size:11px;text-align:center}
+      @media print{body{padding:12mm}}
+    </style></head><body>
+    <h1>📋 ${escHtml(r.name)} 학생 학습 리포트</h1>
+    <p class="sub">${escHtml(r.classCode)} · Lv.${calcLevel(r.correct).level}${eff ? ` · ${eff}학년 문제` : ''} · 출력일 ${today}</p>
+    <div class="stat-row"><div>📝 총 시도<b>${r.attempts}</b></div><div>✅ 총 정답<b>${r.correct}</b></div><div>📈 정답률<b>${rate}%</b></div></div>
+    ${weakSub.length ? `<p class="weak">🔍 취약 유형: ${weakSub.map(([topic, s]) => `${escHtml(topic)}(${Math.round(s.correct / s.attempts * 100)}%)`).join(', ')}</p>` : ''}
+    <p style="margin:0 0 6px;font-weight:bold;font-size:13px">📈 최근 7일 정답률 추이</p>
+    ${growthHtml}
+    <table><thead><tr><th>영역</th><th>시도</th><th>정답</th><th>정답률</th></tr></thead><tbody>${rows}</tbody></table>
+    <footer>반달수학 · 이 리포트는 자동 생성되었습니다</footer>
+  </body></html>`);
+  win.document.close();
+  win.onload = () => { win.focus(); win.print(); };
+}
+$('student-detail-print').onclick = () => { if (currentStudentDetail) printStudentReport(currentStudentDetail); };
 $('teacher-class-filter').onchange = renderTeacherTable;
 $('teacher-search').oninput = renderTeacherTable;
 $('teacher-refresh').onclick = () => loadMyClassCodes().then(() => { loadTeacherData(); loadQuestionBank(); populateAssignClassSelect(); populateAssignTopicSelect(); loadMyAssignmentsTeacher(); populateNoticeClassSelect(); loadMyNoticesTeacher(); });
@@ -2302,6 +2747,11 @@ function renderQuestionBank() {
   const rows = questionRows.filter(r => questionFilterStatus === 'all' ? true : r.status === questionFilterStatus);
   const pendingCount = questionRows.filter(r => r.status === 'pending').length;
   $('question-count-badge').textContent = `대기중 ${pendingCount}개 · 전체 ${questionRows.length}개`;
+  // 대시보드 맨 위에도 대기 개수 배지를 띄워서, 아래 문제 승인 섹션까지 스크롤하지 않아도
+  // 승인 대기열이 쌓인 걸 로그인하자마자 바로 알아챌 수 있게 한다.
+  $('question-pending-alert').classList.toggle('hidden', pendingCount === 0);
+  $('question-pending-alert-count').textContent = pendingCount;
+  document.title = pendingCount > 0 ? `(${pendingCount}) 반달수학 | 올인원` : '반달수학 | 올인원';
   $('question-list').innerHTML = rows.map((r, i) => {
     const label = r.status === 'pending' ? '🕐 대기중' : r.status === 'approved' ? '✅ 승인됨' : '❌ 반려됨';
     const color = r.status === 'pending' ? '#a67c00' : r.status === 'approved' ? '#2bba7b' : '#ef6675';
@@ -2342,6 +2792,13 @@ document.querySelectorAll('#question-filter-tabs button').forEach(b => b.onclick
   document.querySelector('#question-filter-tabs .active').classList.remove('active'); b.classList.add('active');
   questionFilterStatus = b.dataset.status; renderQuestionBank();
 });
+$('question-pending-alert').onclick = () => {
+  // '대기중' 탭으로 전환하고 문제 승인 섹션까지 스크롤해서 바로 처리할 수 있게 한다.
+  document.querySelector('#question-filter-tabs .active').classList.remove('active');
+  document.querySelector('#question-filter-tabs [data-status="pending"]').classList.add('active');
+  questionFilterStatus = 'pending'; renderQuestionBank();
+  $('question-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
 $('teacher-csv').onclick = () => {
   const rows = filteredTeacherRows();
@@ -2476,6 +2933,7 @@ $('login-btn').onclick = async () => {
     await signOut(auth); user = profile = null;
     $('who').textContent = '손님'; $('login-btn').textContent = '로그인'; $('signup-menu-wrap').classList.remove('hidden');
     $('grades').classList.remove('hidden'); $('tabs').classList.remove('hidden'); $('teacher-dash').classList.add('hidden'); $('student-detail-overlay').classList.add('hidden');
+    document.title = '반달수학 | 올인원';
     $('submit-tab-btn').classList.add('hidden'); communityBank = [];
     myTitles = []; updateTitleBadge(); $('titles-overlay').classList.add('hidden');
     dailyLog = {};
@@ -2492,11 +2950,71 @@ $('login-btn').onclick = async () => {
     showGame('quest');
     return;
   }
-  const id = prompt('아이디'), pw = prompt('비밀번호'); if (!id || !pw) return;
-  try { await loadProfile((await signInWithEmailAndPassword(auth, `${id.toLowerCase()}@student.mathquest.local`, pw)).user); }
-  catch (e) { alert(e.message); }
+  openLoginModal();
+};
+
+// ---- 로그인 모달(아이디/비밀번호를 브라우저 기본 prompt() 대신 auth-modal과 같은 스타일의 폼으로 입력받는다) ----
+function openLoginModal() {
+  if (!firebaseConfig) { alert('먼저 firebaseConfig를 채워야 로그인 기능을 쓸 수 있어요.'); return; }
+  $('login-id-input').value = ''; $('login-pw-input').value = '';
+  setAuthError('login-modal-error', '');
+  $('login-modal').classList.remove('hidden');
+  setTimeout(() => $('login-id-input').focus(), 50);
+}
+function closeLoginModal() { $('login-modal').classList.add('hidden'); }
+$('login-modal-close').onclick = closeLoginModal;
+$('login-modal').addEventListener('click', e => { if (e.target.id === 'login-modal') closeLoginModal(); });
+$('login-modal-student-signup').onclick = () => { closeLoginModal(); openAuthModal('student'); };
+$('login-modal-teacher-signup').onclick = () => { closeLoginModal(); openAuthModal('teacher'); };
+$('login-modal-form').onsubmit = async e => {
+  e.preventDefault();
+  setAuthError('login-modal-error', '');
+  const id = $('login-id-input').value.trim(), pw = $('login-pw-input').value;
+  if (!id || !pw) { setAuthError('login-modal-error', '아이디와 비밀번호를 모두 입력해주세요.'); return; }
+  const btn = $('login-modal-submit');
+  btn.disabled = true; btn.textContent = '로그인 중...';
+  try {
+    await loadProfile((await signInWithEmailAndPassword(auth, `${id.toLowerCase()}@student.mathquest.local`, pw)).user);
+    closeLoginModal();
+  } catch (err) {
+    // 로그인 실패 시 에러 메시지와 함께 가입 링크를 바로 보여줘서, 계정이 없는 사용자가
+    // 실패만 보고 이탈하지 않고 바로 가입 화면으로 넘어갈 수 있게 한다.
+    const errEl = $('login-modal-error');
+    errEl.innerHTML = '⚠️ 아이디 또는 비밀번호가 올바르지 않아요.<br>계정이 없으신가요? '
+      + '<button type="button" id="login-modal-error-student-signup" style="border:0;background:none;color:var(--p);font-weight:bold;cursor:pointer;text-decoration:underline;padding:0;font-size:inherit">학생 가입</button> · '
+      + '<button type="button" id="login-modal-error-teacher-signup" style="border:0;background:none;color:var(--p);font-weight:bold;cursor:pointer;text-decoration:underline;padding:0;font-size:inherit">교사 가입</button>';
+    errEl.classList.remove('hidden');
+    $('login-modal-error-student-signup').onclick = () => { closeLoginModal(); openAuthModal('student'); };
+    $('login-modal-error-teacher-signup').onclick = () => { closeLoginModal(); openAuthModal('teacher'); };
+  } finally {
+    btn.disabled = false; btn.textContent = '로그인';
+  }
 };
 if (!firebaseConfig) { $('signup-btn').title = '로그인 기능을 쓰려면 firebaseConfig를 채워주세요.'; $('teacher-signup-btn').title = '로그인 기능을 쓰려면 firebaseConfig를 채워주세요.'; }
+
+// ---- 랜딩 화면 ----
+// 첫 화면은 소개(landing-view)만 보여주고 앱 본체(app-main)는 숨겨둔다. '시작하기'를 누르면 게스트/학생/교사
+// 진입 버튼이 나타나고, 그중 하나를 고르면 landing-view를 감추고 app-main을 드러낸다.
+function enterApp() {
+  $('landing-view').classList.add('hidden');
+  $('app-main').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+$('landing-start-btn').onclick = () => {
+  $('landing-cta-wrap').classList.add('hidden');
+  $('landing-role-wrap').classList.remove('hidden');
+  $('landing-role-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+};
+$('landing-back-btn').onclick = () => {
+  $('landing-role-wrap').classList.add('hidden');
+  $('landing-cta-wrap').classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+// 게스트는 로그인 없이 바로 입장(기존 '손님' 상태 그대로). 학생/교사는 앱에 들어간 뒤
+// 기존 로그인 버튼과 똑같은 아이디/비밀번호 로그인 흐름을 그대로 재사용한다(가입 여부와 무관하게 동일한 로그인 방식).
+$('landing-guest-btn').onclick = () => { enterApp(); };
+$('landing-student-btn').onclick = () => { enterApp(); $('login-btn').click(); };
+$('landing-teacher-btn').onclick = () => { enterApp(); $('login-btn').click(); };
 
 // ---- 문제 생성 (탐험/번개/배틀 공통) ----
 function gcd(x, y) { return y ? gcd(y, x % y) : x; }
@@ -2530,6 +3048,8 @@ const domains = {
     { topic: '규칙찾기', sem: 2, gen: (f = 1) => { const sHi = Math.max(2, Math.round(18 * f)), s = rand(1, sHi); return { text: `다음 수는 무엇일까요? ${s}, ${s + 1}, __`, answer: s + 2 }; } },
     { topic: '수비교', sem: 1, gen: (f = 1) => { const [lo, hi] = scaleRange(10, 99, f); let a = rand(lo, hi), b = rand(lo, hi); while (b === a) b = rand(lo, hi); return { text: `${a}와(과) ${b} 중 더 큰 수는?`, answer: Math.max(a, b) }; } },
     { topic: '묶음과낱개', sem: 1, gen: (f = 1) => { const tenHi = Math.max(1, Math.round(9 * f)), ten = rand(1, tenHi); const oneHi = Math.max(1, Math.round(9 * f)), one = rand(0, oneHi); return { text: `${ten}묶음과 낱개 ${one}개는 모두 몇 개일까요?`, answer: ten * 10 + one }; } },
+    // 두 자리 수 덧셈: 1-2 '덧셈과 뺄셈(3)' 단원(받아올림이 있는 두 자리 수 덧셈). 합이 두 자리 수(99 이하)로 남도록 headroom을 계산해서 자릿수를 넘어가지 않게 한다.
+    { topic: '두자리수덧셈', sem: 2, gen: (f = 1) => { const [aLo, aHi] = scaleRange(11, 70, f), a = rand(aLo, aHi); const room = 99 - a; const bHi = Math.max(10, Math.min(room, Math.round(25 * f))); const b = rand(10, bHi); return { text: `${a} + ${b} = ?`, answer: a + b }; } },
   ],
   // 2학년(2-1·2-2): 곱셈구구, 덧셈뺄셈, 길이(m·cm), 시각과 시간, 여러 가지 도형, 돈 계산, 뛰어 세기
   2: [
@@ -2544,6 +3064,8 @@ const domains = {
     { topic: '표와그래프', sem: 2, gen: (f = 1) => { const items = shuffle(['사과', '바나나', '포도', '딸기', '수박']).slice(0, 3); const [lo, hi] = scaleRange(2, 9, f); const counts = items.map(() => rand(lo, hi)); const svg = barGraphSVG(items, counts); return Math.random() < .5 ? { text: '좋아하는 과일을 조사해 그래프로 나타냈어요. 조사에 참여한 학생은 모두 몇 명일까요?', answer: counts.reduce((a, b) => a + b, 0), svg } : { text: '좋아하는 과일을 조사해 그래프로 나타냈어요. 가장 많은 과일과 가장 적은 과일의 학생 수 차이는 몇 명일까요?', answer: Math.max(...counts) - Math.min(...counts), svg }; } },
     // 세 자리 수의 자릿값: 백 모형(10x10칸)·십 모형(막대)·일 모형(낱개)을 SVG 그림으로 보여주고 수를 읽게 한다.
     { topic: '자릿값', sem: 1, gen: (f = 1) => { const [hLo, hHi] = scaleRange(1, 9, f), h = rand(hLo, hHi); const t = rand(0, 9), o = rand(0, 9); return { text: '그림이 나타내는 수는 얼마일까요?', answer: h * 100 + t * 10 + o, svg: placeValueSVG({ h, t, o }) }; } },
+    // 거스름돈: 2-1 '돈계산'을 확장해 "지불한 돈 - 물건값"을 계산하게 한다. paid를 price보다 큰 다음 1000원 단위로 동적으로 잡아서 항상 거스름돈이 나오게 한다.
+    { topic: '거스름돈', sem: 1, gen: (f = 1) => { const [lo, hi] = scaleRange(2, 9, f), hundreds = rand(lo, hi); const price = hundreds * 100 - (Math.random() < .5 ? 50 : 0); const paid = Math.ceil((price + 1) / 1000) * 1000; return { text: `${paid}원을 내고 ${price}원짜리 물건을 샀어요. 거스름돈은 얼마일까요?`, answer: paid - price }; } },
   ],
   // 3학년(3-1·3-2): 덧셈뺄셈, 곱셈과 나눗셈(나머지 포함), 분수, 시간(분·초), 원, 들이와 무게, 소수의 기초
   3: [
@@ -2558,6 +3080,8 @@ const domains = {
     { topic: '나머지', sem: 2, gen: (f = 1) => { const [dLo, dHi] = scaleRange(2, 9, f), d = rand(dLo, dHi); const [kLo, kHi] = scaleRange(2, 9, f), k = rand(kLo, kHi); const r = rand(1, d - 1), a = d * k + r; return { text: `${a} ÷ ${d}의 나머지는?`, answer: r }; } },
     // 그림그래프: 3학년 자료의 정리 단원. 큰 그림(10개)·작은 그림(1개)을 세어 값을 읽게 한다.
     { topic: '그림그래프', sem: 2, gen: (f = 1) => { const items = shuffle(['사과', '배', '귤', '포도']).slice(0, 3); const [lo, hi] = scaleRange(12, 45, f); const counts = items.map(() => rand(lo, hi)); const svg = pictogramSVG(items, counts); return Math.random() < .5 ? { text: '과수원의 과일 수를 그림그래프로 나타냈어요. 과일은 모두 몇 개일까요?', answer: counts.reduce((a, b) => a + b, 0), svg } : { text: '과수원의 과일 수를 그림그래프로 나타냈어요. 가장 많은 과일과 가장 적은 과일의 수 차이는 몇 개일까요?', answer: Math.max(...counts) - Math.min(...counts), svg }; } },
+    // 길이(mm·km): 3-1 '길이와 시간' 단원. 2학년 '길이'(m·cm)와 topic 이름을 같게 두어, 학습 리포트에서 학년을 넘어 '길이' 영역으로 함께 합산되게 한다.
+    { topic: '길이', sem: 1, gen: (f = 1) => { const [lo, hi] = scaleRange(1, 9, f); if (Math.random() < .5) { const cm = rand(lo, hi); return { text: `${cm}cm는 몇 mm일까요?`, answer: cm * 10 }; } const km = rand(lo, hi); return { text: `${km}km는 몇 m일까요?`, answer: km * 1000 }; } },
   ],
   // 4학년(4-1·4-2): 큰 수 덧셈뺄셈, 각도(삼각형·사각형), 곱셈과 나눗셈, 소수의 덧셈뺄셈, 분수의 덧셈(동분모), 규칙 찾기
   4: [
@@ -2583,6 +3107,8 @@ const domains = {
     { topic: '사각형분류', sem: 2, gen: (f = 1) => { const types = ['사다리꼴', '평행사변형', '직사각형', '마름모', '정사각형']; const type = types[rand(0, types.length - 1)]; return { text: '이 사각형에서 직각은 모두 몇 개일까요?', answer: (type === '직사각형' || type === '정사각형') ? 4 : 0, svg: quadSVG(type) }; } },
     // 네 자리 수의 자릿값: 천 모형(큰 정사각형)·백 모형·십 모형·일 모형을 SVG 그림으로 보여주고 수를 읽게 한다.
     { topic: '자릿값', sem: 1, gen: (f = 1) => { const [thLo, thHi] = scaleRange(1, 9, f), th = rand(thLo, thHi); const h = rand(0, 9), t = rand(0, 9), o = rand(0, 9); return { text: '그림이 나타내는 수는 얼마일까요?', answer: th * 1000 + h * 100 + t * 10 + o, svg: placeValueSVG({ th, h, t, o }) }; } },
+    // 수의 범위: 4-2 '수의 범위와 어림하기' 단원(이상·이하·초과·미만). span을 f로 스케일해서 어려울수록 범위 폭이 넓어지게 한다.
+    { topic: '수의범위', sem: 2, gen: (f = 1) => { const [lo, hi] = scaleRange(10, 60, f), lower = rand(lo, hi); const spanHi = Math.max(3, Math.round(10 * f)), span = rand(3, spanHi); const upper = lower + span; const mode = Math.random(); if (mode < 1 / 3) return { text: `${lower} 이상 ${upper} 이하인 자연수는 모두 몇 개일까요?`, answer: upper - lower + 1 }; if (mode < 2 / 3) return { text: `${lower} 초과 ${upper} 이하인 자연수는 모두 몇 개일까요?`, answer: upper - lower }; return { text: `${lower} 이상 ${upper} 미만인 자연수는 모두 몇 개일까요?`, answer: upper - lower }; } },
   ],
   // 5학년(5-1·5-2): 다각형의 둘레·넓이, 약수와 배수, 분수의 덧셈뺄셈·곱셈, 평균, 어림하기(반올림), 소수의 곱셈
   5: [
@@ -2597,6 +3123,9 @@ const domains = {
     { topic: '분수의곱셈', sem: 2, gen: (f = 1) => { const [dLo, dHi] = scaleRange(3, 12, f), d = rand(dLo, dHi), n = rand(1, d - 1); const [kLo, kHi] = scaleRange(2, 9, f), k = rand(kLo, kHi); return { text: `${n}/${d} × ${k}를 계산하면 분자는 얼마일까요? (분모 ${d} 유지, 약분하지 않음)`, answer: n * k }; } },
     // 합동과대칭: 도형 이름을 글로만 주는 대신 그림을 직접 보여주고 대칭축 개수를 세어 보게 한다.
     { topic: '합동과대칭', sem: 2, gen: (f = 1) => { const shapes = [['정삼각형', 3], ['정사각형', 4], ['정오각형', 5], ['정육각형', 6], ['이등변삼각형', 1], ['직사각형', 2]]; const [name, axes] = shapes[rand(0, shapes.length - 1)]; return { text: '이 도형의 대칭축(선대칭이 되는 선)은 모두 몇 개일까요?', answer: axes, svg: shapeSVG(name) }; } },
+    // 다각형의 넓이: 5-2 '다각형의 둘레와 넓이' 단원 중 평행사변형·마름모·사다리꼴 세 가지를 무작위로 낸다.
+    // 마름모는 두 대각선을 짝수(×2)로 만들어 넓이(대각선1×대각선2÷2)가, 사다리꼴은 높이를 짝수로 만들어 넓이((윗변+아랫변)×높이÷2)가 항상 정수로 떨어지게 한다.
+    { topic: '다각형의넓이', sem: 2, gen: (f = 1) => { const [lo, hi] = scaleRange(3, 20, f), shapeType = rand(0, 2); if (shapeType === 0) { const base = rand(lo, hi), h = rand(lo, hi); return { text: `밑변 ${base}cm, 높이 ${h}cm인 평행사변형의 넓이는? (㎠)`, answer: base * h }; } if (shapeType === 1) { const d1 = rand(lo, hi) * 2, d2 = rand(lo, hi) * 2; return { text: `두 대각선의 길이가 ${d1}cm, ${d2}cm인 마름모의 넓이는? (㎠)`, answer: d1 * d2 / 2 }; } const top = rand(lo, hi), bottom = top + rand(1, Math.max(1, Math.round(8 * f))), h = rand(lo, hi) * 2; return { text: `윗변 ${top}cm, 아랫변 ${bottom}cm, 높이 ${h}cm인 사다리꼴의 넓이는? (㎠)`, answer: (top + bottom) * h / 2 }; } },
   ],
   // 6학년(6-1·6-2): 비와 비율, 비례식, 원의 원주·넓이, 직육면체의 부피, 소수·분수의 나눗셈
   6: [
@@ -2614,6 +3143,8 @@ const domains = {
     // 각기둥과각뿔은 면·모서리·꼭짓점 개수가 각(n)에 대한 공식(각기둥: n+2, 3n, 2n / 각뿔: n+1, 2n, n+1)이라
     // 텍스트만으로 정확히 낼 수 있다.
     { topic: '각기둥과각뿔', sem: 1, gen: (f = 1) => { const names = { 3: '삼각', 4: '사각', 5: '오각', 6: '육각', 7: '칠각', 8: '팔각' }; const [lo, hi] = scaleRange(3, 8, f), n = rand(lo, hi), name = names[n] || `${n}각`; const isPrism = Math.random() < .5; const part = ['면', '모서리', '꼭짓점'][rand(0, 2)]; const shape = isPrism ? `${name}기둥` : `${name}뿔`; const answers = isPrism ? { 면: n + 2, 모서리: n * 3, 꼭짓점: n * 2 } : { 면: n + 1, 모서리: n * 2, 꼭짓점: n + 1 }; return { text: `${shape}의 ${part}은(는) 모두 몇 개일까요?`, answer: answers[part] }; } },
+    // 겉넓이: 6-2 '직육면체의 부피와 겉넓이' 단원. 위 '부피' 항목과 같은 a·b·c 변수로 대응 개념을 짝지어 낸다.
+    { topic: '겉넓이', sem: 1, gen: (f = 1) => { const [lo, hi] = scaleRange(2, 9, f), a = rand(lo, hi), b = rand(lo, hi), c = rand(lo, hi); return { text: `가로 ${a}cm, 세로 ${b}cm, 높이 ${c}cm인 직육면체의 겉넓이는? (㎠)`, answer: 2 * (a * b + b * c + c * a) }; } },
   ],
 };
 // 경계 학년 전용 변형 세트: domains[1]/domains[6]과 topic·sem 구성은 같지만, gen()을 항상
@@ -2628,6 +3159,16 @@ function filterBySemester(list, sem) {
   const filtered = list.filter(e => (e.sem || 1) === 1);
   return filtered.length ? filtered : list;
 }
+// 출제 범위(단원) 필터: topics가 비어있으면(=전체 단원) 그대로 돌려주고, 아니면 그 이름들만 남긴다.
+// 필터링 후 남는 문제가 하나도 없으면(예: AI 난이도 조정으로 다른 학년 목록을 걸렀는데 이름이 하나도 안 겹칠 때)
+// 안전하게 원래 목록 전체를 돌려준다.
+function filterByTopics(list, topics) {
+  if (!topics || !topics.length) return list;
+  const filtered = list.filter(e => topics.includes(e.topic));
+  return filtered.length ? filtered : list;
+}
+// domains[학년] 목록에서 topic 이름만 중복 없이 뽑아준다(출제 범위 설정 UI에서 공용으로 사용).
+function topicsForGrade(g) { return [...new Set((domains[g] || []).map(e => e.topic))]; }
 // ---- 학생이 낸 문제(문제은행) 연동 ----
 // 승인된 문제만 로그인한 학생의 현재 학년에 맞춰 불러와 makeProblem()에서 일정 확률로 섞어 낸다.
 // scope가 'grade'면 같은 학년 학생 누구에게나, 'class'면 제출한 학급 학생에게만 보여준다.
@@ -2692,6 +3233,7 @@ function makeProblem() {
   else if (diff === 'hard' && grade === 6 && Math.random() < 0.35) list = domains6Hard;
   if (!list) list = domains[g];
   list = filterBySemester(list, semester);
+  list = filterByTopics(list, enabledTopics);
   const entry = list[rand(0, list.length - 1)];
   const p = entry.gen();
   return { text: p.text, answer: p.answer, sub: entry.topic, svg: p.svg };
@@ -2723,11 +3265,41 @@ function opts(answer) { const set = new Set([answer]), step = Math.max(1, Math.c
 
 // ---- 문제 표시(HTML) 안전 처리 ----
 // 문제 화면을 textContent에서 innerHTML로 바꿔 SVG 그림(q.svg)을 함께 넣을 수 있게 했다.
-// q.svg는 항상 우리가 직접 만든 도형/자릿값 그림(quadSVG·placeValueSVG)에서만 오고, 학생이 직접
-// 입력하는 값이 절대 섞이지 않는다. 반면 q.text는 학생이 문제은행(submit)에 스스로 적어 낸 문장이
-// 섞여 들어올 수 있으므로, innerHTML에 넣기 전에 escapeHtml()로 반드시 이스케이프한다.
+// q.svg는 대부분 우리가 직접 만든 도형/자릿값 그림(quadSVG·placeValueSVG 등)에서 오지만,
+// 대결(PVP)·함께 풀기(coop)는 상대 클라이언트가 Firestore 문서에 직접 쓴 question.svg를 그대로
+// 읽어와 렌더링하는 경로라서, 브라우저 콘솔 등으로 조작된 악성 SVG가 섞여 들어올 가능성을 배제할 수
+// 없다. 그래서 innerHTML에 넣기 전에 항상 sanitizeSVG()로 허용 목록에 없는 태그·속성·on* 이벤트
+// 핸들러·javascript: 스킴을 제거한다. q.text는 학생이 문제은행(submit)에 스스로 적어 낸 문장이
+// 섞여 들어올 수 있으므로, escapeHtml()로 반드시 이스케이프한다.
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
-function renderQuestion(el, q) { if (!el || !q) return; el.innerHTML = (q.svg ? `<div class="q-visual">${q.svg}</div>` : '') + `<div class="q-text">${escapeHtml(q.text || '')}</div>`; }
+// svg 새니타이저: <svg> 루트만 허용하고, 도형을 그리는 데 필요한 태그·속성만 화이트리스트로 남긴다.
+// <script>·<foreignObject>·<image>·이벤트 핸들러(on*)·href/xlink:href(외부 리소스·javascript: 스킴 경로)는
+// 전부 제거된다. 파싱에 실패하거나 루트가 svg가 아니면 빈 문자열을 돌려줘 화면에 아무것도 넣지 않는다.
+const SVG_ALLOWED_TAGS = new Set(['svg', 'g', 'path', 'rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'text', 'tspan', 'defs', 'lineargradient', 'radialgradient', 'stop', 'clippath']);
+const SVG_ALLOWED_ATTRS = new Set(['viewbox', 'width', 'height', 'x', 'y', 'x1', 'y1', 'x2', 'y2', 'cx', 'cy', 'r', 'rx', 'ry', 'd', 'points', 'fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'stroke-dasharray', 'opacity', 'fill-opacity', 'stroke-opacity', 'transform', 'font-size', 'font-family', 'font-weight', 'text-anchor', 'dominant-baseline', 'offset', 'stop-color', 'stop-opacity', 'gradienttransform', 'gradientunits', 'clip-path', 'id', 'xmlns', 'preserveaspectratio']);
+function sanitizeSVG(str) {
+  if (!str || typeof str !== 'string') return '';
+  try {
+    const parsed = new DOMParser().parseFromString(str, 'image/svg+xml');
+    const root = parsed.documentElement;
+    if (!root || root.tagName.toLowerCase() !== 'svg' || parsed.getElementsByTagName('parsererror').length) return '';
+    const clean = node => {
+      [...node.children].forEach(child => {
+        if (!SVG_ALLOWED_TAGS.has(child.tagName.toLowerCase())) { child.remove(); return; }
+        [...child.attributes].forEach(attr => {
+          const name = attr.name.toLowerCase();
+          if (name.startsWith('on') || name === 'href' || name === 'xlink:href' || !SVG_ALLOWED_ATTRS.has(name)) child.removeAttribute(attr.name);
+        });
+        clean(child);
+      });
+    };
+    [...root.attributes].forEach(attr => { const name = attr.name.toLowerCase(); if (name.startsWith('on') || !SVG_ALLOWED_ATTRS.has(name)) root.removeAttribute(attr.name); });
+    clean(root);
+    return new XMLSerializer().serializeToString(root);
+  } catch (e) { return ''; }
+}
+function renderQuestion(el, q) { if (!el || !q) return; el.innerHTML = (q.svg ? `<div class="q-visual">${sanitizeSVG(q.svg)}</div>` : '') + `<div class="q-text">${escapeHtml(q.text || '')}</div>`; }
+
 
 // ---- 도형 분류용 SVG(4학년 사각형 단원: 사다리꼴·평행사변형·직사각형·마름모·정사각형을 그림으로 보여주고
 // 판별하게 한다). 매번 살짝 다른 각도로 회전시켜(rotate) 항상 같은 그림처럼 보이지 않게 했다.
@@ -4143,6 +4715,20 @@ async function loadCalendar() {
   } catch (e) { /* 최신 조회 실패해도 로컬에 있는 dailyLog로 우선 보여준다 */ }
   renderCalendarMonth();
 }
+// 🌡️ 히트맵 색상 계산: 정답률로 색조(초록=잘함/보라=보통/빨강=주의)를, 문제 수로 진하기(0~3단계)를 정한다.
+const CALENDAR_HEAT_PALETTES = {
+  high: ['#e6faf1', '#bdf0da', '#7ee0b8', '#1fa87a'],
+  mid: ['#f1f0ff', '#d6d6fb', '#aeadf5', '#5b5ce2'],
+  low: ['#fff1f3', '#ffd2da', '#f79cae', '#ef6675']
+};
+function calendarHeat(log) {
+  if (!log?.attempts) return null;
+  const rate = log.correct / log.attempts * 100;
+  const level = log.attempts >= 10 ? 3 : log.attempts >= 5 ? 2 : log.attempts >= 2 ? 1 : 0;
+  const tone = rate >= 80 ? 'high' : rate >= 50 ? 'mid' : 'low';
+  const palette = CALENDAR_HEAT_PALETTES[tone];
+  return { bg: palette[level], border: palette[Math.max(level, 1)], fg: level >= 3 ? '#fff' : 'var(--ink)', rate: Math.round(rate), tone };
+}
 function renderCalendarMonth() {
   const y = calendarViewDate.getFullYear(), m = calendarViewDate.getMonth();
   $('calendar-month-label').textContent = `${y}년 ${m + 1}월`;
@@ -4155,12 +4741,15 @@ function renderCalendarMonth() {
   for (let d = 1; d <= daysInMonth; d++) {
     const key = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
     const log = dailyLog[key];
-    const has = !!log?.attempts;
-    if (has) { activeDays++; monthAttempts += log.attempts; }
+    const heat = calendarHeat(log);
+    if (heat) { activeDays++; monthAttempts += log.attempts; }
     const isToday = key === todayKey;
-    cells.push(`<button class="calendar-day-cell" data-date="${key}" style="border:2px solid ${isToday ? 'var(--p)' : (has ? '#c7c8f5' : '#e7e7f4')};background:${has ? '#eeecff' : '#fff'};border-radius:10px;padding:8px 2px;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:44px">` +
-      `<span style="font-size:13px;font-weight:${isToday ? 'bold' : 'normal'};color:${isToday ? 'var(--p)' : 'var(--ink)'}">${d}</span>` +
-      (has ? `<span style="font-size:10px;color:var(--p)">✏️${log.attempts}</span>` : '') +
+    const bg = heat ? heat.bg : '#fff';
+    const border = isToday ? 'var(--p)' : (heat ? heat.border : '#e7e7f4');
+    const fg = heat ? heat.fg : 'var(--ink)';
+    cells.push(`<button class="calendar-day-cell" data-date="${key}" title="${heat ? `문제 ${log.attempts}개 · 정답률 ${heat.rate}%` : ''}" style="border:2px solid ${border};background:${bg};border-radius:10px;padding:8px 2px;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:44px${isToday ? ';box-shadow:0 0 0 2px #eeecff' : ''}">` +
+      `<span style="font-size:13px;font-weight:${isToday ? 'bold' : 'normal'};color:${fg}">${d}</span>` +
+      (heat ? `<span style="font-size:10px;color:${fg}">✏️${log.attempts} · ${heat.rate}%</span>` : '') +
       `</button>`);
   }
   $('calendar-grid').innerHTML = cells.join('');
@@ -4361,7 +4950,7 @@ async function loadOpponentTier(oppUid) {
   } catch (e) { $('pvp-opp-tier').textContent = ''; }
 }
 
-function makePvpQuestion(g) { const list = filterBySemester(domains[g] || domains[grade], semester); const p = list[rand(0, list.length - 1)].gen(); return { text: p.text, answer: p.answer, options: opts(p.answer), svg: p.svg || null }; }
+function makePvpQuestion(g) { const list = filterByTopics(filterBySemester(domains[g] || domains[grade], semester), enabledTopics); const p = list[rand(0, list.length - 1)].gen(); return { text: p.text, answer: p.answer, options: opts(p.answer), svg: p.svg || null }; }
 
 // ---- 대결 전적 ----
 // 최근 실시간 대결(1:1) 결과를 상대 이름·승패·점수 변화와 함께 최대 HISTORY_MAX개까지 보관한다.
@@ -4453,6 +5042,121 @@ $('pvp-cancel-btn').onclick = async () => {
   if (pvp.duelId) { try { await deleteDoc(doc(db, 'duels', pvp.duelId)); } catch (e) {} pvp.duelId = null; }
   resetPvpLobbyButtons(); $('pvp-lobby-feedback').textContent = '매칭을 취소했어요.';
 };
+
+// ---- 봇과 연습 대결 ----
+// 랜덤 매칭 상대를 찾는 동안(온라인 친구가 없어 대기 시간이 길어질 때) 이탈을 막기 위한 오프라인 연습 모드.
+// Firestore를 전혀 쓰지 않고 클라이언트에서만 진행되며, 점수(rating)·티어·전적에는 영향을 주지 않는다.
+// 봇의 정답률은 "동학년 학생의 평균적인 실력" 정도로 맞춰(BOT_ACCURACY) 실제 상대와 비슷한 긴장감을 준다.
+const BOT_NAME = '🤖 연습 상대';
+const BOT_ACCURACY = 0.62; // 동학년 평균 정답률 근사치
+const BOT_MIN_DELAY_MS = 2200, BOT_MAX_DELAY_MS = 9000; // 봇이 답하기까지 걸리는 시간(라운드 제한 12초 이내)
+const BOT_WIN_REWARD = 4; // 실제 대결(⭐10)보다 낮게: 연습 모드는 보너스일 뿐 주 보상 경로가 아니게 한다.
+let botState = null;
+
+function findBotBtnBusy(busy) { $('pvp-bot-btn').disabled = busy; $('pvp-bot-btn').style.opacity = busy ? .5 : 1; }
+
+function startBotDuel() {
+  if (!pvpRequireLogin()) return;
+  if (pvp.duelId) return; // 이미 매칭 중이거나 대결 중이면 무시
+  stopInvitesListener();
+  pvp.duelId = 'bot'; pvp.isController = true; pvp.bot = true; resolvingRound = -1; lastPvpDoc = null;
+  $('pvp-question').dataset.round = '';
+  $('pvp-lobby').classList.add('hidden'); $('pvp-arena').classList.remove('hidden');
+  $('pvp-opp-tier').textContent = '연습 모드 · 점수 반영 안 됨';
+  botState = { hp: { me: 100, bot: 100 }, round: 0, answers: {}, botAnswerTimer: null, roundEndsAt: 0 };
+  nextBotRound();
+  clearInterval(pvp.tickTimer);
+  pvp.tickTimer = setInterval(botTick, 1000);
+}
+$('pvp-bot-btn').onclick = startBotDuel;
+
+function nextBotRound() {
+  if (!botState) return;
+  botState.round++;
+  botState.question = makePvpQuestion(grade);
+  botState.answers = {};
+  botState.roundEndsAt = Date.now() + PVP_ROUND_MS;
+  clearTimeout(botState.botAnswerTimer);
+  const botWillBeCorrect = Math.random() < BOT_ACCURACY;
+  const delay = rand(BOT_MIN_DELAY_MS, BOT_MAX_DELAY_MS);
+  botState.botAnswerTimer = setTimeout(() => {
+    if (!botState || botState.round !== botState.round || botState.answers.bot) return;
+    botState.answers.bot = { correct: botWillBeCorrect };
+    renderBotState();
+    maybeResolveBotRound();
+  }, delay);
+  renderBotState();
+}
+
+function renderBotState() {
+  if (!botState) return;
+  const d = botState;
+  $('pvp-my-name').textContent = profile?.name || '나';
+  $('pvp-opp-name').textContent = BOT_NAME;
+  $('pvp-my-fighter').innerHTML = avatarGlyphHTML(avatarSnapshot(), 70);
+  $('pvp-opp-fighter').textContent = '🤖';
+  $('pvp-hp-me').style.width = Math.max(0, d.hp.me) + '%';
+  $('pvp-hp-opp').style.width = Math.max(0, d.hp.bot) + '%';
+  $('pvp-round-info').textContent = `라운드 ${d.round} (연습)`;
+  const roundTag = 'bot' + d.round;
+  if ($('pvp-question').dataset.round !== roundTag) {
+    $('pvp-question').dataset.round = roundTag;
+    renderQuestion($('pvp-question'), d.question);
+    $('pvp-answers').innerHTML = d.question.options.map(v => `<button>${v}</button>`).join('');
+    document.querySelectorAll('#pvp-answers button').forEach(b => b.onclick = () => submitBotAnswer(+b.textContent));
+    $('pvp-feedback').textContent = '';
+  }
+  const alreadyAnswered = !!d.answers.me;
+  document.querySelectorAll('#pvp-answers button').forEach(b => b.disabled = alreadyAnswered);
+  if (alreadyAnswered && !d.answers.bot) $('pvp-feedback').textContent = '상대의 답을 기다리는 중...';
+}
+
+function submitBotAnswer(value) {
+  if (!botState || botState.answers.me) return;
+  document.querySelectorAll('#pvp-answers button').forEach(b => b.disabled = true);
+  const ok = value === botState.question.answer;
+  botState.answers.me = { correct: ok };
+  $('pvp-feedback').textContent = ok ? '정답! 공격 성공 ✨' : '아쉬워요. 상대의 답을 기다리는 중...';
+  maybeResolveBotRound();
+}
+
+function maybeResolveBotRound() { if (botState?.answers.me && botState?.answers.bot) resolveBotRound(); }
+
+function resolveBotRound() {
+  if (!botState) return;
+  const d = botState;
+  if (d.answers.me?.correct) d.hp.bot = Math.max(0, d.hp.bot - PVP_DAMAGE);
+  if (d.answers.bot?.correct) d.hp.me = Math.max(0, d.hp.me - PVP_DAMAGE);
+  const meDead = d.hp.me <= 0, botDead = d.hp.bot <= 0;
+  if (meDead || botDead) endBotDuel(meDead && botDead ? 'draw' : botDead ? 'win' : 'lose');
+  else nextBotRound();
+}
+
+function botTick() {
+  if (!botState) return;
+  const remain = Math.max(0, Math.ceil((botState.roundEndsAt - Date.now()) / 1000));
+  $('pvp-timer').textContent = `⏱ ${remain}초 (연습 대결)`;
+  if (Date.now() >= botState.roundEndsAt) {
+    if (!botState.answers.me) botState.answers.me = { correct: false };
+    if (!botState.answers.bot) botState.answers.bot = { correct: false };
+    resolveBotRound();
+  }
+}
+
+function endBotDuel(result) {
+  clearInterval(pvp.tickTimer); pvp.tickTimer = null;
+  if (botState) clearTimeout(botState.botAnswerTimer);
+  const msg = result === 'win' ? '🏆 연습 대결 승리!' : result === 'lose' ? '아쉬워요, 연습 대결 패배.' : '무승부!';
+  $('pvp-question').textContent = msg; $('pvp-answers').innerHTML = ''; $('pvp-feedback').textContent = ''; $('pvp-timer').textContent = '';
+  if (result === 'win') { awardStars(BOT_WIN_REWARD); showToast(`🏆 연습 대결 승리! ⭐${BOT_WIN_REWARD} (점수·전적 반영 안 됨)`); }
+  else if (result === 'lose') showToast('연습 대결 패배! 점수·전적에는 반영되지 않아요.');
+  else showToast('무승부! 연습 대결은 점수에 반영되지 않아요.');
+  setTimeout(() => {
+    pvp.duelId = null; pvp.bot = false; botState = null;
+    $('pvp-arena').classList.add('hidden'); $('pvp-lobby').classList.remove('hidden');
+    if (!$('pvp').classList.contains('hidden')) { renderPvpFriendList(); startInvitesListener(); }
+  }, 2200);
+}
 
 // 내가 만든 대기중 대결(랜덤 매칭 대기 / 친구 도전장 발송)을 감시하다가 상대가 참가하면 진행자로 배틀을 시작한다.
 function watchOwnPendingDuel(id) {
@@ -4608,6 +5312,7 @@ async function endPvpDuel(message, result) {
   }, 2200);
 }
 $('pvp-surrender-btn').onclick = async () => {
+  if (pvp.bot) { endBotDuel('lose'); return; }
   if (!pvp.duelId || !lastPvpDoc) return;
   const oppUid = user.uid === lastPvpDoc.hostUid ? lastPvpDoc.guestUid : lastPvpDoc.hostUid;
   try { await updateDoc(doc(db, 'duels', pvp.duelId), { status: 'finished', winnerUid: oppUid, updatedAt: serverTimestamp() }); } catch (e) {}
@@ -4618,8 +5323,9 @@ function leavePvp() {
   stopInvitesListener();
   if (pvp.unsub) { pvp.unsub(); pvp.unsub = null; }
   clearInterval(pvp.tickTimer); pvp.tickTimer = null;
-  if (pvp.duelId) { try { deleteDoc(doc(db, 'duels', pvp.duelId)).catch(() => {}); } catch (e) {} }
-  pvp = { duelId: null, unsub: null, invitesUnsub: null, isController: false, tickTimer: null };
+  if (botState) { clearTimeout(botState.botAnswerTimer); botState = null; }
+  if (pvp.duelId && !pvp.bot) { try { deleteDoc(doc(db, 'duels', pvp.duelId)).catch(() => {}); } catch (e) {} }
+  pvp = { duelId: null, unsub: null, invitesUnsub: null, isController: false, tickTimer: null, bot: false };
   lastPvpDoc = null; resolvingRound = -1;
   $('pvp-arena').classList.add('hidden'); $('pvp-lobby').classList.remove('hidden'); resetPvpLobbyButtons();
 }
@@ -4864,4 +5570,66 @@ $('rhythm-best').textContent = rhythm.best;
 $('bingo-best').textContent = bingo.best == null ? '-' : bingo.best;
 $('reveal-best').textContent = reveal.best;
 renderMonsterGallery(); paintMonsterStage();
+
+// ================== PWA 설치 ==================
+// 스토어 심사 없이 홈 화면에 설치해 앱처럼 쓸 수 있게 하는 기능.
+// Chrome/Whale/Android는 beforeinstallprompt 이벤트로 브라우저 자체 설치 팝업을 띄우고,
+// iOS Safari는 그 이벤트를 지원하지 않으므로 "공유 → 홈 화면에 추가" 안내로 대체한다.
+let deferredInstallPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredInstallPrompt = e; });
+window.addEventListener('appinstalled', () => { deferredInstallPrompt = null; showToast('✅ 반달수학이 설치되었어요!'); });
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch((e) => console.warn('서비스워커 등록 실패', e)); });
+}
+
+function detectPwaEnv() {
+  const ua = navigator.userAgent;
+  const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isEdge = /Edg\//.test(ua);
+  return { isIOS, isEdge };
+}
+function pwaResetRows() {
+  $('pwa-install-body').innerHTML = `
+    <div class="pwa-env-row" id="pwa-row-pc"><span class="icon">🖥️</span><div><b>PC 및 안드로이드 기기</b><span>구글 크롬(Chrome) 또는 네이버 웨일(Whale) 브라우저</span></div></div>
+    <div class="pwa-env-row" id="pwa-row-ios"><span class="icon">📱</span><div><b>iOS (아이폰, 아이패드)</b><span>사파리(Safari) 브라우저</span></div></div>
+    <div class="pwa-env-row warn" id="pwa-row-warn"><span class="icon">⚠️</span><div><b>MS 엣지(Edge) 브라우저</b><span>일부 기능이 원활하지 않을 수 있어 설치를 권장하지 않습니다.</span></div></div>`;
+  const { isIOS, isEdge } = detectPwaEnv();
+  const activeId = isIOS ? 'pwa-row-ios' : isEdge ? 'pwa-row-warn' : 'pwa-row-pc';
+  $(activeId)?.classList.add('pwa-env-row-active');
+  $('pwa-install-go').textContent = '계속 진행';
+}
+function openPwaInstallModal() {
+  pwaResetRows();
+  $('pwa-install-go').onclick = pwaInstallGoHandler;
+  $('pwa-install-overlay').classList.remove('hidden');
+}
+$('pwa-install-btn').onclick = openPwaInstallModal;
+$('pwa-install-close').onclick = () => $('pwa-install-overlay').classList.add('hidden');
+$('pwa-install-cancel').onclick = () => $('pwa-install-overlay').classList.add('hidden');
+async function pwaInstallGoHandler() {
+  const { isIOS } = detectPwaEnv();
+  if (deferredInstallPrompt) {
+    $('pwa-install-overlay').classList.add('hidden');
+    deferredInstallPrompt.prompt();
+    try {
+      const choice = await deferredInstallPrompt.userChoice;
+      if (choice.outcome !== 'accepted') showToast('설치를 취소했어요. 언제든 다시 시도할 수 있어요.');
+    } catch (e) {}
+    deferredInstallPrompt = null;
+    return;
+  }
+  if (isIOS) {
+    $('pwa-install-body').innerHTML = `
+      <div style="text-align:left;font-size:14px;line-height:2;color:var(--ink)">
+        <p style="margin:0"><b>1.</b> 사파리 화면 하단(또는 상단)의 공유 버튼 <b>⬆️</b>을 눌러주세요.</p>
+        <p style="margin:0"><b>2.</b> 메뉴에서 <b>'홈 화면에 추가'</b>를 선택하세요.</p>
+        <p style="margin:0"><b>3.</b> 오른쪽 위 <b>'추가'</b>를 누르면 완료!</p>
+      </div>`;
+    $('pwa-install-go').textContent = '확인했어요';
+    $('pwa-install-go').onclick = () => $('pwa-install-overlay').classList.add('hidden');
+    return;
+  }
+  $('pwa-install-overlay').classList.add('hidden');
+  showToast('이 브라우저는 자동 설치를 지원하지 않아요. 크롬 또는 웨일 브라우저에서 다시 시도해주세요.');
+}
 </script></body></html>

@@ -187,19 +187,90 @@
 .board-tile.here{box-shadow:0 0 0 3px var(--p)}
 #board-dice{font-size:44px;margin:8px 0}
 @media(max-width:550px){.hero{flex-wrap:wrap;gap:8px}.hero h1{font-size:22px}.mascot{font-size:38px}.answers{grid-template-columns:1fr}.match-grid{grid-template-columns:repeat(3,1fr)}.card{height:70px}.fighter{font-size:60px}}
-.landing{max-width:720px;margin:0 auto;padding:40px 20px 60px;text-align:center}
-.landing-hero{margin:10px 0 8px}
-.landing-mascot{font-size:56px;line-height:1}
+.landing{max-width:1120px;margin:0 auto;padding:40px 20px 60px;text-align:center}
 .landing-mascot img,.logo img{display:block}
-.landing-hero h1{font:36px Jua,sans-serif;margin:10px 0 6px;color:var(--ink)}
-.landing-tag{margin:0;color:#6d6ea3;font-size:15px}
-.landing-intro{margin:22px auto 0;max-width:520px;color:#54547a;font-size:14px;line-height:1.7}
+.landing-hero-row{display:grid;grid-template-columns:1fr;gap:40px;align-items:center;margin:10px 0 8px;text-align:center}
+@media(min-width:900px){.landing-hero-row{grid-template-columns:1.05fr 1fr;gap:56px;text-align:left}}
+.landing-brand-pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid #eeecf7;border-radius:999px;padding:5px 14px 5px 5px;font:12.5px 'Gowun Dodum',sans-serif;font-weight:bold;color:var(--p);box-shadow:0 6px 16px #34336d0d}
+.landing-brand-pill img{border-radius:999px}
+.landing-hero-left h1{font:clamp(28px,4vw,40px) Jua,sans-serif;margin:16px 0 14px;color:var(--ink);line-height:1.4}
+.landing-hero-left h1 b{color:var(--p)}
+.landing-name-note{margin:10px 0 16px;font-size:13.5px;font-weight:bold;color:var(--p);display:flex;align-items:center;gap:6px;justify-content:center}
+@media(min-width:900px){.landing-name-note{justify-content:flex-start}}
+.landing-intro{margin:0 auto;max-width:500px;color:#54547a;font-size:14.5px;line-height:1.8}
+@media(min-width:900px){.landing-intro{margin:0}}
+.landing-intro b{color:var(--ink)}
+.landing-pills{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0;justify-content:center}
+@media(min-width:900px){.landing-pills{justify-content:flex-start}}
+.landing-pill{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:8px 14px 8px 8px;font-size:12.5px;font-weight:bold;color:var(--ink)}
+.landing-pill .ic{width:26px;height:26px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 2px 6px #34336d14;flex-shrink:0}
+.landing-pill.t1{background:#eeecff}
+.landing-pill.t2{background:var(--mint)}
+.landing-pill.t3{background:#fff3d6}
+.preview-wrap{position:relative;max-width:400px;margin:0 auto}
+.preview-card{position:relative;background:#fff;border:2px solid #eeecf7;border-radius:22px;padding:20px 20px 18px;box-shadow:0 20px 50px #34336d14;overflow:hidden}
+.preview-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(120deg,#5c5de0,#987ee9)}
+.preview-top-row{display:flex;align-items:center;justify-content:space-between;margin:6px 0 16px}
+.preview-eyebrow{font:12px 'Gowun Dodum',sans-serif;font-weight:bold;color:var(--p)}
+.preview-badge{width:30px;height:30px;border-radius:10px;background:#f1f0ff;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.preview-slides{position:relative;min-height:222px}
+.preview-slide{display:none}
+.preview-slide.on{display:block;animation:authFade .25s ease}
+.preview-slide .preview-title{margin:0 0 14px;font:18px Jua,sans-serif;color:var(--ink)}
+.preview-grade-row{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.preview-grade-row span{border:2px solid #e7e7f4;border-radius:999px;padding:5px 10px;font-size:11.5px;color:#9394b3;font-weight:bold}
+.preview-grade-row span.on{background:var(--p);border-color:var(--p);color:#fff}
+.preview-box{background:#fbfbff;border:2px solid #eeecf7;border-radius:14px;padding:14px;margin-bottom:12px}
+.preview-box .q{font:22px Jua,sans-serif;color:var(--ink);margin:0 0 10px;text-align:center}
+.preview-progress{height:8px;border-radius:999px;background:#eeecf7;overflow:hidden;margin-bottom:6px}
+.preview-progress i{display:block;height:100%;background:linear-gradient(120deg,#5c5de0,#987ee9);border-radius:999px}
+.preview-progress-label{font-size:11px;color:#9394b3;margin:0}
+.preview-stat-row{display:flex;gap:10px}
+.preview-stat{flex:1;background:#fbfbff;border:2px solid #eeecf7;border-radius:12px;padding:10px;text-align:center}
+.preview-stat b{display:block;font:15px Jua,sans-serif;color:var(--ink);font-weight:normal}
+.preview-stat span{font-size:11px;color:#9394b3}
+.preview-caption{text-align:center;font-size:11.5px;color:#b3b4cc;margin:14px 0 0}
+.preview-arrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:999px;border:2px solid #eeecf7;background:#fff;color:#9394b3;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px #34336d14;transition:color .15s,border-color .15s;z-index:2}
+.preview-arrow:hover{color:var(--p);border-color:#c7c8f5}
+.preview-arrow.left{left:-12px}
+.preview-arrow.right{right:-12px}
+.preview-dots-row{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:14px}
+.preview-count{font-size:11.5px;color:#9394b3;font-weight:bold}
+.preview-dots{display:flex;gap:5px}
+.preview-dots button{width:6px;height:6px;border-radius:999px;border:0;background:#e1e1f0;padding:0;cursor:pointer}
+.preview-dots button.on{background:var(--p);width:16px}
 .landing-features{display:grid;grid-template-columns:1fr;gap:12px;margin:30px 0}
 @media(min-width:600px){.landing-features{grid-template-columns:repeat(2,1fr)}}
 .landing-feature-card{background:#fff;border:2px solid #eeecf7;border-radius:18px;padding:18px 16px;text-align:left;box-shadow:0 8px 20px #34336d0d}
 .landing-feature-card .icon{font-size:26px;line-height:1;margin-bottom:8px}
 .landing-feature-card h3{margin:0 0 6px;font:16px Jua,sans-serif;color:var(--ink)}
 .landing-feature-card p{margin:0;font-size:13px;color:#7c7ca0;line-height:1.6}
+.landing-steps{margin:34px 0 0;max-width:600px;margin-left:auto;margin-right:auto}
+.landing-steps-title{font:17px Jua,sans-serif;color:var(--ink);margin:0 0 14px}
+.landing-steps-grid{display:flex;flex-direction:column;gap:10px;text-align:left}
+.landing-step{display:flex;gap:12px;align-items:flex-start;background:#fbfbff;border:2px solid #e7e7f4;border-radius:14px;padding:12px 14px}
+.landing-step .num{font:18px Jua,sans-serif;color:#fff;background:var(--p);border-radius:999px;width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.landing-step b{display:block;font-size:14px;color:var(--ink);margin-bottom:2px}
+.landing-step span{font-size:13px;color:#7c7ca0;line-height:1.6}
+.landing-audience{margin:26px auto 0;max-width:600px;display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:600px){.landing-audience{grid-template-columns:repeat(3,1fr)}}
+.landing-audience-card{background:#f7f6ff;border:2px solid #eeecf7;border-radius:14px;padding:14px;text-align:left}
+.landing-audience-card b{display:block;font-size:13.5px;color:var(--ink);margin-bottom:4px}
+.landing-audience-card span{font-size:12.5px;color:#7c7ca0;line-height:1.6}
+.landing-activities{margin:34px auto 0;max-width:680px;text-align:left}
+.landing-activities-title{font:17px Jua,sans-serif;color:var(--ink);margin:0 0 14px;text-align:center}
+.landing-activity-group{border:2px solid #eeecf7;border-radius:14px;margin-bottom:10px;overflow:hidden;background:#fff}
+.landing-activity-group summary{cursor:pointer;list-style:none;padding:13px 16px;font:15px Jua,sans-serif;color:var(--ink);display:flex;align-items:center;gap:8px}
+.landing-activity-group summary::-webkit-details-marker{display:none}
+.landing-activity-group summary::after{content:'▾';color:#9394b3;font-size:13px;margin-left:auto;transition:transform .15s}
+.landing-activity-group[open] summary::after{transform:rotate(180deg)}
+.landing-activity-group summary .cnt{font:12px 'Gowun Dodum',sans-serif;color:#9394b3}
+.landing-activity-items{display:grid;grid-template-columns:1fr;gap:8px;padding:0 14px 14px}
+@media(min-width:600px){.landing-activity-items{grid-template-columns:repeat(2,1fr)}}
+.landing-activity-item{display:flex;gap:10px;align-items:flex-start;background:#fbfbff;border:1px solid #eeecf7;border-radius:10px;padding:10px 12px}
+.landing-activity-item .ic{font-size:18px;line-height:1.3}
+.landing-activity-item b{display:block;font-size:13px;color:var(--ink);margin-bottom:2px}
+.landing-activity-item span{font-size:12px;color:#7c7ca0;line-height:1.5}
 #landing-cta-wrap{margin:32px 0 6px}
 .landing-cta-btn{border:0;border-radius:999px;padding:16px 44px;background:linear-gradient(120deg,#5c5de0,#987ee9);color:#fff;font:18px Jua,sans-serif;cursor:pointer;box-shadow:0 10px 26px #5b5ce240;transition:transform .1s,filter .15s}
 .landing-cta-btn:hover{filter:brightness(1.06)}
@@ -234,12 +305,76 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 </head><body>
 <div id="landing-view" class="landing">
-  <div class="landing-hero">
-    <div class="landing-mascot"><img src="icon-512.png" alt="반달수학 로고" width="72" height="72" style="margin:0 auto;border-radius:18px"></div>
-    <h1>반달수학</h1>
-    <p class="landing-tag">초등 1~6학년 수학, 놀이처럼 매일 조금씩</p>
+  <div class="landing-hero-row">
+    <div class="landing-hero-left">
+      <span class="landing-brand-pill"><img src="icon-192.png" alt="" width="20" height="20">반달수학</span>
+      <h1>초등 1~6학년을 위한<br><b>올인원 수학 놀이터</b></h1>
+      <p class="landing-name-note"><span class="moon-ic">🌙</span>'반달'처럼, 매일 조금씩 차오르는 수학 실력</p>
+      <p class="landing-intro">반달수학의 '반달'은 <b>매일 조금씩 차올라 보름달이 되는 달</b>에서 따온 이름이에요. 하루 한 문제씩 꾸준히 풀면 별이 쌓이고 몬스터가 자라며, 실력도 함께 둥글게 채워져요. 친구와 겨루는 실시간 대결, 다 함께 푸는 오늘의 도전, <b>선생님이 살펴보는 학급 관리</b>까지 이 안에 다 있어요.</p>
+      <div class="landing-pills">
+        <span class="landing-pill t1"><span class="ic">🎯</span>학년별 난이도 자동 조절</span>
+        <span class="landing-pill t2"><span class="ic">🕹️</span>28가지 활동 모드</span>
+        <span class="landing-pill t3"><span class="ic">📱</span>PC·태블릿·모바일 지원</span>
+      </div>
+      <div id="landing-cta-wrap">
+        <button class="landing-cta-btn" id="landing-start-btn">시작하기</button>
+      </div>
+      <div id="landing-role-wrap" class="hidden">
+        <p>어떻게 시작할까요?</p>
+        <div class="landing-role-buttons">
+          <button class="landing-role-btn" id="landing-guest-btn"><span class="emoji">🙋</span>게스트로 시작</button>
+          <button class="landing-role-btn primary" id="landing-student-btn"><span class="emoji">🧑‍🎓</span>학생 로그인</button>
+          <button class="landing-role-btn" id="landing-teacher-btn"><span class="emoji">🧑‍🏫</span>교사 로그인</button>
+        </div>
+        <p class="landing-role-hint">계정이 없다면 게스트로 먼저 둘러보거나, 시작한 뒤 오른쪽 위 '가입' 메뉴에서 새로 만들 수 있어요.</p>
+        <label style="display:flex;align-items:center;justify-content:center;gap:6px;margin:14px 0 0;font-size:12.5px;color:#9394b3;cursor:pointer">
+          <input type="checkbox" id="landing-skip-today" style="width:15px;height:15px;accent-color:var(--p)">
+          오늘 하루 다시 보지 않기
+        </label>
+        <button type="button" class="landing-back-btn" id="landing-back-btn">← 소개 다시 보기</button>
+      </div>
+    </div>
+    <div class="landing-hero-right">
+      <div class="preview-wrap">
+        <button class="preview-arrow left" id="preview-prev" aria-label="이전 미리보기">‹</button>
+        <button class="preview-arrow right" id="preview-next" aria-label="다음 미리보기">›</button>
+        <div class="preview-card">
+          <div class="preview-top-row">
+            <span class="preview-eyebrow">✨ 화면 미리보기</span>
+            <span class="preview-badge">🦊</span>
+          </div>
+          <div class="preview-slides" id="preview-slides">
+            <div class="preview-slide on" data-i="0">
+              <p class="preview-title">🗺️ 오늘의 탐험 퀴즈</p>
+              <div class="preview-grade-row"><span>1학년</span><span>2학년</span><span>3학년</span><span>4학년</span><span class="on">5학년</span><span>6학년</span></div>
+              <div class="preview-box"><p class="q">36 × 4 = ?</p><div class="preview-progress"><i style="width:62%"></i></div><p class="preview-progress-label">7 / 12 문제</p></div>
+              <div class="preview-stat-row"><div class="preview-stat"><b>⭐ 128</b><span>모은 별</span></div><div class="preview-stat"><b>🔥 6일</b><span>연속 출석</span></div></div>
+            </div>
+            <div class="preview-slide" data-i="1">
+              <p class="preview-title">🐣 몬스터 목장</p>
+              <div class="preview-box" style="text-align:center"><div style="font-size:38px">🐉</div><p style="margin:6px 0 10px;font:14px 'Gowun Dodum',sans-serif;font-weight:bold;color:var(--ink)">불꽃도마뱀 · Lv.3</p><div class="preview-progress"><i style="width:74%"></i></div><p class="preview-progress-label">다음 진화까지 별 23개</p></div>
+              <div class="preview-stat-row"><div class="preview-stat"><b>⭐ 312</b><span>모은 별</span></div><div class="preview-stat"><b>🐾 12마리</b><span>도감 완성</span></div></div>
+            </div>
+            <div class="preview-slide" data-i="2">
+              <p class="preview-title">⚔️ 실시간 대결</p>
+              <div class="preview-box"><div style="display:flex;justify-content:space-between;align-items:center;font:13px 'Gowun Dodum',sans-serif;font-weight:bold;color:var(--ink)"><span>🦊 나</span><span style="color:#9394b3;font-size:11px">VS</span><span>🐻 민준</span></div><div class="preview-progress" style="margin-top:12px"><i style="width:58%"></i></div><p class="preview-progress-label" style="text-align:center">7문제 중 4문제 먼저 맞히기</p></div>
+              <div class="preview-stat-row"><div class="preview-stat"><b>🔥 3연승</b><span>이번 주</span></div><div class="preview-stat"><b>🏆 12위</b><span>오늘 랭킹</span></div></div>
+            </div>
+            <div class="preview-slide" data-i="3">
+              <p class="preview-title">🧑‍🏫 학급 관리</p>
+              <div class="preview-box"><p style="margin:0 0 8px;font-size:12.5px;font-weight:bold;color:var(--ink)">5학년 2반 · 이번 주 리포트</p><div class="preview-progress"><i style="width:82%"></i></div><p class="preview-progress-label">과제 완료율 82% (23/28명)</p></div>
+              <div class="preview-stat-row"><div class="preview-stat"><b>📌 3건</b><span>진행 중 과제</span></div><div class="preview-stat"><b>📢 1건</b><span>새 공지</span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="preview-dots-row">
+          <span class="preview-count" id="preview-count">1 / 4</span>
+          <span class="preview-dots" id="preview-dots"><button class="on" data-i="0"></button><button data-i="1"></button><button data-i="2"></button><button data-i="3"></button></span>
+        </div>
+        <p class="preview-caption">실제 기능을 바탕으로 재구성한 예시 화면입니다.</p>
+      </div>
+    </div>
   </div>
-  <p class="landing-intro">문제를 풀수록 별이 쌓이고 몬스터가 자라나요. 친구와 실시간으로 겨루는 대결부터, 매일 똑같이 나오는 오늘의 도전, 선생님이 관리하는 학급까지 — 반달수학 하나로 다 돼요.</p>
   <div class="landing-features">
     <div class="landing-feature-card"><div class="icon">🎮</div><h3>맞춤 난이도 퀴즈</h3><p>학년별 문제은행에서 정답률에 맞춰 난이도가 자동으로 오르내려요.</p></div>
     <div class="landing-feature-card"><div class="icon">⚔️</div><h3>실시간 대결</h3><p>친구와 실시간으로 문제를 겨루는 몬스터 배틀, 랭킹과 연승 보너스를 즐겨요.</p></div>
@@ -248,18 +383,74 @@
     <div class="landing-feature-card"><div class="icon">🧑‍🏫</div><h3>교사용 학급 관리</h3><p>학급 코드로 학생을 초대하고, 학기·단원별 출제 범위와 학습 리포트를 확인해요.</p></div>
     <div class="landing-feature-card"><div class="icon">✏️</div><h3>학생 문제 만들기</h3><p>학생이 직접 문제를 내고 선생님 승인을 거쳐 친구들과 공유해요.</p></div>
   </div>
-  <div id="landing-cta-wrap">
-    <button class="landing-cta-btn" id="landing-start-btn">시작하기</button>
+  <div class="landing-activities">
+    <p class="landing-activities-title">어떤 활동이 있나요?</p>
+    <details class="landing-activity-group" open>
+      <summary>🗺️ 퀴즈 <span class="cnt">4가지</span></summary>
+      <div class="landing-activity-items">
+        <div class="landing-activity-item"><span class="ic">🗺️</span><div><b>탐험 퀴즈</b><span>지도를 따라 이동하며 문제를 풀고 별을 모으는 기본 퀴즈예요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">✍️</span><div><b>서술형 문제</b><span>답을 직접 입력하며 풀이 과정까지 꼼꼼히 연습해요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">⚡</span><div><b>번개 계산</b><span>제한 시간 안에 빠르게 계산해 순발력을 키워요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">💣</span><div><b>폭탄 해체</b><span>시간이 다 되기 전에 정답을 맞혀 폭탄을 해체해요.</span></div></div>
+      </div>
+    </details>
+    <details class="landing-activity-group">
+      <summary>🎮 미니게임 <span class="cnt">7가지</span></summary>
+      <div class="landing-activity-items">
+        <div class="landing-activity-item"><span class="ic">🃏</span><div><b>카드 짝맞추기</b><span>문제와 정답 카드를 짝지어 뒤집으며 풀어요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🧠</span><div><b>순서 기억</b><span>점점 늘어나는 숫자 순서를 기억해 맞히는 게임이에요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🎲</span><div><b>주사위 모험</b><span>주사위를 굴려 보드판을 이동하며 문제를 풀어요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🧩</span><div><b>숫자 미로</b><span>미로 속에서 정답 경로를 찾아 이동해요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🥁</span><div><b>리듬 정답 탭</b><span>리듬에 맞춰 정답이 지나가는 순간에 탭해요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🎯</span><div><b>숫자 빙고</b><span>정답을 맞혀 빙고 칸을 하나씩 채워요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🖼️</span><div><b>그림 맞추기</b><span>문제를 풀수록 가려진 그림이 조금씩 드러나요.</span></div></div>
+      </div>
+    </details>
+    <details class="landing-activity-group">
+      <summary>🐣 몬스터 <span class="cnt">4가지</span></summary>
+      <div class="landing-activity-items">
+        <div class="landing-activity-item"><span class="ic">🐣</span><div><b>몬스터 목장</b><span>모은 별로 몬스터를 키우고 나만의 도감을 완성해요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">⚔️</span><div><b>몬스터 배틀</b><span>내가 키운 몬스터로 친구와 실시간으로 대결해요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🐲</span><div><b>웨이브 서바이벌</b><span>몰려오는 몬스터를 문제를 풀며 막아내요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🏰</span><div><b>타워 디펜스</b><span>타워를 세우고 몬스터의 공격을 막아요.</span></div></div>
+      </div>
+    </details>
+    <details class="landing-activity-group">
+      <summary>⚔️ 대결 <span class="cnt">3가지</span></summary>
+      <div class="landing-activity-items">
+        <div class="landing-activity-item"><span class="ic">🏃</span><div><b>팀 릴레이</b><span>팀을 이뤄 이어달리듯 함께 문제를 풀어요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🤝</span><div><b>실시간 대결</b><span>친구와 실시간으로 문제를 겨루며 승부를 가려요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">📅</span><div><b>오늘의 도전</b><span>매일 똑같은 문제로 친구들과 함께 겨루는 도전이에요.</span></div></div>
+      </div>
+    </details>
+    <details class="landing-activity-group">
+      <summary>🗂️ 관리 <span class="cnt">10가지</span></summary>
+      <div class="landing-activity-items">
+        <div class="landing-activity-item"><span class="ic">📌</span><div><b>과제</b><span>선생님이 낸 과제를 확인하고 풀어요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">📢</span><div><b>공지사항</b><span>선생님이 남긴 공지를 확인해요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">📊</span><div><b>학습 리포트</b><span>내 학습 현황을 한눈에 확인해요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">📅</span><div><b>학습 캘린더</b><span>날짜별 학습 기록을 달력으로 확인해요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">📈</span><div><b>주간 성장</b><span>한 주간의 성장을 그래프로 확인해요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🎯</span><div><b>목표 설정</b><span>나만의 학습 목표를 세우고 달성해가요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">📒</span><div><b>오답 노트</b><span>틀린 문제를 모아 다시 풀어봐요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🏅</span><div><b>칭호 도감</b><span>모은 칭호를 도감으로 확인해요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🛍️</span><div><b>상점</b><span>모은 별로 다양한 아이템을 구매해요.</span></div></div>
+        <div class="landing-activity-item"><span class="ic">🏆</span><div><b>랭킹</b><span>친구들과 실력을 겨루며 순위를 확인해요.</span></div></div>
+      </div>
+    </details>
   </div>
-  <div id="landing-role-wrap" class="hidden">
-    <p>어떻게 시작할까요?</p>
-    <div class="landing-role-buttons">
-      <button class="landing-role-btn" id="landing-guest-btn"><span class="emoji">🙋</span>게스트로 시작</button>
-      <button class="landing-role-btn primary" id="landing-student-btn"><span class="emoji">🧑‍🎓</span>학생 로그인</button>
-      <button class="landing-role-btn" id="landing-teacher-btn"><span class="emoji">🧑‍🏫</span>교사 로그인</button>
+  <div class="landing-steps">
+    <p class="landing-steps-title">이렇게 시작해요</p>
+    <div class="landing-steps-grid">
+      <div class="landing-step"><span class="num">1</span><div><b>시작하기를 누르고 방법을 골라요</b><span>게스트로 바로 둘러보거나, 학생·교사 계정으로 로그인해요. 계정이 없어도 게스트로 먼저 체험할 수 있어요.</span></div></div>
+      <div class="landing-step"><span class="num">2</span><div><b>학년과 활동을 선택해요</b><span>1~6학년 중 내 학년을 고르고, 퀴즈·미니게임·몬스터·대결 중 하고 싶은 활동을 골라요.</span></div></div>
+      <div class="landing-step"><span class="num">3</span><div><b>문제를 풀며 별과 몬스터를 모아요</b><span>정답을 맞힐 때마다 별이 쌓이고 몬스터가 자라요. 상점, 랭킹, 칭호 도감까지 하나씩 채워가요.</span></div></div>
     </div>
-    <p class="landing-role-hint">계정이 없다면 게스트로 먼저 둘러보거나, 시작한 뒤 오른쪽 위 '가입' 메뉴에서 새로 만들 수 있어요.</p>
-    <button type="button" class="landing-back-btn" id="landing-back-btn">← 소개 다시 보기</button>
+  </div>
+  <div class="landing-audience">
+    <div class="landing-audience-card"><b>🧑‍🎓 학생이라면</b><span>학년에 맞는 문제로 매일 조금씩 연습하고, 친구와 실시간 대결로 재미있게 실력을 키워요.</span></div>
+    <div class="landing-audience-card"><b>🧑‍🏫 선생님이라면</b><span>학급 코드로 학생을 초대하고, 단원별 출제 범위와 과제·리포트로 학습 현황을 한눈에 확인해요.</span></div>
+    <div class="landing-audience-card"><b>🙋 처음이라면</b><span>가입 없이 게스트로 먼저 둘러보고, 마음에 들면 학생 계정을 만들어 기록을 이어가요.</span></div>
   </div>
   <footer style="text-align:center;margin-top:30px;font-size:12px;color:#b3b4cc"><img src="icon-192.png" alt="" width="16" height="16" style="border-radius:4px;vertical-align:-3px;margin-right:5px">© <span id="landing-footer-year"></span> 반달수학 · All rights reserved · made by m00n</footer>
 </div>
@@ -2995,11 +3186,20 @@ if (!firebaseConfig) { $('signup-btn').title = '로그인 기능을 쓰려면 fi
 // ---- 랜딩 화면 ----
 // 첫 화면은 소개(landing-view)만 보여주고 앱 본체(app-main)는 숨겨둔다. '시작하기'를 누르면 게스트/학생/교사
 // 진입 버튼이 나타나고, 그중 하나를 고르면 landing-view를 감추고 app-main을 드러낸다.
+// '오늘 하루 다시 보지 않기'를 체크하고 입장하면, 같은 날짜(로컬 기준) 안에는 소개 화면을 건너뛰고 바로 앱으로 들어간다.
+const LANDING_SKIP_KEY = 'bandalmathHideIntroDate';
+// todayStr()는 앱 전역에서 이미 위쪽(약 1900번째 줄)에 ISO 날짜(YYYY-MM-DD) 형식으로 정의되어 있어 그대로 재사용한다.
+// (예전엔 여기서 toDateString() 형식으로 다시 선언했는데, 같은 스코프에 함수 선언이 두 번 있으면 나중 선언이
+//  앞의 것을 덮어써서 dailyLog 등 다른 곳의 날짜 키(ISO 형식)와 형식이 어긋나는 버그가 있었다.)
 function enterApp() {
   $('landing-view').classList.add('hidden');
   $('app-main').classList.remove('hidden');
   window.scrollTo(0, 0);
 }
+function saveLandingSkipPref() {
+  if ($('landing-skip-today')?.checked) localStorage.setItem(LANDING_SKIP_KEY, todayStr());
+}
+if (localStorage.getItem(LANDING_SKIP_KEY) === todayStr()) enterApp();
 $('landing-start-btn').onclick = () => {
   $('landing-cta-wrap').classList.add('hidden');
   $('landing-role-wrap').classList.remove('hidden');
@@ -3012,9 +3212,33 @@ $('landing-back-btn').onclick = () => {
 };
 // 게스트는 로그인 없이 바로 입장(기존 '손님' 상태 그대로). 학생/교사는 앱에 들어간 뒤
 // 기존 로그인 버튼과 똑같은 아이디/비밀번호 로그인 흐름을 그대로 재사용한다(가입 여부와 무관하게 동일한 로그인 방식).
-$('landing-guest-btn').onclick = () => { enterApp(); };
-$('landing-student-btn').onclick = () => { enterApp(); $('login-btn').click(); };
-$('landing-teacher-btn').onclick = () => { enterApp(); $('login-btn').click(); };
+$('landing-guest-btn').onclick = () => { saveLandingSkipPref(); enterApp(); };
+$('landing-student-btn').onclick = () => { saveLandingSkipPref(); enterApp(); $('login-btn').click(); };
+$('landing-teacher-btn').onclick = () => { saveLandingSkipPref(); enterApp(); $('login-btn').click(); };
+
+// ---- 랜딩 히어로 미리보기 캐러셀 ----
+(function initPreviewCarousel() {
+  const slides = Array.from(document.querySelectorAll('#preview-slides .preview-slide'));
+  const dots = Array.from(document.querySelectorAll('#preview-dots button'));
+  const countEl = $('preview-count');
+  if (!slides.length) return;
+  let idx = 0, timer = null;
+  function show(i) {
+    idx = (i + slides.length) % slides.length;
+    slides.forEach((s, n) => s.classList.toggle('on', n === idx));
+    dots.forEach((d, n) => d.classList.toggle('on', n === idx));
+    if (countEl) countEl.textContent = `${idx + 1} / ${slides.length}`;
+  }
+  function restartAutoplay() {
+    if (timer) clearInterval(timer);
+    timer = setInterval(() => show(idx + 1), 4500);
+  }
+  $('preview-prev')?.addEventListener('click', () => { show(idx - 1); restartAutoplay(); });
+  $('preview-next')?.addEventListener('click', () => { show(idx + 1); restartAutoplay(); });
+  dots.forEach(d => d.addEventListener('click', () => { show(+d.dataset.i); restartAutoplay(); }));
+  show(0);
+  restartAutoplay();
+})();
 
 // ---- 문제 생성 (탐험/번개/배틀 공통) ----
 function gcd(x, y) { return y ? gcd(y, x % y) : x; }

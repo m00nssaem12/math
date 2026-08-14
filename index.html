@@ -3655,7 +3655,7 @@ async function loadMyAssignmentsTeacher() {
     myAssignmentsTeacher = snap.docs.map(d => ({ id: d.id, ...d.data() }))
       .sort((a, b) => (b.createdAt?.toMillis?.() || 0) - (a.createdAt?.toMillis?.() || 0));
     const doneCounts = await Promise.all(myAssignmentsTeacher.map(a =>
-      getDocs(query(collection(db, 'assignmentProgress'), where('assignmentId', '==', a.id), where('completed', '==', true)))
+      getDocs(query(collection(db, 'assignmentProgress'), where('assignmentId', '==', a.id), where('classCode', '==', a.classCode), where('completed', '==', true)))
         .then(s => s.size).catch(() => 0)
     ));
     $('assign-list').innerHTML = myAssignmentsTeacher.length
@@ -3681,7 +3681,7 @@ async function loadAssignmentDeadlineAlerts() {
   if (!relevant.length) { box.classList.add('hidden'); listEl.innerHTML = ''; return; }
   try {
     const progressSnaps = await Promise.all(relevant.map(a =>
-      getDocs(query(collection(db, 'assignmentProgress'), where('assignmentId', '==', a.id), where('completed', '==', true)))
+      getDocs(query(collection(db, 'assignmentProgress'), where('assignmentId', '==', a.id), where('classCode', '==', a.classCode), where('completed', '==', true)))
     ));
     const entries = relevant.map((a, i) => {
       const doneUids = new Set(progressSnaps[i].docs.map(d => d.data().uid));
@@ -3780,8 +3780,18 @@ async function loadTeacherData() {
   $('teacher-feedback').textContent = '불러오는 중...';
   try {
     const ownedSet = new Set(myClassCodes);
-    const [usersSnap, progressSnap] = await Promise.all([getDocs(collection(db, 'users')), getDocs(collection(db, 'progress'))]);
-    const progressMap = new Map(progressSnap.docs.map(d => [d.id, d.data()]));
+    // progress 보안 규칙은 "내가 만든 학급 코드"에 속한 문서만 읽을 수 있게 되어 있는데(ownsClassCode),
+    // where 없이 컬렉션 전체를 훑으면 다른 반 학생 기록도 스캔 대상에 들어가서 통째로 거부된다
+    // (Firestore는 쿼리 결과에 권한 없는 문서가 하나라도 섞일 수 있으면 요청 자체를 막는다 — "Missing or
+    // insufficient permissions"). 그래서 내가 만든 학급 코드로만 좁혀서 조회한다.
+    // 'in' 연산자는 한 번에 최대 30개 값까지만 지원하므로, 학급 코드가 많으면 30개씩 나눠 병렬로 조회한다.
+    const codeChunks = [];
+    for (let i = 0; i < myClassCodes.length; i += 30) codeChunks.push(myClassCodes.slice(i, i + 30));
+    const [usersSnap, ...progressSnaps] = await Promise.all([
+      getDocs(collection(db, 'users')),
+      ...codeChunks.map(chunk => getDocs(query(collection(db, 'progress'), where('classCode', 'in', chunk)))),
+    ]);
+    const progressMap = new Map(progressSnaps.flatMap(s => s.docs).map(d => [d.id, d.data()]));
     teacherRows = usersSnap.docs
       .filter(d => d.data().role === 'student' && ownedSet.has(d.data().classCode) && !d.data().archived) // 내가 만든 학급 코드에 속한 학생만 보여준다(재발급으로 대체된 옛 계정은 제외)
       .map(d => {
